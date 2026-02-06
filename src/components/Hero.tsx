@@ -9,26 +9,26 @@ const Hero = () => {
       }} allow="autoplay; encrypted-media" title="Background video" />
       </div>
       {/* Orange-to-black vignette overlay */}
-      <div className="absolute inset-0" style={{
+      <div className="absolute inset-0 bg-[#d4783a]/[0.76]" style={{
       background: `
             radial-gradient(ellipse at center, transparent 20%, hsl(20 90% 20% / 0.4) 50%, hsl(0 0% 0% / 0.85) 80%, hsl(0 0% 0% / 1) 100%)
           `
     }} />
 
       {/* Content */}
-      <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
+      <div className="relative z-10 text-center max-w-4xl mx-auto px-0">
         {/* Planets + tagline */}
         
 
         {/* Main title */}
-        <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-foreground leading-tight mb-6">
+        <h1 className="font-display text-4xl lg:text-7xl leading-tight mb-6 md:text-5xl font-medium text-primary-foreground">
           All the content you need,
           <br />
           all in one place.
         </h1>
 
         {/* Subtitle */}
-        <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto">
+        <p className="text-lg md:text-xl max-w-2xl mx-auto text-primary-foreground">
           Podcasts, Reels booster, short films, photography and more..
         </p>
       </div>
