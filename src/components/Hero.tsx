@@ -16,7 +16,7 @@ const Hero = () => {
     }} />
 
       {/* Content */}
-      <div className="relative z-10 text-center max-w-4xl mx-auto px-0">
+      <div className="relative z-10 text-center max-w-4xl px-0 mx-0">
         {/* Planets + tagline */}
         
 
