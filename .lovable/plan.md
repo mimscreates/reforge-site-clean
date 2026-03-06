@@ -1,85 +1,34 @@
 
-# Plan de recréation du site KaunStudios en React
 
-## Objectif
-Recréer fidèlement le site www.kaunstudios.com actuellement sur Framer, en code React/Tailwind propre et facilement modifiable.
+## Diagnostic
 
----
+The base UI components (`button.tsx`, `card.tsx`, `input.tsx`, etc.) were correctly updated, but **dozens of component-level overrides** use `rounded-full` or `rounded-xl` directly in className props, which override the design system values. This is why nothing visually changed.
 
-## Page d'accueil (Homepage)
+### Files with overrides to fix
 
-### 1. Navbar
-- Logo KAUN Studios à gauche
-- Liens de navigation : Homepage, Nos packs, Demande de devis
-- Bouton CTA "Réserver ma session" (lien externe vers booking.kaunstudios.com)
+| File | Issue |
+|------|-------|
+| `CreatorPacks.tsx` | Buttons: `rounded-full`, Cards: `rounded-xl` |
+| `CorporatePacks.tsx` | Buttons: `rounded-full`, Cards: `rounded-xl` |
+| `Newsletter.tsx` | Input & Button: `rounded-full` |
+| `StudioCarousel.tsx` | Button: `rounded-full` |
+| `SessionConfigurator.tsx` | Button: `rounded-full` |
+| `RentalConfigurator.tsx` | Button: `rounded-full` |
+| `PodcastOffers.tsx` | Button: `rounded-full` |
+| `AudienceSelector.tsx` | Cards: `rounded-xl` → should be `rounded-2xl` |
+| `Portfolio.tsx` | Cards & badges to verify |
+| `Options.tsx` | Items use `rounded-lg` (correct) |
+| `Navbar.tsx` | Any button overrides |
+| `Hero.tsx` | CTA buttons |
+| `BookingModal.tsx` / `BookingWidget.tsx` | Form elements & buttons |
+| `FAQ.tsx` | Accordion items |
 
-### 2. Section Hero
-- Image de fond plein écran (studio podcast)
-- Texte accroche : "+100 billion planets but you deserve your own"
-- Titre principal : "All the content you need, all in one place."
-- Sous-titre : "Podcasts, Reels booster, short films, photography and more.."
-- Icônes planètes décoratives
+### Plan
 
-### 3. Bandeau défilant de services
-- Marquee/ticker horizontal animé avec les catégories : Podcast, Talks, Production, Interviews (avec icônes)
+1. **Remove all `rounded-full` from buttons** across every component — let them inherit `rounded-lg` (8px) from `button.tsx`
+2. **Update card containers** using `rounded-xl` to `rounded-2xl` (24px) where appropriate
+3. **Remove `rounded-full` from form inputs** (Newsletter) — let them inherit `rounded-lg` from `input.tsx`
+4. **Keep `rounded-full` only** where semantically correct: avatars, circular icon buttons, pill badges, progress bars
 
-### 4. Section "Personnalise your pack"
-- Widget de réservation embarqué (iframe du système de booking existant) affichant les 4 packs :
-  - **Customize** – 100 DT/h
-  - **Nova** – 140 DT/h  
-  - **Cosmic** – 390 DT/h
-  - **Interstellar** – 900 DT/h
-- Chaque pack avec sa liste de services inclus
+This is a ~12 file sweep replacing className overrides so the design tokens actually take effect.
 
-### 5. Section "Studios podcasts clé en main"
-- Titre + description
-- Carrousel d'images des studios (défilement automatique)
-- Bouton "Réserver ma session"
-
-### 6. Section "Our Podcast Offers" – Cartes détaillées des 3 packs
-- **Nova** (140 DT/h) – Carte avec liste des services (Audio, Micro, Éclairage PRO, etc.)
-- **Cosmic** (390 DT/h) – Carte avec liste des services (Vidéo+Audio, 2 caméras, etc.)
-- **Interstellar** (900 DT/h) – Carte avec liste complète (montage, révisions, brief, etc.)
-- Chaque carte avec bouton "Réserver ma session"
-
-### 7. Section Options supplémentaires
-- Liste des options à la carte avec prix (Caméra supplémentaire 100 DT, Micro 50 DT, Shorts 100 DT, etc.)
-
-### 8. Section "Create more, consume less"
-- Texte de présentation de Kaun Studios
-- Image du studio
-- 3 blocs de services : Podcast 🎙, Services supplémentaires 📷, Production 🎬
-
-### 9. Section FAQ
-- Accordéon avec les questions fréquentes (accompagnement, week-end, matériel supplémentaire, déplacement, dépassement horaire)
-- Image décorative
-
-### 10. Section Newsletter
-- Titre "Subscribe for Kaun insights"
-- Champ email + bouton d'inscription
-
-### 11. Footer
-- Logo + description de KAUN Studios
-- Liens de navigation (Homepage, Nos packs, Demande de devis)
-- Liens sociaux (Instagram, Facebook)
-- Bouton "Réserver ma session"
-
----
-
-## Design & Style
-- **Thème sombre** (fond noir/très foncé) avec accents orange
-- **Typographies** : PP Neue Machina (titres) + DM Sans/Inter (corps de texte)
-- **Animations** : marquee défilant, transitions smooth au scroll
-- Responsive (mobile + desktop)
-- Toutes les images actuelles du site seront référencées depuis les URLs Framer existantes
-
----
-
-## Pages supplémentaires
-- Page **Nos Packs** (détails des offres)
-- Page **Demande de devis** (formulaire de contact)
-
-## Notes techniques
-- Pas de backend nécessaire (site vitrine statique)
-- Les liens de réservation pointent vers le système externe existant (booking.kaunstudios.com)
-- Code organisé en composants réutilisables pour faciliter les modifications futures
