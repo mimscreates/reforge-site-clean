@@ -9,11 +9,11 @@ import kaunLogo from "@/assets/kaun-logo.png";
 
 const navLinks = [
   { label: "Home", path: "/" },
-  { label: "Our Packs", path: "/packs" },
-  { label: "Portfolio", path: "/portfolio" },
-  { label: "Build Your Session", path: "/build-session" },
-  { label: "Rent Your Space", path: "/rent-your-space" },
-  { label: "Request a Quote", path: "/devis" },
+  { label: "Packs", path: "/packs" },
+  { label: "Work", path: "/portfolio" },
+  { label: "Customize", path: "/build-session" },
+  { label: "Rent Our Studios", path: "/rent-your-space" },
+  { label: "Contact Us", path: "/devis" },
 ];
 
 const NavItem = ({ link, isActive }: { link: typeof navLinks[0]; isActive: boolean }) => {
@@ -24,7 +24,7 @@ const NavItem = ({ link, isActive }: { link: typeof navLinks[0]; isActive: boole
     >
       <Link
         to={link.path}
-        className={`relative text-[13px] font-medium transition-colors px-1 py-1 ${
+        className={`relative text-[15px] font-medium transition-colors px-1 py-1 ${
           isActive ? "text-foreground" : "text-muted-foreground"
         }`}
       >

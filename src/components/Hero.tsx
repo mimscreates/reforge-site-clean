@@ -73,12 +73,6 @@ const Hero = () => {
         style={{ background: isDark ? "rgba(0,0,0,0.65)" : "rgba(0,0,0,0.4)" }}
       />
 
-      {/* Floating particles */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none z-[4]">
-        {Array.from({ length: 12 }).map((_, i) => (
-          <FloatingParticle key={i} index={i} />
-        ))}
-      </div>
 
       {/* Cinematic bottom fade */}
       <div
