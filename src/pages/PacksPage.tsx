@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 import { ArrowRight, Crown, Star, Handshake } from "lucide-react";
-import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import BookingModal from "@/components/BookingModal";
 
 const CHECK_ICON =
   "https://framerusercontent.com/images/wQY5BFOK9fwE3QUIMrG43ZlTKM.png?width=201&height=201";
@@ -234,9 +232,8 @@ const VIPContent = ({ openBooking }: { openBooking: (n: string) => void }) => (
 /* ── Main page ── */
 const PacksPage = () => {
   const [activeTab, setActiveTab] = useState<Tab>("creator");
-  const [modalOpen, setModalOpen] = useState(false);
-  const [selectedPack, setSelectedPack] = useState("");
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const hash = location.hash.replace("#", "");
@@ -246,8 +243,13 @@ const PacksPage = () => {
   }, [location.hash]);
 
   const openBooking = (name: string) => {
-    setSelectedPack(name);
-    setModalOpen(true);
+    if (name.includes("(VIP)")) {
+      navigate("/vip");
+    } else {
+      const type = name.includes("(Business)") ? "Business" : "Creator";
+      const packName = name.replace(/ \((Creator|Business|VIP)\)/, "");
+      navigate(`/book?pack=${encodeURIComponent(packName)}&type=${type}`);
+    }
   };
 
   return (
@@ -328,7 +330,6 @@ const PacksPage = () => {
           </motion.div>
         </section>
 
-        <BookingModal open={modalOpen} onOpenChange={setModalOpen} selectedPack={selectedPack} />
       </main>
       <Footer />
     </div>
