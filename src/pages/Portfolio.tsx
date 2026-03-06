@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import reelThumb1 from "@/assets/reels/reel-thumb-1.jpg";
 import reelThumb2 from "@/assets/reels/reel-thumb-2.jpg";
+import reelThumb3 from "@/assets/reels/reel-thumb-3.jpg";
 import reelThumb4 from "@/assets/reels/reel-thumb-4.jpg";
 
 type Category = "All" | "Podcast" | "Reels" | "Music Video";
