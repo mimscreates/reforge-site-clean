@@ -3,9 +3,12 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Play, X } from "lucide-react";
+import { ArrowRight, Play, X, ExternalLink } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
+import reelThumb1 from "@/assets/reels/reel-thumb-1.jpg";
+import reelThumb2 from "@/assets/reels/reel-thumb-2.jpg";
+import reelThumb3 from "@/assets/reels/reel-thumb-3.jpg";
 
 type Category = "All" | "Podcast" | "Reels" | "Music Video";
 
@@ -14,6 +17,7 @@ interface VideoProject {
   embedUrl: string;
   thumbnail: string;
   category: Exclude<Category, "All">;
+  externalUrl?: string;
 }
 
 const projects: VideoProject[] = [
@@ -24,10 +28,10 @@ const projects: VideoProject[] = [
   { id: "NDyL3wMlpDo", embedUrl: "https://www.youtube.com/embed/NDyL3wMlpDo", thumbnail: "https://img.youtube.com/vi/NDyL3wMlpDo/maxresdefault.jpg", category: "Podcast" },
   { id: "9p0sQWvUudk", embedUrl: "https://www.youtube.com/embed/9p0sQWvUudk", thumbnail: "https://img.youtube.com/vi/9p0sQWvUudk/maxresdefault.jpg", category: "Podcast" },
   { id: "48utRXZHkGo", embedUrl: "https://www.youtube.com/embed/48utRXZHkGo", thumbnail: "https://img.youtube.com/vi/48utRXZHkGo/maxresdefault.jpg", category: "Podcast" },
-  // Reels
-  { id: "reel-1", embedUrl: "https://www.instagram.com/reel/DUGrwcdCDVn/embed", thumbnail: "", category: "Reels" },
-  { id: "reel-2", embedUrl: "https://www.instagram.com/reel/DUYrAJ4iLnG/embed", thumbnail: "", category: "Reels" },
-  { id: "reel-3", embedUrl: "https://www.instagram.com/reel/DMnEOzDsgV_/embed", thumbnail: "", category: "Reels" },
+  // Reels — open Instagram externally
+  { id: "reel-1", embedUrl: "", thumbnail: reelThumb1, category: "Reels", externalUrl: "https://www.instagram.com/reel/DUGrwcdCDVn/" },
+  { id: "reel-2", embedUrl: "", thumbnail: reelThumb2, category: "Reels", externalUrl: "https://www.instagram.com/reel/DUYrAJ4iLnG/" },
+  { id: "reel-3", embedUrl: "", thumbnail: reelThumb3, category: "Reels", externalUrl: "https://www.instagram.com/reel/DMnEOzDsgV_/" },
   // Music Video
   { id: "DEORkgTglFE", embedUrl: "https://www.youtube.com/embed/DEORkgTglFE", thumbnail: "https://img.youtube.com/vi/DEORkgTglFE/maxresdefault.jpg", category: "Music Video" },
 ];
@@ -101,24 +105,34 @@ const Portfolio = () => {
                     exit={{ opacity: 0, scale: 0.95 }}
                     transition={{ duration: 0.4, delay: i * 0.05 }}
                   >
-                    {isReel(project) ? (
-                      /* Reel card — inline embed (Instagram doesn't support modal well) */
-                      <div className="overflow-hidden rounded-[24px] border border-border/40 bg-card/80 backdrop-blur-sm">
+                    {project.externalUrl ? (
+                      /* Reel card — opens Instagram in new tab */
+                      <a
+                        href={project.externalUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group block overflow-hidden rounded-[24px] border border-border/40 bg-card/80 backdrop-blur-sm transition-all duration-300 hover:border-primary/25 hover:shadow-2xl hover:shadow-primary/5 hover:scale-[1.03]"
+                      >
                         <div className="relative aspect-[9/16] max-h-[480px] overflow-hidden">
-                          <iframe
-                            src={project.embedUrl}
-                            title="Instagram Reel"
-                            className="absolute inset-0 w-full h-full border-0"
+                          <img
+                            src={project.thumbnail}
+                            alt=""
+                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                             loading="lazy"
-                            allowFullScreen
                           />
+                          <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/30 transition-all duration-300">
+                            <div className="w-14 h-14 rounded-full bg-primary/90 flex items-center justify-center opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-300 shadow-lg shadow-primary/30">
+                              <ExternalLink className="w-5 h-5 text-primary-foreground" />
+                            </div>
+                          </div>
                         </div>
-                        <div className="p-4">
+                        <div className="p-4 flex items-center justify-between">
                           <Badge variant="outline" className="text-[10px] border-primary/30 text-primary">
                             Reel
                           </Badge>
+                          <span className="text-[10px] text-muted-foreground/60">View on Instagram ↗</span>
                         </div>
-                      </div>
+                      </a>
                     ) : (
                       /* YouTube card — clickable thumbnail */
                       <button
@@ -132,7 +146,6 @@ const Portfolio = () => {
                             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                             loading="lazy"
                           />
-                          {/* Play overlay */}
                           <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/30 transition-all duration-300">
                             <div className="w-14 h-14 rounded-full bg-primary/90 flex items-center justify-center opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-300 shadow-lg shadow-primary/30">
                               <Play className="w-6 h-6 text-primary-foreground ml-0.5" fill="currentColor" />
