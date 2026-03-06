@@ -73,8 +73,9 @@ const Devis = () => {
               className="bg-card border-border/50 text-foreground placeholder:text-muted-foreground rounded-lg text-sm"
             />
             <Button
+              variant="cta"
               type="submit"
-              className="w-full rounded-full bg-primary text-primary-foreground hover:bg-primary/90 font-medium text-sm h-10"
+              className="w-full rounded-full font-medium text-sm h-10"
             >
               Send Request
             </Button>

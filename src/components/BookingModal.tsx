@@ -65,8 +65,9 @@ const BookingModal = ({ open, onOpenChange, selectedPack }: BookingModalProps) =
               shortly to confirm your session.
             </DialogDescription>
             <Button
+              variant="cta"
               onClick={() => handleClose(false)}
-              className="mt-4 rounded-full bg-primary text-primary-foreground hover:bg-primary/90"
+              className="mt-4 rounded-full"
             >
               Close
             </Button>
@@ -194,8 +195,9 @@ const BookingModal = ({ open, onOpenChange, selectedPack }: BookingModalProps) =
           </div>
 
           <Button
+            variant="cta"
             type="submit"
-            className="w-full rounded-full bg-primary text-primary-foreground hover:bg-primary/90 font-medium mt-2"
+            className="w-full rounded-full font-medium mt-2"
           >
             Submit Booking Request
           </Button>
