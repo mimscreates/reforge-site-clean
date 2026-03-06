@@ -66,7 +66,7 @@ const Hero = () => {
           >
             Create Powerful Content.
             <br />
-            <span className="text-primary">All In One Studio.</span>
+            <span className="bg-gradient-to-r from-orange-400 via-amber-300 to-orange-400 bg-[length:200%_auto] bg-clip-text text-transparent animate-[gradient-shift_10s_linear_infinite]">All In One Studio.</span>
           </motion.h1>
 
           <motion.p
