@@ -12,6 +12,7 @@ import {
   Building2,
   Sparkles,
   CheckCircle2,
+  Loader2,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -22,6 +23,8 @@ import { Calendar } from "@/components/ui/calendar";
 import Navbar from "@/components/Navbar";
 import { creatorPacks } from "@/components/CreatorPacks";
 import { corporatePacks } from "@/components/CorporatePacks";
+import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 const allPacks = [
   ...creatorPacks.map((p) => ({ ...p, type: "Creator" as const })),
@@ -55,6 +58,7 @@ const BookingWizard = () => {
   const [company, setCompany] = useState("");
   const [notes, setNotes] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   // If no pack, redirect back
   useEffect(() => {
@@ -67,9 +71,34 @@ const BookingWizard = () => {
   const canProceedStep3 =
     firstName.trim() && lastName.trim() && email.trim() && phone.trim();
 
-  const handleSubmit = () => {
-    setSubmitted(true);
-    setStep(3);
+  const handleSubmit = async () => {
+    setLoading(true);
+    try {
+      const { data, error } = await supabase.functions.invoke("send-booking-email", {
+        body: {
+          request_type: "booking",
+          pack_name: selectedPack?.name,
+          pack_type: selectedPack?.type,
+          selected_date: date ? format(date, "yyyy-MM-dd") : null,
+          selected_time: time,
+          booker_type: bookerType,
+          first_name: firstName,
+          last_name: lastName,
+          email,
+          phone,
+          company: bookerType === "company" ? company : null,
+          notes: notes || null,
+        },
+      });
+      if (error) throw error;
+      setSubmitted(true);
+      setStep(3);
+    } catch (err) {
+      console.error(err);
+      toast.error("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const goToStep = (s: number) => {
@@ -479,11 +508,12 @@ const BookingWizard = () => {
                   </button>
                   <Button
                     variant="cta"
-                    disabled={!canProceedStep3}
+                    disabled={!canProceedStep3 || loading}
                     onClick={handleSubmit}
                     className="font-medium text-sm h-11 px-8 gap-2 rounded-lg disabled:opacity-40"
                   >
-                    <Sparkles className="w-4 h-4" /> Confirm My Session
+                    {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4" />}
+                    {loading ? "Sending…" : "Confirm My Session"}
                   </Button>
                 </div>
               </motion.div>
