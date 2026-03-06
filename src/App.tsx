@@ -5,8 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { HashRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import Index from "./pages/Index";
-import CreatorPacksPage from "./pages/CreatorPacksPage";
-import CorporatePacksPage from "./pages/CorporatePacksPage";
+import PacksPage from "./pages/PacksPage";
 import Devis from "./pages/Devis";
 import BuildSession from "./pages/BuildSession";
 import RentYourSpace from "./pages/RentYourSpace";
@@ -24,8 +23,9 @@ const App = () => (
         <HashRouter>
           <Routes>
             <Route path="/" element={<Index />} />
-            <Route path="/creator-packs" element={<CreatorPacksPage />} />
-            <Route path="/corporate-packs" element={<CorporatePacksPage />} />
+            <Route path="/creator-packs" element={<PacksPage />} />
+            <Route path="/corporate-packs" element={<PacksPage />} />
+            <Route path="/packs" element={<PacksPage />} />
             <Route path="/devis" element={<Devis />} />
             <Route path="/build-session" element={<BuildSession />} />
             <Route path="/rent-your-space" element={<RentYourSpace />} />
