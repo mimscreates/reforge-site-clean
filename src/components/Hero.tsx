@@ -6,13 +6,13 @@ const Hero = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const { theme } = useTheme();
 
-  const darkOverlay = "rgba(0,0,0,0.35)";
-  const lightOverlay = "rgba(0,0,0,0.2)";
+  const darkOverlay = "rgba(0,0,0,0.55)";
+  const lightOverlay = "rgba(0,0,0,0.25)";
 
   const darkGradient =
-    "linear-gradient(90deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.55) 40%, rgba(255,120,0,0.15) 100%)";
+    "linear-gradient(90deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.55) 40%, rgba(244,106,37,0.12) 100%)";
   const lightGradient =
-    "linear-gradient(90deg, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.6) 40%, rgba(255,120,0,0.1) 100%)";
+    "linear-gradient(90deg, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.6) 40%, rgba(244,106,37,0.08) 100%)";
 
   const isDark = theme === "dark";
 
@@ -66,7 +66,7 @@ const Hero = () => {
           >
             Create Powerful Content.
             <br />
-            <span className="bg-gradient-to-r from-orange-400 via-amber-300 to-orange-400 bg-[length:200%_auto] bg-clip-text text-transparent animate-[gradient-shift_10s_linear_infinite]">All In One Studio.</span>
+            <span className="bg-gradient-to-r from-[#f46a25] via-[#ff8a3d] to-[#f46a25] bg-[length:200%_auto] bg-clip-text text-transparent animate-[gradient-shift_10s_linear_infinite]">All In One Studio.</span>
           </motion.h1>
 
           <motion.p
