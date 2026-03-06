@@ -10,9 +10,9 @@ const highlights = [
 ];
 
 const AgencyPartnership = () => (
-  <section className="py-20 md:py-28 px-4 border-t border-border/40">
+  <section className="py-12 md:py-28 px-4 border-t border-border/40">
     <div className="container mx-auto max-w-5xl">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
         {/* Left — Text */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
@@ -28,7 +28,7 @@ const AgencyPartnership = () => (
             For Agencies &<br />Marketing Teams
           </h2>
 
-          <p className="text-muted-foreground text-sm md:text-base leading-relaxed mb-8 max-w-md">
+          <p className="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 md:mb-8 max-w-md">
             We collaborate with agencies that need a reliable podcast and content studio for their clients. Become a partner and scale your content offering without the overhead.
           </p>
 

@@ -23,14 +23,14 @@ const steps = [
 ];
 
 const HowItWorks = () => (
-  <section className="py-20 px-4">
+  <section className="py-12 md:py-20 px-4">
     <div className="container mx-auto max-w-5xl">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
-        className="text-center mb-14"
+        className="text-center mb-8 md:mb-14"
       >
         <h2 className="font-display text-2xl md:text-4xl font-bold text-foreground mb-3">
           How Your Session Works
@@ -40,7 +40,7 @@ const HowItWorks = () => (
         </p>
       </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
         {steps.map((step, i) => (
           <motion.div
             key={step.title}
@@ -48,7 +48,7 @@ const HowItWorks = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.45, delay: i * 0.1 }}
-            className="relative bg-card border border-border/50 rounded-2xl p-7 text-center transition-all duration-500 hover:-translate-y-1 hover:border-primary/20 hover:shadow-xl hover:shadow-primary/5"
+            className="relative bg-card border border-border/50 rounded-2xl p-5 md:p-7 text-center transition-all duration-500 hover:-translate-y-1 hover:border-primary/20 hover:shadow-xl hover:shadow-primary/5"
           >
             {/* Step number */}
             <span className="absolute top-5 right-5 font-display text-xs font-bold text-muted-foreground/30">

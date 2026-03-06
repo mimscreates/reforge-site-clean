@@ -38,12 +38,12 @@ const FAQ = () => {
           Frequently Asked Questions
         </h2>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-10 items-start">
           <div className="rounded-2xl overflow-hidden">
             <img
               src={FAQ_IMG}
               alt="KAUN Studio FAQ"
-              className="w-full h-[350px] object-cover rounded-2xl"
+              className="w-full h-[220px] md:h-[350px] object-cover rounded-2xl"
               loading="lazy"
             />
           </div>

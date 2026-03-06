@@ -21,8 +21,8 @@ const ClientLogos = () => {
   const allLogos = [...logos, ...logos];
 
   return (
-    <section className="py-12 md:py-20 bg-background overflow-hidden">
-      <div className="container mx-auto px-4 mb-8">
+    <section className="py-8 md:py-20 bg-background overflow-hidden">
+      <div className="container mx-auto px-4 mb-5 md:mb-8">
         <p className="text-center text-muted-foreground/60 text-xs md:text-sm uppercase tracking-[0.15em] font-medium">
           Trusted by creators, brands and companies
         </p>

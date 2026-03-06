@@ -10,14 +10,14 @@ const outputs = [
 ];
 
 const ContentMultiplier = () => (
-  <section className="py-20 px-4">
+  <section className="py-12 md:py-20 px-4">
     <div className="container mx-auto max-w-5xl">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
-        className="text-center mb-16"
+        className="text-center mb-10 md:mb-16"
       >
         <h2 className="font-display text-2xl md:text-4xl font-bold text-foreground mb-3">
           Turn One Session into Weeks of Content
@@ -28,7 +28,7 @@ const ContentMultiplier = () => (
       </motion.div>
 
       {/* Flow visualization */}
-      <div className="flex flex-col items-center gap-8">
+      <div className="flex flex-col items-center gap-5 md:gap-8">
         {/* Source */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
@@ -37,7 +37,7 @@ const ContentMultiplier = () => (
           transition={{ duration: 0.5 }}
           className="relative"
         >
-          <div className="w-28 h-28 md:w-32 md:h-32 rounded-full bg-primary/10 border-2 border-primary/30 flex flex-col items-center justify-center">
+          <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-primary/10 border-2 border-primary/30 flex flex-col items-center justify-center">
             <Mic className="w-7 h-7 text-primary mb-1" />
             <span className="font-display text-xs font-bold text-foreground">1 Session</span>
           </div>
@@ -64,7 +64,7 @@ const ContentMultiplier = () => (
           />
 
           {/* Output cards */}
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-3">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-3 md:gap-3">
             {outputs.map((item) => (
               <motion.div
                 key={item.label}
@@ -77,7 +77,7 @@ const ContentMultiplier = () => (
                 {/* Vertical tick */}
                 <div className="hidden md:block w-px h-5 bg-border mb-3" />
 
-                <div className="w-full bg-card border border-border/50 rounded-2xl p-5 text-center transition-all duration-500 hover:-translate-y-1 hover:border-primary/20 hover:shadow-lg hover:shadow-primary/5">
+                <div className="w-full bg-card border border-border/50 rounded-2xl p-4 md:p-5 text-center transition-all duration-500 hover:-translate-y-1 hover:border-primary/20 hover:shadow-lg hover:shadow-primary/5">
                   <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-3">
                     <item.icon className="w-5 h-5 text-primary" />
                   </div>

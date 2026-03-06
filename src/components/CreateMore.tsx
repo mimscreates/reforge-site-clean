@@ -17,11 +17,11 @@ const CreateMore = () => {
         <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-12 text-sm md:text-base leading-relaxed">
           At Kaun Studios, we help creators produce podcasts and media projects — from recording and editing to distribution.
         </p>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-10 items-start">
           <div className="rounded-2xl overflow-hidden">
-            <img src={STUDIO_IMG} alt="KAUN Studio" className="w-full h-[400px] object-cover rounded-2xl" loading="lazy" />
+            <img src={STUDIO_IMG} alt="KAUN Studio" className="w-full h-[250px] md:h-[400px] object-cover rounded-2xl" loading="lazy" />
           </div>
-          <div className="space-y-6">
+          <div className="space-y-4 md:space-y-6">
             {services.map((service) => (
               <div key={service.title}>
                 <h3 className="font-display text-lg font-bold text-foreground mb-2">{service.title}</h3>

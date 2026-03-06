@@ -31,14 +31,14 @@ const segments = [
 
 const WhoWeWorkWith = () => {
   return (
-    <section className="py-20 px-4 bg-background">
+    <section className="py-12 md:py-20 px-4 bg-background">
       <div className="container mx-auto max-w-5xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-14"
+          className="text-center mb-8 md:mb-14"
         >
           <h2 className="font-display text-2xl md:text-4xl font-bold text-foreground mb-3">
             Who We Work With
@@ -59,7 +59,7 @@ const WhoWeWorkWith = () => {
             >
               <Link
                 to={seg.link}
-                className="group bg-card border border-border/50 rounded-2xl p-7 flex flex-col items-center text-center gap-4 cursor-pointer transition-all duration-300 hover:border-primary/40 hover:shadow-[0_0_30px_-8px_hsl(20_90%_55%_/_0.2)] block h-full"
+                className="group bg-card border border-border/50 rounded-2xl p-5 md:p-7 flex flex-col items-center text-center gap-3 md:gap-4 cursor-pointer transition-all duration-300 hover:border-primary/40 hover:shadow-[0_0_30px_-8px_hsl(20_90%_55%_/_0.2)] block h-full"
               >
                 <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/15 transition-colors">
                   <seg.icon className="w-7 h-7 text-primary" />
