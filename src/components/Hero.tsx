@@ -1,60 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { useTheme } from "@/components/ThemeProvider";
-
-const SHOOTING_STAR_COUNT = 5;
-
-const ShootingStar = ({ delay }: { delay: number }) => {
-  const top = Math.random() * 40; // top 40% of hero
-  const left = Math.random() * 80 + 10;
-  const angle = 25 + Math.random() * 20; // 25-45 degrees
-  const duration = 0.6 + Math.random() * 0.5;
-  const size = 80 + Math.random() * 120;
-
-  return (
-    <motion.div
-      className="absolute pointer-events-none"
-      style={{
-        top: `${top}%`,
-        left: `${left}%`,
-        width: `${size}px`,
-        height: "1px",
-        transform: `rotate(${angle}deg)`,
-        transformOrigin: "right center",
-      }}
-      initial={{ opacity: 0, scaleX: 0 }}
-      animate={{
-        opacity: [0, 1, 1, 0],
-        scaleX: [0, 1, 1, 1],
-        x: [0, -size * 1.5],
-        y: [0, size * 0.8],
-      }}
-      transition={{
-        duration,
-        delay,
-        ease: "easeIn",
-        repeat: Infinity,
-        repeatDelay: 4 + Math.random() * 8,
-      }}
-    >
-      {/* Tail gradient */}
-      <div
-        className="absolute inset-0 rounded-full"
-        style={{
-          background: "linear-gradient(to left, rgba(244,106,37,0.9), rgba(255,180,115,0.4), transparent)",
-        }}
-      />
-      {/* Bright head */}
-      <div
-        className="absolute right-0 top-1/2 -translate-y-1/2 w-[3px] h-[3px] rounded-full"
-        style={{
-          background: "#fff",
-          boxShadow: "0 0 6px 2px rgba(244,106,37,0.8), 0 0 12px 4px rgba(244,106,37,0.3)",
-        }}
-      />
-    </motion.div>
-  );
-};
 
 const FloatingParticle = ({ index }: { index: number }) => {
   const size = 2 + Math.random() * 2;
@@ -91,14 +37,8 @@ const FloatingParticle = ({ index }: { index: number }) => {
 
 const Hero = () => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const [showStars, setShowStars] = useState(false);
   const { theme } = useTheme();
   const isDark = theme === "dark";
-
-  useEffect(() => {
-    const timer = setTimeout(() => setShowStars(true), 1200);
-    return () => clearTimeout(timer);
-  }, []);
 
   const wordAnimation = {
     hidden: { opacity: 0, y: 25, filter: "blur(4px)" },
@@ -132,15 +72,6 @@ const Hero = () => {
         className="absolute inset-0"
         style={{ background: isDark ? "rgba(0,0,0,0.65)" : "rgba(0,0,0,0.4)" }}
       />
-
-      {/* Shooting stars */}
-      {showStars && (
-        <div className="absolute inset-0 overflow-hidden pointer-events-none z-[5]">
-          {Array.from({ length: SHOOTING_STAR_COUNT }).map((_, i) => (
-            <ShootingStar key={i} delay={i * 2.5} />
-          ))}
-        </div>
-      )}
 
       {/* Floating particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-[4]">
@@ -183,7 +114,7 @@ const Hero = () => {
         <div className="max-w-3xl">
           <h1 className="font-display text-[36px] md:text-[64px] lg:text-[80px] leading-[1.05] tracking-[-0.03em] mb-6">
             <span className="block overflow-hidden">
-              {["Your", "Vision."].map((word, i) => (
+              {["Your", "Vision"].map((word, i) => (
                 <motion.span
                   key={word}
                   custom={i}
@@ -231,17 +162,6 @@ const Hero = () => {
               ))}
             </span>
           </h1>
-
-          {/* Subtle divider line */}
-          <motion.div
-            initial={{ scaleX: 0, opacity: 0 }}
-            animate={{ scaleX: 1, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
-            className="w-16 h-[1px] mb-5 origin-left"
-            style={{
-              background: "linear-gradient(to right, rgba(244,106,37,0.6), transparent)",
-            }}
-          />
 
           <motion.p
             initial={{ opacity: 0, y: 15 }}
