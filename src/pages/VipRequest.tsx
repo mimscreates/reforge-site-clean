@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { CheckCircle2, Sparkles } from "lucide-react";
+import { CheckCircle2, Sparkles, Loader2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 const VipRequest = () => {
   const [firstName, setFirstName] = useState("");
@@ -14,12 +16,31 @@ const VipRequest = () => {
   const [email, setEmail] = useState("");
   const [notes, setNotes] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const canSubmit = firstName.trim() && lastName.trim() && email.trim();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setLoading(true);
+    try {
+      const { error } = await supabase.functions.invoke("send-booking-email", {
+        body: {
+          request_type: "vip",
+          first_name: firstName,
+          last_name: lastName,
+          email,
+          notes: notes || null,
+        },
+      });
+      if (error) throw error;
+      setSubmitted(true);
+    } catch (err) {
+      console.error(err);
+      toast.error("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -102,10 +123,11 @@ const VipRequest = () => {
                 <Button
                   variant="cta"
                   type="submit"
-                  disabled={!canSubmit}
+                  disabled={!canSubmit || loading}
                   className="w-full font-medium text-sm h-12 rounded-lg gap-2 disabled:opacity-40"
                 >
-                  <Sparkles className="w-4 h-4" /> Request Access
+                  {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4" />}
+                  {loading ? "Sending…" : "Request Access"}
                 </Button>
               </form>
             </motion.div>
