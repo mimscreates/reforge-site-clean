@@ -18,12 +18,6 @@ const navLinks = [
   { label: "Request a Quote", path: "/devis" },
 ];
 
-const mobileNavGroups = [
-  { label: "CREATE", items: [{ label: "Creator Packs", path: "/build-session?tab=creator" }] },
-  { label: "WORK WITH US", items: [{ label: "Corporate Packs", path: "/build-session?tab=business" }, { label: "Build Your Session", path: "/build-session" }] },
-  { label: "STUDIO", items: [{ label: "Rent Your Space", path: "/rent-your-space" }, { label: "Portfolio", path: "/portfolio" }] },
-  { label: "CONTACT", items: [{ label: "Request a Quote", path: "/devis" }, { label: "Call Us", path: "tel:+21626934928", external: true }] },
-];
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -99,30 +93,24 @@ const Navbar = () => {
                   <button onClick={() => setMobileOpen(false)} className="w-8 h-8 flex items-center justify-center rounded-full text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"><X size={18} /></button>
                 </div>
               </div>
-              <div className="flex-1 overflow-y-auto px-5 py-6 space-y-6">
-                {mobileNavGroups.map((group, gi) => (
-                  <motion.div key={group.label} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 + gi * 0.06, duration: 0.35 }}>
-                    <p className="text-[10px] font-bold tracking-[0.2em] text-muted-foreground/60 uppercase mb-3">{group.label}</p>
-                    <div className="space-y-0.5">
-                      {group.items.map((item) => {
-                        const isHash = item.path.startsWith("/#");
-                        const isExternal = "external" in item && item.external;
-                        const content = (
-                          <span className="flex items-center justify-between w-full group/item">
-                            <span className="text-foreground text-[15px] font-medium relative">
-                              {item.label}
-                              <span className="absolute left-0 -bottom-0.5 w-0 h-[2px] bg-primary transition-all duration-300 group-hover/item:w-full" />
-                            </span>
-                            <ArrowRight className="w-4 h-4 text-muted-foreground/40 group-hover/item:text-primary group-hover/item:translate-x-0.5 transition-all duration-200" />
-                          </span>
-                        );
-                        if (isExternal) return <a key={item.path} href={item.path} className="block py-2.5 px-2 rounded-lg hover:bg-secondary/50 transition-colors">{content}</a>;
-                        if (isHash) return <button key={item.path} onClick={() => handleNav(item.path)} className="block w-full text-left py-2.5 px-2 rounded-lg hover:bg-secondary/50 transition-colors">{content}</button>;
-                        return <Link key={item.path} to={item.path} onClick={() => setMobileOpen(false)} className="block py-2.5 px-2 rounded-lg hover:bg-secondary/50 transition-colors">{content}</Link>;
-                      })}
-                    </div>
-                  </motion.div>
-                ))}
+              <div className="flex-1 overflow-y-auto px-5 py-6 space-y-1">
+                {navLinks.map((link, i) => {
+                  const isHash = link.path.startsWith("/#");
+                  const isActive = location.pathname === link.path;
+                  return (
+                    <motion.div key={link.path} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 + i * 0.04, duration: 0.3 }}>
+                      {isHash ? (
+                        <button onClick={() => handleNav(link.path)} className="block w-full text-left py-3 px-3 rounded-lg hover:bg-secondary/50 transition-colors text-[15px] font-medium text-muted-foreground">
+                          {link.label}
+                        </button>
+                      ) : (
+                        <Link to={link.path} onClick={() => setMobileOpen(false)} className={`block py-3 px-3 rounded-lg hover:bg-secondary/50 transition-colors text-[15px] font-medium ${isActive ? "text-foreground" : "text-muted-foreground"}`}>
+                          {link.label}
+                        </Link>
+                      )}
+                    </motion.div>
+                  );
+                })}
               </div>
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35, duration: 0.3 }} className="px-6 pb-7 pt-5 border-t border-border/50 space-y-4">
                 <Link to="/build-session" onClick={() => setMobileOpen(false)}>
