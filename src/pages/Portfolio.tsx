@@ -8,7 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import reelThumb1 from "@/assets/reels/reel-thumb-1.jpg";
 import reelThumb2 from "@/assets/reels/reel-thumb-2.jpg";
-import reelThumb3 from "@/assets/reels/reel-thumb-3.jpg";
+import reelThumb4 from "@/assets/reels/reel-thumb-4.jpg";
 
 type Category = "All" | "Podcast" | "Reels" | "Music Video";
 
@@ -29,9 +29,10 @@ const projects: VideoProject[] = [
   { id: "9p0sQWvUudk", embedUrl: "https://www.youtube.com/embed/9p0sQWvUudk", thumbnail: "https://img.youtube.com/vi/9p0sQWvUudk/maxresdefault.jpg", category: "Podcast" },
   { id: "48utRXZHkGo", embedUrl: "https://www.youtube.com/embed/48utRXZHkGo", thumbnail: "https://img.youtube.com/vi/48utRXZHkGo/maxresdefault.jpg", category: "Podcast" },
   // Reels — open Instagram externally
-  { id: "reel-1", embedUrl: "", thumbnail: reelThumb1, category: "Reels", externalUrl: "https://www.instagram.com/reel/DUGrwcdCDVn/" },
-  { id: "reel-2", embedUrl: "", thumbnail: reelThumb2, category: "Reels", externalUrl: "https://www.instagram.com/reel/DUYrAJ4iLnG/" },
-  { id: "reel-3", embedUrl: "", thumbnail: reelThumb3, category: "Reels", externalUrl: "https://www.instagram.com/reel/DMnEOzDsgV_/" },
+  { id: "reel-1", embedUrl: "", thumbnail: reelThumb1, category: "Reels", externalUrl: "https://www.instagram.com/p/DUYrAJ4iLnG/" },
+  { id: "reel-2", embedUrl: "", thumbnail: reelThumb2, category: "Reels", externalUrl: "https://www.instagram.com/p/DUGrwcdCDVn/" },
+  { id: "reel-3", embedUrl: "", thumbnail: reelThumb3, category: "Reels", externalUrl: "https://www.instagram.com/p/DNswQT8Xodd/" },
+  { id: "reel-4", embedUrl: "", thumbnail: reelThumb4, category: "Reels", externalUrl: "https://www.instagram.com/p/DMnEOzDsgV_/" },
   // Music Video
   { id: "DEORkgTglFE", embedUrl: "https://www.youtube.com/embed/DEORkgTglFE", thumbnail: "https://img.youtube.com/vi/DEORkgTglFE/maxresdefault.jpg", category: "Music Video" },
 ];
