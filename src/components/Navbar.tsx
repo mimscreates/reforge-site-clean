@@ -66,7 +66,7 @@ const Navbar = () => {
             </a>
             <Link to="/build-session">
               <Button
-                variant="cta"
+                variant="cta-primary"
                 className="font-medium text-[13px] h-8 px-4"
               >
                 Book a Session
@@ -154,7 +154,7 @@ const Navbar = () => {
               </div>
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35, duration: 0.3 }} className="px-6 pb-7 pt-5 border-t border-border/50 space-y-4">
                 <Link to="/build-session" onClick={() => setMobileOpen(false)}>
-                  <Button variant="cta" className="w-full font-medium text-sm h-12 rounded-lg gap-2">
+                  <Button variant="cta-primary" className="w-full font-medium text-sm h-12 rounded-lg gap-2">
                     Book a Session
                   </Button>
                 </Link>

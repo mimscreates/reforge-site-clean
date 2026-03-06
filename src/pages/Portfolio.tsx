@@ -181,7 +181,7 @@ const Portfolio = () => {
               Ready to create something like this?
             </h2>
             <Link to="/build-session">
-              <Button variant="cta" className="font-medium text-sm h-11 px-7 gap-2">
+              <Button variant="cta-primary" className="font-medium text-sm h-11 px-7 gap-2">
                 Book a Session <ArrowRight className="w-4 h-4" />
               </Button>
             </Link>
