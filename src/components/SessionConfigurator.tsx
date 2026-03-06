@@ -97,12 +97,12 @@ const SessionConfigurator = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-6 md:mb-8"
+          className="text-center mb-8 md:mb-10"
         >
-          <h1 className="font-display text-2xl md:text-5xl font-bold text-foreground mb-2 md:mb-4">
+          <h1 className="font-display text-2xl md:text-5xl font-bold text-foreground mb-3 md:mb-5 max-w-[800px] mx-auto">
             Build Your Session
           </h1>
-          <p className="text-muted-foreground text-sm md:text-lg max-w-2xl mx-auto">
+          <p className="text-muted-foreground text-sm md:text-lg max-w-[600px] mx-auto">
             Configure your podcast production session and get an instant quote.
           </p>
         </motion.div>
@@ -112,14 +112,14 @@ const SessionConfigurator = () => {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.2 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-2 md:gap-3 mb-8 md:mb-16 p-3 md:p-4 rounded-xl border border-border bg-card/50 max-w-2xl mx-auto"
+          className="flex flex-col sm:flex-row items-center justify-center gap-2 md:gap-3 mb-6 md:mb-12 p-2.5 md:p-3 rounded-lg border border-border/60 bg-card/30 max-w-[640px] mx-auto"
         >
-          <p className="text-muted-foreground text-sm text-center sm:text-left">
+          <p className="text-muted-foreground text-xs text-center sm:text-left">
             Custom sessions are flexible but usually more expensive than our recommended studio packs.
           </p>
           <a
             href="/nos-packs#creator-packs"
-            className="inline-flex items-center gap-1.5 text-primary text-sm font-medium whitespace-nowrap hover:underline"
+            className="inline-flex items-center gap-1.5 text-primary text-xs font-medium whitespace-nowrap hover:underline"
           >
             View Recommended Packs <ArrowRight className="w-4 h-4" />
           </a>
@@ -219,21 +219,23 @@ const SessionConfigurator = () => {
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
-                className="bg-card border border-border rounded-2xl p-6 space-y-6"
+                className="bg-card border border-border rounded-2xl p-6 space-y-0"
               >
-                <h3 className="font-display text-xl font-bold text-foreground">Session Summary</h3>
+                <h3 className="font-display text-xl font-bold text-foreground pb-4 border-b border-border/50">Session Summary</h3>
 
-                <SummaryRow label="Base Session" value="Studio, lighting, setup & technician" price={BASE_SESSION_PRICE} />
-                <SummaryRow label="Filming Setup" value={filmingLabel} price={filmingPrice} />
-                <SummaryRow label="Session Type" value={sessionTypeLabel} price={0} />
-                <SummaryRow label="Editing" value={editingLabel} price={editingPrice} />
-                <SummaryRow label="Social Clips" value={clipsLabel} price={clipsPrice} />
-                <SummaryRow label="Reel Style" value={reelLabel} price={reelPrice} />
-                {extrasLabels.length > 0 && (
-                  <SummaryRow label="Extras" value={extrasLabels.join(", ")} price={extrasPrice} />
-                )}
+                <div className="divide-y divide-border/30">
+                  <div className="py-4"><SummaryRow label="Base Session" value="Studio, lighting, setup & technician" price={BASE_SESSION_PRICE} /></div>
+                  <div className="py-4"><SummaryRow label="Filming Setup" value={filmingLabel} price={filmingPrice} /></div>
+                  <div className="py-4"><SummaryRow label="Session Type" value={sessionTypeLabel} price={0} /></div>
+                  <div className="py-4"><SummaryRow label="Editing" value={editingLabel} price={editingPrice} /></div>
+                  <div className="py-4"><SummaryRow label="Social Clips" value={clipsLabel} price={clipsPrice} /></div>
+                  <div className="py-4"><SummaryRow label="Reel Style" value={reelLabel} price={reelPrice} /></div>
+                  {extrasLabels.length > 0 && (
+                    <div className="py-4"><SummaryRow label="Extras" value={extrasLabels.join(", ")} price={extrasPrice} /></div>
+                  )}
+                </div>
 
-                <div className="border-t border-border pt-4">
+                <div className="border-t border-border pt-5 mt-1">
                   <div className="flex items-center justify-between">
                     <span className="font-display text-lg font-bold text-foreground">Estimated Total</span>
                     <span className="font-display text-2xl font-bold text-primary">{totalPrice} DT</span>
@@ -371,7 +373,7 @@ function SummaryRow({ label, value, price }: { label: string; value: string; pri
   return (
     <div className="flex items-start justify-between gap-2">
       <div>
-        <p className="text-xs text-muted-foreground uppercase tracking-wider">{label}</p>
+        <p className="text-[10px] text-muted-foreground/70 uppercase tracking-wider mb-0.5">{label}</p>
         <p className="text-foreground text-sm">{value}</p>
       </div>
       <span className="text-primary text-sm font-semibold whitespace-nowrap">
