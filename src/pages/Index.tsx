@@ -4,13 +4,13 @@ import ClientLogos from "@/components/ClientLogos";
 import WhoWeWorkWith from "@/components/WhoWeWorkWith";
 import HowItWorks from "@/components/HowItWorks";
 import ContentMultiplier from "@/components/ContentMultiplier";
-
 import StudioCarousel from "@/components/StudioCarousel";
 import CreateMore from "@/components/CreateMore";
 import AgencyPartnership from "@/components/AgencyPartnership";
 import FAQ from "@/components/FAQ";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
+import MobileFloatingCTA from "@/components/MobileFloatingCTA";
 
 const Index = () => {
   return (
@@ -30,6 +30,7 @@ const Index = () => {
         <FinalCTA />
       </main>
       <Footer />
+      <MobileFloatingCTA />
     </div>
   );
 };
