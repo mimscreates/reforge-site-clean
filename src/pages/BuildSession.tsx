@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sliders, Mic, Building2, Check } from "lucide-react";
 import Navbar from "@/components/Navbar";
@@ -21,7 +22,15 @@ const tabs = [
 type TabId = (typeof tabs)[number]["id"];
 
 const BuildSession = () => {
-  const [activeTab, setActiveTab] = useState<TabId>("creator");
+  const [searchParams] = useSearchParams();
+  const tabParam = searchParams.get("tab") as TabId | null;
+  const [activeTab, setActiveTab] = useState<TabId>(tabParam && ["custom", "creator", "business"].includes(tabParam) ? tabParam : "creator");
+
+  useEffect(() => {
+    if (tabParam && ["custom", "creator", "business"].includes(tabParam)) {
+      setActiveTab(tabParam);
+    }
+  }, [tabParam]);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedPack, setSelectedPack] = useState("");
 
