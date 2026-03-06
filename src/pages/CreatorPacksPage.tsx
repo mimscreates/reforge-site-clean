@@ -144,7 +144,7 @@ const CreatorPacksPage = () => {
                     ))}
                   </div>
                   <Button
-                    variant="cta"
+                    variant="cta-primary"
                     onClick={() => openBooking(pack.name)}
                     className="mt-auto w-full font-medium text-sm h-9"
                   >
