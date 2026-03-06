@@ -17,7 +17,7 @@ const Hero = () => {
   const isDark = theme === "dark";
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-background">
+    <section className="relative min-h-[85vh] md:min-h-screen flex items-center overflow-hidden bg-background">
       {/* Background video */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/2 left-1/2 w-[300%] h-[300%] -translate-x-1/2 -translate-y-1/2 md:w-[180%] md:h-[180%]">

@@ -32,9 +32,9 @@ const faqs = [
 
 const FAQ = () => {
   return (
-    <section className="py-16 px-4 bg-background">
+    <section className="py-10 md:py-16 px-4 bg-background">
       <div className="container mx-auto">
-        <h2 className="font-display text-2xl md:text-4xl font-bold text-foreground text-center mb-12">
+        <h2 className="font-display text-2xl md:text-4xl font-bold text-foreground text-center mb-8 md:mb-12">
           Frequently Asked Questions
         </h2>
 
