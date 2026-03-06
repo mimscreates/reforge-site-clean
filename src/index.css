@@ -22,7 +22,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 7%;
 
-    --primary: 20 90% 55%;
+    --primary: 20 91% 55%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 240 3% 94%;
@@ -31,7 +31,7 @@
     --muted: 240 3% 94%;
     --muted-foreground: 0 0% 33%;
 
-    --accent: 20 90% 55%;
+    --accent: 20 91% 55%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
@@ -39,32 +39,32 @@
 
     --border: 240 4% 90%;
     --input: 240 4% 90%;
-    --ring: 20 90% 55%;
+    --ring: 20 91% 55%;
 
     --radius: 0.5rem;
     --radius-card: 1.5rem;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 0 0% 7%;
-    --sidebar-primary: 20 90% 55%;
+    --sidebar-primary: 20 91% 55%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 240 3% 94%;
     --sidebar-accent-foreground: 0 0% 7%;
     --sidebar-border: 240 4% 90%;
-    --sidebar-ring: 20 90% 55%;
+    --sidebar-ring: 20 91% 55%;
   }
 
   .dark {
-    --background: 0 0% 7%;
+    --background: 0 0% 5%;
     --foreground: 0 0% 95%;
 
-    --card: 0 0% 10%;
+    --card: 0 0% 8%;
     --card-foreground: 0 0% 95%;
 
-    --popover: 0 0% 10%;
+    --popover: 0 0% 8%;
     --popover-foreground: 0 0% 95%;
 
-    --primary: 20 90% 55%;
+    --primary: 20 91% 55%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 0 0% 15%;
@@ -73,7 +73,7 @@
     --muted: 0 0% 15%;
     --muted-foreground: 0 0% 65%;
 
-    --accent: 20 90% 55%;
+    --accent: 20 91% 55%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
@@ -81,16 +81,16 @@
 
     --border: 0 0% 20%;
     --input: 0 0% 20%;
-    --ring: 20 90% 55%;
+    --ring: 20 91% 55%;
 
-    --sidebar-background: 0 0% 8%;
+    --sidebar-background: 0 0% 5%;
     --sidebar-foreground: 0 0% 95%;
-    --sidebar-primary: 20 90% 55%;
+    --sidebar-primary: 20 91% 55%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 0 0% 15%;
     --sidebar-accent-foreground: 0 0% 95%;
     --sidebar-border: 0 0% 20%;
-    --sidebar-ring: 20 90% 55%;
+    --sidebar-ring: 20 91% 55%;
   }
 }
 
@@ -130,7 +130,7 @@
     background: hsl(var(--primary));
     border-color: hsl(var(--primary));
     color: white;
-    box-shadow: 0 0 24px rgba(255, 106, 26, 0.45);
+    box-shadow: 0 0 24px rgba(244, 106, 37, 0.45);
     transform: scale(1.02);
   }
 
@@ -156,7 +156,7 @@
     background: hsl(var(--primary));
     border-color: hsl(var(--primary));
     color: white;
-    box-shadow: 0 0 24px rgba(255, 106, 26, 0.45);
+    box-shadow: 0 0 24px rgba(244, 106, 37, 0.45);
   }
 }
 
