@@ -13,6 +13,12 @@ import RentYourSpace from "./pages/RentYourSpace";
 import Portfolio from "./pages/Portfolio";
 import NotFound from "./pages/NotFound";
 
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  return null;
+};
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -22,6 +28,7 @@ const App = () => (
         <Toaster />
         <Sonner />
         <HashRouter>
+          <ScrollToTop />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/creator-packs" element={<PacksPage />} />
