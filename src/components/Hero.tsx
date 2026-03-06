@@ -1,11 +1,104 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useTheme } from "@/components/ThemeProvider";
 
+const SHOOTING_STAR_COUNT = 5;
+
+const ShootingStar = ({ delay }: { delay: number }) => {
+  const top = Math.random() * 40; // top 40% of hero
+  const left = Math.random() * 80 + 10;
+  const angle = 25 + Math.random() * 20; // 25-45 degrees
+  const duration = 0.6 + Math.random() * 0.5;
+  const size = 80 + Math.random() * 120;
+
+  return (
+    <motion.div
+      className="absolute pointer-events-none"
+      style={{
+        top: `${top}%`,
+        left: `${left}%`,
+        width: `${size}px`,
+        height: "1px",
+        transform: `rotate(${angle}deg)`,
+        transformOrigin: "right center",
+      }}
+      initial={{ opacity: 0, scaleX: 0 }}
+      animate={{
+        opacity: [0, 1, 1, 0],
+        scaleX: [0, 1, 1, 1],
+        x: [0, -size * 1.5],
+        y: [0, size * 0.8],
+      }}
+      transition={{
+        duration,
+        delay,
+        ease: "easeIn",
+        repeat: Infinity,
+        repeatDelay: 4 + Math.random() * 8,
+      }}
+    >
+      {/* Tail gradient */}
+      <div
+        className="absolute inset-0 rounded-full"
+        style={{
+          background: "linear-gradient(to left, rgba(244,106,37,0.9), rgba(255,180,115,0.4), transparent)",
+        }}
+      />
+      {/* Bright head */}
+      <div
+        className="absolute right-0 top-1/2 -translate-y-1/2 w-[3px] h-[3px] rounded-full"
+        style={{
+          background: "#fff",
+          boxShadow: "0 0 6px 2px rgba(244,106,37,0.8), 0 0 12px 4px rgba(244,106,37,0.3)",
+        }}
+      />
+    </motion.div>
+  );
+};
+
+const FloatingParticle = ({ index }: { index: number }) => {
+  const size = 2 + Math.random() * 2;
+  const left = Math.random() * 100;
+  const top = Math.random() * 100;
+  const duration = 3 + Math.random() * 4;
+  const delay = Math.random() * 3;
+
+  return (
+    <motion.div
+      className="absolute rounded-full pointer-events-none"
+      style={{
+        width: size,
+        height: size,
+        left: `${left}%`,
+        top: `${top}%`,
+        background: index % 3 === 0
+          ? "rgba(244,106,37,0.4)"
+          : "rgba(255,255,255,0.15)",
+      }}
+      animate={{
+        y: [0, -15, 0],
+        opacity: [0.2, 0.6, 0.2],
+      }}
+      transition={{
+        duration,
+        delay,
+        repeat: Infinity,
+        ease: "easeInOut",
+      }}
+    />
+  );
+};
+
 const Hero = () => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [showStars, setShowStars] = useState(false);
   const { theme } = useTheme();
   const isDark = theme === "dark";
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShowStars(true), 1200);
+    return () => clearTimeout(timer);
+  }, []);
 
   const wordAnimation = {
     hidden: { opacity: 0, y: 25, filter: "blur(4px)" },
@@ -40,7 +133,23 @@ const Hero = () => {
         style={{ background: isDark ? "rgba(0,0,0,0.65)" : "rgba(0,0,0,0.4)" }}
       />
 
-      {/* Cinematic bottom fade — taller for smoother transition */}
+      {/* Shooting stars */}
+      {showStars && (
+        <div className="absolute inset-0 overflow-hidden pointer-events-none z-[5]">
+          {Array.from({ length: SHOOTING_STAR_COUNT }).map((_, i) => (
+            <ShootingStar key={i} delay={i * 2.5} />
+          ))}
+        </div>
+      )}
+
+      {/* Floating particles */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-[4]">
+        {Array.from({ length: 12 }).map((_, i) => (
+          <FloatingParticle key={i} index={i} />
+        ))}
+      </div>
+
+      {/* Cinematic bottom fade */}
       <div
         className="absolute inset-x-0 bottom-0 h-[350px] md:h-[400px]"
         style={{
@@ -57,10 +166,21 @@ const Hero = () => {
         }}
       />
 
+      {/* Cinematic lens flare — top right */}
+      <motion.div
+        className="absolute top-[15%] right-[10%] w-[300px] h-[300px] pointer-events-none z-[3]"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: [0, 0.15, 0.08, 0.15], scale: [0.8, 1, 0.95, 1] }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+        style={{
+          background: "radial-gradient(circle, rgba(244,106,37,0.2) 0%, rgba(255,138,61,0.05) 40%, transparent 70%)",
+          filter: "blur(30px)",
+        }}
+      />
+
       {/* Content */}
       <div className="relative z-10 w-full max-w-6xl px-5 md:px-12 mx-auto pb-28 md:pb-0">
         <div className="max-w-3xl">
-          {/* Line 1 — word by word reveal */}
           <h1 className="font-display text-[36px] md:text-[64px] lg:text-[80px] leading-[1.05] tracking-[-0.03em] mb-6">
             <span className="block overflow-hidden">
               {["Your", "Vision."].map((word, i) => (
@@ -78,7 +198,6 @@ const Hero = () => {
               ))}
             </span>
 
-            {/* Line 2 — the hero statement */}
             <span className="block overflow-hidden">
               {["Our", "Studio."].map((word, i) => (
                 <motion.span
@@ -90,9 +209,7 @@ const Hero = () => {
                   className="inline-block mr-[0.25em]"
                   style={{
                     fontWeight: word === "Studio." ? 700 : 600,
-                    ...(word === "Studio."
-                      ? {}
-                      : { color: "white" }),
+                    ...(word === "Studio." ? {} : { color: "white" }),
                   }}
                 >
                   {word === "Studio." ? (
