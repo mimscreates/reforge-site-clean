@@ -33,7 +33,7 @@ const MobileStickyBar = ({ totalPrice, items, onReserve }: MobileStickyBarProps)
           </div>
           <button
             onClick={() => setOpen(true)}
-            className="flex items-center gap-1 text-foreground text-xs font-medium bg-secondary/80 border border-border rounded-full px-3 py-1.5 hover:bg-secondary transition-colors"
+            className="flex items-center gap-1 text-foreground text-xs font-medium bg-secondary/80 border border-border rounded-lg px-3 py-1.5 hover:bg-secondary transition-colors"
           >
             Summary <ChevronUp className="w-3.5 h-3.5" />
           </button>
@@ -80,7 +80,7 @@ const MobileStickyBar = ({ totalPrice, items, onReserve }: MobileStickyBarProps)
                 setOpen(false);
                 onReserve();
               }}
-              className="w-full rounded-full font-medium text-sm py-5"
+              className="w-full font-medium text-sm py-5"
             >
               Reserve This Session
             </Button>

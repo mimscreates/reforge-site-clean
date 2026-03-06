@@ -45,7 +45,7 @@ const AudienceSelector = () => {
               whileHover={{ scale: 1.02, borderColor: "hsl(20 90% 55%)" }}
               whileTap={{ scale: 0.98 }}
               onClick={() => scrollTo(card.target)}
-              className="bg-card border border-border/50 rounded-xl p-7 flex flex-col items-center text-center gap-3 cursor-pointer transition-shadow hover:shadow-[0_0_25px_-5px_hsl(20_90%_55%_/_0.25)]"
+              className="bg-card border border-border/50 rounded-2xl p-7 flex flex-col items-center text-center gap-3 cursor-pointer transition-shadow hover:shadow-[0_0_25px_-5px_hsl(20_90%_55%_/_0.25)]"
             >
               <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
                 <card.icon className="w-6 h-6 text-primary" />

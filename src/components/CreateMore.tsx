@@ -18,8 +18,8 @@ const CreateMore = () => {
           At Kaun Studios, we help creators produce podcasts and media projects — from recording and editing to distribution.
         </p>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
-          <div className="rounded-xl overflow-hidden">
-            <img src={STUDIO_IMG} alt="KAUN Studio" className="w-full h-[400px] object-cover rounded-xl" loading="lazy" />
+          <div className="rounded-2xl overflow-hidden">
+            <img src={STUDIO_IMG} alt="KAUN Studio" className="w-full h-[400px] object-cover rounded-2xl" loading="lazy" />
           </div>
           <div className="space-y-6">
             {services.map((service) => (
@@ -29,7 +29,7 @@ const CreateMore = () => {
               </div>
             ))}
             <Link to="/#creator-packs">
-              <Button variant="cta" className="rounded-full px-6 font-medium text-sm h-9">Book a Session</Button>
+              <Button variant="cta" className="px-6 font-medium text-sm h-9">Book a Session</Button>
             </Link>
           </div>
         </div>

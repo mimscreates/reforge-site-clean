@@ -67,7 +67,7 @@ const BookingModal = ({ open, onOpenChange, selectedPack }: BookingModalProps) =
             <Button
               variant="cta"
               onClick={() => handleClose(false)}
-              className="mt-4 rounded-full"
+              className="mt-4"
             >
               Close
             </Button>
@@ -172,7 +172,7 @@ const BookingModal = ({ open, onOpenChange, selectedPack }: BookingModalProps) =
                 required
                 value={time}
                 onChange={(e) => setTime(e.target.value)}
-                className="flex h-10 w-full rounded-md border border-border bg-secondary px-3 py-2 text-sm text-foreground ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="flex h-10 w-full rounded-lg border border-border bg-secondary px-3 py-2 text-sm text-foreground ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 <option value="" disabled>
                   Select a time
@@ -197,7 +197,7 @@ const BookingModal = ({ open, onOpenChange, selectedPack }: BookingModalProps) =
           <Button
             variant="cta"
             type="submit"
-            className="w-full rounded-full font-medium mt-2"
+            className="w-full font-medium mt-2"
           >
             Submit Booking Request
           </Button>

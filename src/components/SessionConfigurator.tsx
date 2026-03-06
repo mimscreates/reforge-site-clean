@@ -243,7 +243,7 @@ const SessionConfigurator = () => {
                 <Button
                   variant="cta"
                   onClick={() => setModalOpen(true)}
-                  className="w-full rounded-full font-medium text-base py-6"
+                  className="w-full font-medium text-base py-6"
                 >
                   Reserve This Session
                 </Button>
@@ -327,7 +327,7 @@ function ConfigSection({ icon, title, subtitle, children }: { icon: React.ReactN
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.4 }}
-      className="bg-card border border-border rounded-xl md:rounded-2xl p-4 md:p-6"
+      className="bg-card border border-border rounded-2xl p-4 md:p-6"
     >
       <div className="flex items-center gap-2 md:gap-3 mb-0.5 md:mb-1">
         <div className="text-primary">{icon}</div>

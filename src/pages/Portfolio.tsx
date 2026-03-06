@@ -141,7 +141,7 @@ const Portfolio = () => {
               Share your setup with the community and get featured on our portfolio.
             </p>
             <Link to="/devis">
-              <Button variant="cta" className="rounded-full font-medium text-sm h-10 px-6 gap-2">
+              <Button variant="cta" className="font-medium text-sm h-10 px-6 gap-2">
                 Submit Your Build <ArrowRight className="w-4 h-4" />
               </Button>
             </Link>

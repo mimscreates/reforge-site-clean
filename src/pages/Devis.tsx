@@ -75,7 +75,7 @@ const Devis = () => {
             <Button
               variant="cta"
               type="submit"
-              className="w-full rounded-full font-medium text-sm h-10"
+              className="w-full font-medium text-sm h-10"
             >
               Send Request
             </Button>

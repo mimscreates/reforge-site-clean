@@ -30,7 +30,7 @@ const CreatorPacks = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {packs.map((pack, i) => (
             <motion.div key={pack.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08, duration: 0.4 }}
-              className={`relative bg-card border rounded-xl p-6 flex flex-col items-center text-center ${pack.popular ? "border-primary shadow-[0_0_30px_-8px_hsl(20_90%_55%_/_0.35)]" : "border-border/50"}`}>
+              className={`relative bg-card border rounded-2xl p-6 flex flex-col items-center text-center ${pack.popular ? "border-primary shadow-[0_0_30px_-8px_hsl(20_90%_55%_/_0.35)]" : "border-border/50"}`}>
               {pack.popular && (
                 <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground text-[10px] font-bold px-3 py-0.5 rounded-full uppercase tracking-wider">Most Popular</div>
               )}
@@ -45,7 +45,7 @@ const CreatorPacks = () => {
                   </div>
                 ))}
               </div>
-              <Button variant="cta" onClick={() => openBooking(pack.name)} className="mt-auto w-full rounded-full font-medium text-sm h-9">
+              <Button variant="cta" onClick={() => openBooking(pack.name)} className="mt-auto w-full font-medium text-sm h-9">
                 Book a Session
               </Button>
             </motion.div>
