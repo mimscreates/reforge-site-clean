@@ -177,69 +177,68 @@ const CorporatePacksPage = () => {
 
         {/* Agency Partnership */}
         <section id="partnership" className="py-20 px-4 bg-secondary/20 scroll-mt-16">
-          <div className="container mx-auto max-w-5xl">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
-              {/* Left: Content */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-              >
-                <div className="inline-flex items-center gap-2 bg-primary/10 text-primary text-xs font-semibold px-4 py-1.5 rounded-full mb-5">
-                  <Handshake className="w-3.5 h-3.5" /> For Agencies
-                </div>
-                <h2 className="font-display text-2xl md:text-4xl font-bold text-foreground mb-4">
-                  Partner With Us
-                </h2>
-                <p className="text-muted-foreground text-base leading-relaxed mb-6">
-                  Marketing agencies, content agencies, and consultants — collaborate with KAUN Studios to produce professional podcast and video content for your clients. We become your reliable production partner so you can focus on strategy and client relationships.
-                </p>
+          <div className="container mx-auto max-w-3xl">
+            {/* Text content centered */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="text-center mb-12"
+            >
+              <div className="inline-flex items-center gap-2 bg-primary/10 text-primary text-xs font-semibold px-4 py-1.5 rounded-full mb-5">
+                <Handshake className="w-3.5 h-3.5" /> For Agencies
+              </div>
+              <h2 className="font-display text-2xl md:text-4xl font-bold text-foreground mb-4">
+                Partner With Us
+              </h2>
+              <p className="text-muted-foreground text-base leading-relaxed mb-8 max-w-2xl mx-auto">
+                Marketing agencies, content agencies, and consultants — collaborate with KAUN Studios to produce professional podcast and video content for your clients. We become your reliable production partner so you can focus on strategy and client relationships.
+              </p>
 
-                <div className="space-y-3 mb-8">
-                  {partnerBenefits.map((benefit) => (
-                    <div key={benefit} className="flex items-center gap-3">
-                      <img src={CHECK_ICON} alt="" className="w-4 h-4 object-contain flex-shrink-0" />
-                      <span className="text-foreground text-sm">{benefit}</span>
-                    </div>
-                  ))}
-                </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-left max-w-xl mx-auto mb-8">
+                {partnerBenefits.map((benefit) => (
+                  <div key={benefit} className="flex items-center gap-3">
+                    <img src={CHECK_ICON} alt="" className="w-4 h-4 object-contain flex-shrink-0" />
+                    <span className="text-foreground text-sm">{benefit}</span>
+                  </div>
+                ))}
+              </div>
 
-                <p className="text-muted-foreground text-sm italic">
-                  Whether you need a one-time production or an ongoing partnership, we adapt to your agency's workflow.
-                </p>
-              </motion.div>
+              <p className="text-muted-foreground text-sm italic">
+                Whether you need a one-time production or an ongoing partnership, we adapt to your agency's workflow.
+              </p>
+            </motion.div>
 
-              {/* Right: Calendly embed */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.15 }}
-                className="bg-card border border-border rounded-2xl p-6"
-              >
-                <h3 className="font-display text-lg font-bold text-foreground mb-2">
-                  Schedule a Partnership Call
-                </h3>
-                <p className="text-muted-foreground text-sm mb-5">
-                  Book a 30-minute discovery call to discuss how we can work together.
-                </p>
+            {/* Cal.com embed full width */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.15 }}
+              className="bg-card border border-border rounded-2xl p-6"
+            >
+              <h3 className="font-display text-lg font-bold text-foreground mb-2 text-center">
+                Schedule a Partnership Call
+              </h3>
+              <p className="text-muted-foreground text-sm mb-5 text-center">
+                Book a 40-minute discovery call to discuss how we can work together.
+              </p>
 
-                <div className="rounded-xl overflow-hidden border border-border bg-background" style={{ minHeight: 500 }}>
-                  <iframe
-                    src="https://cal.com/kaun-studios-csvvzi/40min?embed=true&theme=dark"
-                    title="Schedule a partnership call"
-                    className="w-full border-0"
-                    style={{ height: 500 }}
-                    loading="lazy"
-                  />
-                </div>
+              <div className="rounded-xl overflow-hidden border border-border bg-background" style={{ minHeight: 600 }}>
+                <iframe
+                  src="https://cal.eu/kaun-studios-csvvzi/40min?embed=true&theme=dark"
+                  title="Schedule a partnership call"
+                  className="w-full border-0"
+                  style={{ height: 600 }}
+                  loading="lazy"
+                />
+              </div>
 
-                <p className="text-muted-foreground/50 text-[11px] text-center mt-3">
-                  No commitment required — let's explore how we can collaborate.
-                </p>
-              </motion.div>
-            </div>
+              <p className="text-muted-foreground/50 text-[11px] text-center mt-3">
+                No commitment required — let's explore how we can collaborate.
+              </p>
+            </motion.div>
           </div>
         </section>
 
