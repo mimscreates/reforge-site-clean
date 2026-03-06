@@ -78,7 +78,7 @@ const Navbar = () => {
           <div className="flex items-center gap-2 lg:hidden">
             <ThemeToggle />
             <Link to="/build-session">
-              <Button variant="cta" className="font-medium text-[11px] h-7 px-3 rounded-md">
+              <Button variant="cta-primary" className="font-medium text-[11px] h-7 px-3 rounded-md">
                 Book
               </Button>
             </Link>
