@@ -26,6 +26,7 @@ const PodcastOffers = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {packs.map(pack => <div key={pack.name} className="bg-card border border-border rounded-2xl p-8 flex flex-col items-center text-center">
+
               <img src={pack.icon} alt={pack.name} className="w-20 h-20 object-contain mb-6" />
               <h3 className="font-display text-2xl font-bold text-foreground mb-2">{pack.name}</h3>
               <p className="font-display text-xl text-primary font-bold mb-8">{pack.price}</p>
@@ -38,7 +39,7 @@ const PodcastOffers = () => {
               </div>
 
               <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" className="mt-auto w-full">
-                <Button className="w-full rounded-full bg-primary text-primary-foreground hover:bg-primary/90 font-medium">
+                <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-medium">
                   Réserver ma session
                 </Button>
               </a>

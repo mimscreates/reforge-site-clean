@@ -74,7 +74,7 @@ const Navbar = () => {
               <Button
                 variant="cta"
                 onClick={() => { if (location.pathname === "/") { const el = document.getElementById("creator-packs"); if (el) el.scrollIntoView({ behavior: "smooth", block: "start" }); } }}
-                className="rounded-full font-medium text-[13px] h-8 px-4"
+                className="font-medium text-[13px] h-8 px-4"
               >
                 Book a Session
               </Button>
@@ -127,11 +127,11 @@ const Navbar = () => {
                 ))}
               </div>
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35, duration: 0.3 }} className="px-5 pb-6 pt-3 border-t border-border/50 space-y-2.5">
-                <a href="tel:+21626934928" className="flex items-center justify-center gap-2 w-full h-10 rounded-full border border-border bg-secondary/50 text-foreground text-sm font-medium hover:bg-secondary transition-colors">
+                <a href="tel:+21626934928" className="flex items-center justify-center gap-2 w-full h-10 rounded-lg border border-border bg-secondary/50 text-foreground text-sm font-medium hover:bg-secondary transition-colors">
                   <Phone className="w-4 h-4" />Call Us
                 </a>
                 <Link to="/#creator-packs" onClick={() => { setMobileOpen(false); if (location.pathname === "/") { setTimeout(() => { const el = document.getElementById("creator-packs"); if (el) el.scrollIntoView({ behavior: "smooth", block: "start" }); }, 100); } }}>
-                  <Button variant="cta" className="w-full rounded-full font-medium text-sm h-10">Book a Session</Button>
+                  <Button variant="cta" className="w-full font-medium text-sm h-10">Book a Session</Button>
                 </Link>
               </motion.div>
             </motion.div>
