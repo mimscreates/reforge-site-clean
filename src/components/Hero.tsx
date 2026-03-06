@@ -1,8 +1,20 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { useTheme } from "@/components/ThemeProvider";
 
 const Hero = () => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const { theme } = useTheme();
+
+  const darkOverlay = "rgba(0,0,0,0.35)";
+  const lightOverlay = "rgba(0,0,0,0.2)";
+
+  const darkGradient =
+    "linear-gradient(90deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.55) 40%, rgba(255,120,0,0.15) 100%)";
+  const lightGradient =
+    "linear-gradient(90deg, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.6) 40%, rgba(255,120,0,0.1) 100%)";
+
+  const isDark = theme === "dark";
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden bg-background">
@@ -21,19 +33,16 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Layer 1: Dark overlay for readability */}
+      {/* Layer 1: overlay */}
       <div
         className="absolute inset-0"
-        style={{ background: "rgba(0,0,0,0.35)" }}
+        style={{ background: isDark ? darkOverlay : lightOverlay }}
       />
 
-      {/* Layer 2: Cinematic gradient — dark left, subtle orange right */}
+      {/* Layer 2: gradient */}
       <div
         className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(90deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.55) 40%, rgba(255,120,0,0.15) 100%)",
-        }}
+        style={{ background: isDark ? darkGradient : lightGradient }}
       />
 
       {/* Bottom fade to background */}
@@ -44,14 +53,16 @@ const Hero = () => {
         }}
       />
 
-      {/* Content — left-aligned in dark zone */}
+      {/* Content */}
       <div className="relative z-10 w-full max-w-6xl px-6 md:px-12 mx-auto">
         <div className="max-w-2xl">
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="font-display text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight text-primary-foreground mb-5"
+            className={`font-display text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight mb-5 ${
+              isDark ? "text-primary-foreground" : "text-foreground"
+            }`}
           >
             Create Powerful Content.
             <br />
@@ -62,7 +73,9 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
-            className="text-base md:text-lg text-primary-foreground/70 max-w-lg leading-relaxed"
+            className={`text-base md:text-lg max-w-lg leading-relaxed ${
+              isDark ? "text-primary-foreground/70" : "text-muted-foreground"
+            }`}
           >
             Podcasts, reels, interviews and corporate content produced in one place.
           </motion.p>

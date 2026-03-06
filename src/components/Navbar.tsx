@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import ThemeToggle from "@/components/ThemeToggle";
+import { useTheme } from "@/components/ThemeProvider";
 
 const LOGO_URL =
   "https://framerusercontent.com/images/u6I7XJU9MR5jMeeqxKPjCdEdn64.jpg?width=891&height=891";
@@ -18,6 +20,7 @@ const navLinks = [
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
+  const { theme } = useTheme();
 
   const handleNav = (path: string) => {
     setMobileOpen(false);
@@ -32,8 +35,16 @@ const Navbar = () => {
     }
   };
 
+  const navBg = theme === "dark"
+    ? "rgba(10,10,10,0.55)"
+    : "rgba(255,255,255,0.7)";
+
+  const navBorder = theme === "dark"
+    ? "1px solid rgba(255,255,255,0.08)"
+    : "1px solid rgba(0,0,0,0.08)";
+
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50" style={{ background: "rgba(10,10,10,0.55)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
+    <nav className="fixed top-0 left-0 right-0 z-50" style={{ background: navBg, backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)", borderBottom: navBorder }}>
       <div className="flex items-center justify-between h-14 px-5 md:px-8 w-full">
         <Link to="/" className="flex-shrink-0">
           <img src={LOGO_URL} alt="KAUN Studios" className="h-8 w-8 rounded-md object-cover" />
@@ -66,6 +77,7 @@ const Navbar = () => {
         </div>
 
         <div className="hidden lg:flex items-center gap-3">
+          <ThemeToggle />
           <a
             href="tel:+21626934928"
             className="inline-flex items-center gap-1.5 text-[13px] font-medium text-muted-foreground hover:text-primary transition-colors"
@@ -88,12 +100,15 @@ const Navbar = () => {
           </Link>
         </div>
 
-        <button
-          className="lg:hidden text-foreground"
-          onClick={() => setMobileOpen(!mobileOpen)}
-        >
-          {mobileOpen ? <X size={22} /> : <Menu size={22} />}
-        </button>
+        <div className="flex items-center gap-2 lg:hidden">
+          <ThemeToggle />
+          <button
+            className="text-foreground"
+            onClick={() => setMobileOpen(!mobileOpen)}
+          >
+            {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
+        </div>
       </div>
 
       {mobileOpen && (
