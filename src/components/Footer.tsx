@@ -20,7 +20,8 @@ const Footer = () => {
             <h4 className="font-display text-foreground font-semibold text-sm mb-3">Navigation</h4>
             <div className="space-y-2">
               <Link to="/" className="block text-muted-foreground hover:text-foreground text-sm transition-colors">Home</Link>
-              <Link to="/nos-packs" className="block text-muted-foreground hover:text-foreground text-sm transition-colors">Our Packs</Link>
+              <Link to="/creator-packs" className="block text-muted-foreground hover:text-foreground text-sm transition-colors">Creator Packs</Link>
+              <Link to="/corporate-packs" className="block text-muted-foreground hover:text-foreground text-sm transition-colors">Corporate Packs</Link>
               <Link to="/build-session" className="block text-muted-foreground hover:text-foreground text-sm transition-colors">Build Your Session</Link>
               <Link to="/rent-your-space" className="block text-muted-foreground hover:text-foreground text-sm transition-colors">Rent Your Space</Link>
               <Link to="/portfolio" className="block text-muted-foreground hover:text-foreground text-sm transition-colors">Portfolio</Link>
