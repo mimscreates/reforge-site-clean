@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Mic, Video, Scissors, Film, Sparkles, Check, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import BookingModal from "@/components/BookingModal";
+import MobileStickyBar from "@/components/MobileStickyBar";
 
 // --- PRICING DATA ---
 
@@ -106,7 +107,8 @@ const SessionConfigurator = () => {
   ].filter(Boolean).join(", ");
 
   return (
-    <section className="py-20 px-4 bg-background">
+    <>
+    <section className="py-20 pb-32 lg:pb-20 px-4 bg-background">
       <div className="container mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -214,8 +216,8 @@ const SessionConfigurator = () => {
             </ConfigSection>
           </div>
 
-          {/* RIGHT: Summary Panel */}
-          <div className="lg:col-span-1">
+          {/* RIGHT: Summary Panel (desktop only) */}
+          <div className="hidden lg:block lg:col-span-1">
             <div className="sticky top-24">
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
@@ -259,7 +261,22 @@ const SessionConfigurator = () => {
         onOpenChange={setModalOpen}
         selectedPack={`Custom Session: ${configSummary} — ${totalPrice} DT`}
       />
+
+      <MobileStickyBar
+        totalPrice={totalPrice}
+        items={[
+          { label: "Base Session", value: "Studio, lighting, setup & technician", price: BASE_SESSION_PRICE },
+          { label: "Filming Setup", value: filmingLabel, price: filmingPrice },
+          { label: "Session Type", value: sessionTypeLabel, price: 0 },
+          { label: "Editing", value: editingLabel, price: editingPrice },
+          { label: "Social Clips", value: clipsLabel, price: clipsPrice },
+          { label: "Reel Style", value: reelLabel, price: reelPrice },
+          ...(extrasLabels.length > 0 ? [{ label: "Extras", value: extrasLabels.join(", "), price: extrasPrice }] : []),
+        ]}
+        onReserve={() => setModalOpen(true)}
+      />
     </section>
+    </>
   );
 };
 
