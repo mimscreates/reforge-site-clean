@@ -1,51 +1,61 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mic, Video, Scissors, Film, Sparkles, Check } from "lucide-react";
+import { Mic, Video, Scissors, Film, Sparkles, Check, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import BookingModal from "@/components/BookingModal";
 
 // --- PRICING DATA ---
 
+const BASE_SESSION_PRICE = 700;
+const BASE_SESSION_INCLUDES = [
+  "Studio access",
+  "Lighting",
+  "Technical setup",
+  "Technician",
+  "Recording session",
+];
+
 const filmingOptions = [
-  { id: "audio-1mic", label: "1 Microphone", category: "Audio Podcast", price: 200 },
-  { id: "audio-2mic", label: "2 Microphones", category: "Audio Podcast", price: 350 },
-  { id: "audio-3mic", label: "3 Microphones", category: "Audio Podcast", price: 500 },
-  { id: "video-1c1m", label: "1 Camera + 1 Microphone", category: "Video Podcast", price: 500 },
-  { id: "video-2c2m", label: "2 Cameras + 2 Microphones", category: "Video Podcast", price: 800 },
-  { id: "video-3c2m", label: "3 Cameras + 2 Microphones", category: "Video Podcast", price: 1100 },
+  { id: "audio-1mic", label: "1 Microphone", category: "Audio Podcast", price: 100 },
+  { id: "audio-2mic", label: "2 Microphones", category: "Audio Podcast", price: 200 },
+  { id: "audio-3mic", label: "3 Microphones", category: "Audio Podcast", price: 350 },
+  { id: "video-1c1m", label: "1 Camera + 1 Microphone", category: "Video Podcast", price: 300 },
+  { id: "video-2c2m", label: "2 Cameras + 2 Microphones", category: "Video Podcast", price: 600 },
+  { id: "video-3c2m", label: "3 Cameras + 2 Microphones", category: "Video Podcast", price: 900 },
 ];
 
 const sessionTypes = [
   { id: "podcast", label: "Podcast Episode", price: 0 },
   { id: "interview", label: "Interview", price: 0 },
-  { id: "social", label: "Social Media Content", price: 100 },
-  { id: "corporate", label: "Corporate Podcast", price: 200 },
+  { id: "social", label: "Social Media Content", price: 0 },
+  { id: "corporate", label: "Corporate Podcast", price: 0 },
 ];
 
 const editingOptions = [
   { id: "no-edit", label: "No Editing (RAW delivery)", price: 0 },
-  { id: "basic-edit", label: "Basic Editing", price: 200 },
+  { id: "basic-edit", label: "Basic Editing", price: 250 },
   { id: "pro-edit", label: "Professional Editing", price: 450 },
 ];
 
 const clipOptions = [
   { id: "0-clips", label: "0 Clips", price: 0 },
-  { id: "2-clips", label: "2 Clips", price: 150 },
-  { id: "4-clips", label: "4 Clips", price: 280 },
-  { id: "8-clips", label: "8 Clips", price: 500 },
+  { id: "2-clips", label: "2 Clips", price: 200 },
+  { id: "4-clips", label: "4 Clips", price: 350 },
+  { id: "8-clips", label: "8 Clips", price: 600 },
 ];
 
 const reelStyles = [
   { id: "basic-cut", label: "Basic Cut", price: 0 },
-  { id: "captions", label: "Captions + Subtitles", price: 100 },
-  { id: "viral", label: "Viral Style Editing", price: 250 },
+  { id: "captions", label: "Captions + Subtitles", price: 120 },
+  { id: "viral", label: "Viral Style Editing", price: 300 },
 ];
 
 const extras = [
   { id: "thumbnail", label: "Thumbnail Design", price: 80 },
   { id: "social-format", label: "Social Media Formatting", price: 100 },
-  { id: "priority", label: "Priority Delivery", price: 150 },
+  { id: "priority", label: "Priority Delivery (48h)", price: 150 },
   { id: "optimization", label: "Content Optimization", price: 120 },
+  { id: "multi-platform", label: "Multi-Platform Content Pack", price: 200 },
 ];
 
 // --- COMPONENT ---
@@ -69,14 +79,14 @@ const SessionConfigurator = () => {
 
   // Compute total
   const filmingPrice = filmingOptions.find((o) => o.id === filming)?.price || 0;
-  const sessionTypePrice = sessionTypes.find((o) => o.id === sessionType)?.price || 0;
+  const sessionTypePrice = 0;
   const editingPrice = editingOptions.find((o) => o.id === editing)?.price || 0;
   const clipsPrice = clipOptions.find((o) => o.id === clips)?.price || 0;
   const reelPrice = reelStyles.find((o) => o.id === reelStyle)?.price || 0;
   const extrasPrice = extras
     .filter((e) => selectedExtras.includes(e.id))
     .reduce((sum, e) => sum + e.price, 0);
-  const totalPrice = filmingPrice + sessionTypePrice + editingPrice + clipsPrice + reelPrice + extrasPrice;
+  const totalPrice = BASE_SESSION_PRICE + filmingPrice + editingPrice + clipsPrice + reelPrice + extrasPrice;
 
   // Summary labels
   const filmingLabel = filmingOptions.find((o) => o.id === filming)?.label || "";
@@ -102,7 +112,7 @@ const SessionConfigurator = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-16"
+          className="text-center mb-8"
         >
           <h1 className="font-display text-3xl md:text-5xl font-bold text-foreground mb-4">
             Build Your Session
@@ -110,6 +120,24 @@ const SessionConfigurator = () => {
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             Configure your podcast production session and get an instant quote.
           </p>
+        </motion.div>
+
+        {/* Pack recommendation note */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.2 }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-16 p-4 rounded-xl border border-border bg-card/50 max-w-2xl mx-auto"
+        >
+          <p className="text-muted-foreground text-sm text-center sm:text-left">
+            Custom sessions are flexible but usually more expensive than our recommended studio packs.
+          </p>
+          <a
+            href="/nos-packs#creator-packs"
+            className="inline-flex items-center gap-1.5 text-primary text-sm font-medium whitespace-nowrap hover:underline"
+          >
+            View Recommended Packs <ArrowRight className="w-4 h-4" />
+          </a>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -197,8 +225,9 @@ const SessionConfigurator = () => {
               >
                 <h3 className="font-display text-xl font-bold text-foreground">Session Summary</h3>
 
-                <SummaryRow label="Session Setup" value={filmingLabel} price={filmingPrice} />
-                <SummaryRow label="Session Type" value={sessionTypeLabel} price={sessionTypePrice} />
+                <SummaryRow label="Base Session" value="Studio, lighting, setup & technician" price={BASE_SESSION_PRICE} />
+                <SummaryRow label="Filming Setup" value={filmingLabel} price={filmingPrice} />
+                <SummaryRow label="Session Type" value={sessionTypeLabel} price={0} />
                 <SummaryRow label="Editing" value={editingLabel} price={editingPrice} />
                 <SummaryRow label="Social Clips" value={clipsLabel} price={clipsPrice} />
                 <SummaryRow label="Reel Style" value={reelLabel} price={reelPrice} />
@@ -208,7 +237,7 @@ const SessionConfigurator = () => {
 
                 <div className="border-t border-border pt-4">
                   <div className="flex items-center justify-between">
-                    <span className="font-display text-lg font-bold text-foreground">Total</span>
+                    <span className="font-display text-lg font-bold text-foreground">Estimated Total</span>
                     <span className="font-display text-2xl font-bold text-primary">{totalPrice} DT</span>
                   </div>
                 </div>
