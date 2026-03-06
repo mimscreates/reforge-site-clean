@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sliders, Mic, Building2, Check } from "lucide-react";
 import Navbar from "@/components/Navbar";
