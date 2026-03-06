@@ -11,8 +11,8 @@ const LOGO_URL =
 
 const navLinks = [
   { label: "Home", path: "/" },
-  { label: "Creator Packs", path: "/#creator-packs" },
-  { label: "Corporate Packs", path: "/#corporate-packs" },
+  { label: "Creator Packs", path: "/creator-packs" },
+  { label: "Corporate Packs", path: "/corporate-packs" },
   { label: "Build Your Session", path: "/build-session" },
   { label: "Rent Your Space", path: "/rent-your-space" },
   { label: "Portfolio", path: "/portfolio" },
@@ -20,8 +20,8 @@ const navLinks = [
 ];
 
 const mobileNavGroups = [
-  { label: "CREATE", items: [{ label: "Creator Packs", path: "/#creator-packs" }] },
-  { label: "WORK WITH US", items: [{ label: "Corporate Packs", path: "/#corporate-packs" }, { label: "Build Your Session", path: "/build-session" }] },
+  { label: "CREATE", items: [{ label: "Creator Packs", path: "/creator-packs" }] },
+  { label: "WORK WITH US", items: [{ label: "Corporate Packs", path: "/corporate-packs" }, { label: "Build Your Session", path: "/build-session" }] },
   { label: "STUDIO", items: [{ label: "Rent Your Space", path: "/rent-your-space" }, { label: "Portfolio", path: "/portfolio" }] },
   { label: "CONTACT", items: [{ label: "Request a Quote", path: "/devis" }, { label: "Call Us", path: "tel:+21626934928", external: true }] },
 ];
