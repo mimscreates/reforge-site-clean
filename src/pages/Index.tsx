@@ -4,7 +4,7 @@ import ClientLogos from "@/components/ClientLogos";
 import WhoWeWorkWith from "@/components/WhoWeWorkWith";
 import HowItWorks from "@/components/HowItWorks";
 import ContentMultiplier from "@/components/ContentMultiplier";
-import Options from "@/components/Options";
+
 import StudioCarousel from "@/components/StudioCarousel";
 import CreateMore from "@/components/CreateMore";
 import AgencyPartnership from "@/components/AgencyPartnership";
@@ -23,7 +23,7 @@ const Index = () => {
         <HowItWorks />
         <ContentMultiplier />
         <StudioCarousel />
-        <Options />
+        
         <CreateMore />
         <AgencyPartnership />
         <FAQ />
