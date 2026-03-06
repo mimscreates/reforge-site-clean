@@ -36,7 +36,7 @@ const projects: VideoProject[] = [
   { id: "DEORkgTglFE", embedUrl: "https://www.youtube.com/embed/DEORkgTglFE", thumbnail: "https://img.youtube.com/vi/DEORkgTglFE/maxresdefault.jpg", category: "Music Video" },
 ];
 
-const Portfolio = () => {
+const categories: Category[] = ["All", "Podcast", "Reels", "Music Video"];
   const [active, setActive] = useState<Category>("All");
   const [modalVideo, setModalVideo] = useState<VideoProject | null>(null);
   const filtered = active === "All" ? projects : projects.filter((p) => p.category === active);
