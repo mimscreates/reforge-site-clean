@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import logo1 from "@/assets/logos/logo-1.avif";
 import logo2 from "@/assets/logos/logo-2.webp";
 import logo3 from "@/assets/logos/logo-3.jpg";
@@ -14,47 +15,55 @@ const logos = [
   { src: logo5, alt: "Trésors Naturels" },
   { src: logo6, alt: "Didon Clinic" },
   { src: logo7, alt: "Client 7" },
+  { src: logo1, alt: "Client 8" },
 ];
 
 const ClientLogos = () => {
-  // Double the logos for seamless infinite scroll
-  const allLogos = [...logos, ...logos];
-
   return (
-    <section className="py-8 md:py-20 bg-background overflow-hidden">
-      <div className="container mx-auto px-4 mb-5 md:mb-8">
-        <p className="text-center text-muted-foreground/60 text-xs md:text-sm uppercase tracking-[0.15em] font-medium">
-          Trusted by creators, brands and companies
-        </p>
-      </div>
+    <section className="relative py-14 md:py-24 bg-background overflow-hidden">
+      {/* Subtle radial glow */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse 60% 40% at 50% 50%, hsl(20 91% 55% / 0.04), transparent)",
+        }}
+      />
 
-      {/* Carousel with edge fades */}
-      <div className="relative">
-        {/* Left fade */}
-        <div
-          className="absolute left-0 top-0 bottom-0 w-16 md:w-32 z-10 pointer-events-none"
-          style={{ background: "linear-gradient(to right, hsl(var(--background)), transparent)" }}
-        />
-        {/* Right fade */}
-        <div
-          className="absolute right-0 top-0 bottom-0 w-16 md:w-32 z-10 pointer-events-none"
-          style={{ background: "linear-gradient(to left, hsl(var(--background)), transparent)" }}
-        />
+      <div className="relative container mx-auto px-4 max-w-5xl">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-10 md:mb-14"
+        >
+          <h2 className="font-display text-2xl md:text-4xl font-bold text-foreground mb-3">
+            Trusted by Creators, Brands & Companies
+          </h2>
+          <p className="text-muted-foreground text-sm md:text-base max-w-lg mx-auto">
+            Companies and creators trust KAUN to produce high-quality podcasts
+            and media content.
+          </p>
+        </motion.div>
 
-        {/* Scrolling track */}
-        <div className="flex items-center gap-12 md:gap-20 animate-logo-scroll hover:[animation-play-state:paused] w-max">
-          {allLogos.map((logo, i) => (
-            <div
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+          {logos.map((logo, i) => (
+            <motion.div
               key={i}
-              className="flex-shrink-0 flex items-center justify-center h-10 md:h-14 transition-all duration-300 opacity-50 grayscale hover:opacity-100 hover:grayscale-0"
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.35, delay: i * 0.05 }}
+              className="group flex items-center justify-center rounded-[20px] border border-border/50 bg-card p-6 transition-all duration-300 hover:border-primary/20 hover:shadow-lg hover:shadow-primary/5"
             >
               <img
                 src={logo.src}
                 alt={logo.alt}
-                className="h-full w-auto max-w-[100px] md:max-w-[140px] object-contain"
+                className="h-10 w-auto max-w-[120px] object-contain grayscale opacity-70 transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105"
                 loading="lazy"
               />
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
