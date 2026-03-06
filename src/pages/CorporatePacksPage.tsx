@@ -227,7 +227,7 @@ const CorporatePacksPage = () => {
 
                 <div className="rounded-xl overflow-hidden border border-border bg-background" style={{ minHeight: 500 }}>
                   <iframe
-                    src="https://calendly.com/kaunstudios/partnership"
+                    src="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ3IVgTIorh-YdhpshMyipbf8Zv2127CoC1btlugtIXn_jgKpz0DYzjE5jmk9H9j46H2IuC008BP"
                     title="Schedule a partnership call"
                     className="w-full border-0"
                     style={{ height: 500 }}
