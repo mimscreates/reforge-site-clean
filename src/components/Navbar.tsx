@@ -33,8 +33,8 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
-      <div className="container mx-auto flex items-center justify-between h-16 px-4 bg-[#1c1c1c]">
+    <nav className="fixed top-0 left-0 right-0 z-50" style={{ background: "rgba(10,10,10,0.55)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
+      <div className="flex items-center justify-between h-16 px-6 md:px-8 w-full">
         <Link to="/" className="flex-shrink-0">
           <img
             src={LOGO_URL}
