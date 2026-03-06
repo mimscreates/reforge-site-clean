@@ -20,7 +20,8 @@ const Footer = () => {
             <h4 className="font-display text-foreground font-semibold text-sm mb-3">Navigation</h4>
             <div className="space-y-2">
               <Link to="/" className="block text-muted-foreground hover:text-foreground text-sm transition-colors">Home</Link>
-              <Link to="/nos-packs" className="block text-muted-foreground hover:text-foreground text-sm transition-colors">Our Packs</Link>
+              <Link to="/creator-packs" className="block text-muted-foreground hover:text-foreground text-sm transition-colors">Creator Packs</Link>
+              <Link to="/corporate-packs" className="block text-muted-foreground hover:text-foreground text-sm transition-colors">Corporate Packs</Link>
               <Link to="/build-session" className="block text-muted-foreground hover:text-foreground text-sm transition-colors">Build Your Session</Link>
               <Link to="/rent-your-space" className="block text-muted-foreground hover:text-foreground text-sm transition-colors">Rent Your Space</Link>
               <Link to="/portfolio" className="block text-muted-foreground hover:text-foreground text-sm transition-colors">Portfolio</Link>
@@ -33,7 +34,7 @@ const Footer = () => {
               <a href="https://www.instagram.com/kaun_studios/" target="_blank" rel="noopener noreferrer" className="block text-muted-foreground hover:text-primary text-sm transition-colors">Instagram</a>
               <a href="https://www.facebook.com/Kaunstudiosandproduction" target="_blank" rel="noopener noreferrer" className="block text-muted-foreground hover:text-primary text-sm transition-colors">Facebook</a>
             </div>
-            <Link to="/#creator-packs">
+            <Link to="/creator-packs">
               <Button variant="cta" className="font-medium text-sm h-9 px-5">Book a Session</Button>
             </Link>
           </div>

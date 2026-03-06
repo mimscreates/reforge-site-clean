@@ -28,7 +28,7 @@ const CreateMore = () => {
                 <p className="text-muted-foreground text-sm leading-relaxed">{service.description}</p>
               </div>
             ))}
-            <Link to="/#creator-packs">
+            <Link to="/creator-packs">
               <Button variant="cta" className="px-6 font-medium text-sm h-9">Book a Session</Button>
             </Link>
           </div>
