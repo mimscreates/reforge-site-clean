@@ -2,7 +2,7 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import ClientLogos from "@/components/ClientLogos";
 import AudienceSelector from "@/components/AudienceSelector";
-import ServiceMarquee from "@/components/ServiceMarquee";
+
 import CreatorPacks from "@/components/CreatorPacks";
 import CorporatePacks from "@/components/CorporatePacks";
 import Options from "@/components/Options";
@@ -19,7 +19,7 @@ const Index = () => {
       <main>
         <Hero />
         <ClientLogos />
-        <ServiceMarquee />
+        
         <CreatorPacks />
         <CorporatePacks />
         <Options />
