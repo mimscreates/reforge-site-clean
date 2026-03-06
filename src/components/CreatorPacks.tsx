@@ -45,7 +45,7 @@ const CreatorPacks = () => {
                   </div>
                 ))}
               </div>
-              <Button variant="cta" onClick={() => openBooking(pack.name)} className="mt-auto w-full font-medium text-sm h-9">
+              <Button variant="cta-primary" onClick={() => openBooking(pack.name)} className="mt-auto w-full font-medium text-sm h-9">
                 Book a Session
               </Button>
             </motion.div>
