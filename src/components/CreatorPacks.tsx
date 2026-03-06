@@ -61,76 +61,66 @@ const CreatorPacks = () => {
   };
 
   return (
-    <section id="creator-packs" className="py-20 px-4 bg-background scroll-mt-20">
+    <section id="creator-packs" className="py-16 px-4 bg-background scroll-mt-16">
       <div className="container mx-auto">
-        <h2 className="font-display text-3xl md:text-5xl font-bold text-foreground text-center mb-4">
+        <h2 className="font-display text-2xl md:text-4xl font-bold text-foreground text-center mb-3">
           Podcast Studio Sessions
         </h2>
-        <p className="text-muted-foreground text-center mb-16 text-lg">
+        <p className="text-muted-foreground text-center mb-12 text-sm md:text-base">
           Professional recording packs for content creators.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {packs.map((pack, i) => (
             <motion.div
               key={pack.name}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.5 }}
-              className={`relative bg-card border rounded-2xl p-8 flex flex-col items-center text-center ${
+              transition={{ delay: i * 0.08, duration: 0.4 }}
+              className={`relative bg-card border rounded-xl p-6 flex flex-col items-center text-center ${
                 pack.popular
-                  ? "border-primary shadow-[0_0_40px_-10px_hsl(20_90%_55%_/_0.4)]"
-                  : "border-border"
+                  ? "border-primary shadow-[0_0_30px_-8px_hsl(20_90%_55%_/_0.35)]"
+                  : "border-border/50"
               }`}
             >
               {pack.popular && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground text-xs font-bold px-4 py-1 rounded-full uppercase tracking-wider">
+                <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground text-[10px] font-bold px-3 py-0.5 rounded-full uppercase tracking-wider">
                   Most Popular
                 </div>
               )}
 
-              <h3 className="font-display text-2xl font-bold text-foreground mb-2 mt-2">
+              <h3 className="font-display text-xl font-bold text-foreground mb-1 mt-1">
                 {pack.name}
               </h3>
-              <p className="font-display text-3xl text-primary font-bold">
+              <p className="font-display text-2xl text-primary font-bold">
                 {pack.price}
               </p>
-              <span className="text-muted-foreground text-sm mb-8">
+              <span className="text-muted-foreground text-xs mb-6">
                 {pack.unit}
               </span>
 
-              <div className="space-y-3 w-full mb-8">
+              <div className="space-y-2 w-full mb-6">
                 {pack.features.map((feature) => (
-                  <div key={feature} className="flex items-center gap-3">
-                    <img
-                      src={CHECK_ICON}
-                      alt=""
-                      className="w-5 h-5 object-contain flex-shrink-0"
-                    />
-                    <span className="text-foreground text-sm text-left">
-                      {feature}
-                    </span>
+                  <div key={feature} className="flex items-center gap-2">
+                    <img src={CHECK_ICON} alt="" className="w-4 h-4 object-contain flex-shrink-0" />
+                    <span className="text-foreground text-sm text-left">{feature}</span>
                   </div>
                 ))}
               </div>
 
               <Button
                 onClick={() => openBooking(pack.name)}
-                className="mt-auto w-full rounded-full bg-primary text-primary-foreground hover:bg-primary/90 font-medium"
+                className="mt-auto w-full rounded-full bg-primary text-primary-foreground hover:bg-primary/90 font-medium text-sm h-9"
               >
-                Reserve my session
+                Book a Session
               </Button>
             </motion.div>
           ))}
         </div>
       </div>
 
-      <BookingModal
-        open={modalOpen}
-        onOpenChange={setModalOpen}
-        selectedPack={selectedPack}
-      />
+      <BookingModal open={modalOpen} onOpenChange={setModalOpen} selectedPack={selectedPack} />
     </section>
   );
 };

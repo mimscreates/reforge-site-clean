@@ -12,7 +12,7 @@ const navLinks = [
   { label: "Corporate Packs", path: "/#corporate-packs" },
   { label: "Build Your Session", path: "/build-session" },
   { label: "Rent Your Space", path: "/rent-your-space" },
-  { label: "Demande de devis", path: "/devis" },
+  { label: "Request a Quote", path: "/devis" },
 ];
 
 const Navbar = () => {
@@ -34,22 +34,18 @@ const Navbar = () => {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50" style={{ background: "rgba(10,10,10,0.55)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
-      <div className="flex items-center justify-between h-16 px-6 md:px-8 w-full">
+      <div className="flex items-center justify-between h-14 px-5 md:px-8 w-full">
         <Link to="/" className="flex-shrink-0">
-          <img
-            src={LOGO_URL}
-            alt="KAUN Studios"
-            className="h-10 w-10 rounded-lg object-cover"
-          />
+          <img src={LOGO_URL} alt="KAUN Studios" className="h-8 w-8 rounded-md object-cover" />
         </Link>
 
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden lg:flex items-center gap-6">
           {navLinks.map((link) =>
             link.path.startsWith("/#") ? (
               <button
                 key={link.path}
                 onClick={() => handleNav(link.path)}
-                className="text-sm font-medium transition-colors hover:text-primary text-muted-foreground"
+                className="text-[13px] font-medium transition-colors hover:text-primary text-muted-foreground"
               >
                 {link.label}
               </button>
@@ -57,9 +53,9 @@ const Navbar = () => {
               <Link
                 key={link.path}
                 to={link.path}
-                className={`text-sm font-medium transition-colors hover:text-primary ${
+                className={`text-[13px] font-medium transition-colors hover:text-primary ${
                   location.pathname === link.path
-                    ? "text-foreground border-b-2 border-primary pb-0.5"
+                    ? "text-foreground"
                     : "text-muted-foreground"
                 }`}
               >
@@ -69,35 +65,39 @@ const Navbar = () => {
           )}
         </div>
 
-        <div className="hidden md:flex items-center gap-3">
+        <div className="hidden lg:flex items-center gap-3">
           <a
             href="tel:+21626934928"
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+            className="inline-flex items-center gap-1.5 text-[13px] font-medium text-muted-foreground hover:text-primary transition-colors"
           >
-            <Phone className="w-4 h-4" />
+            <Phone className="w-3.5 h-3.5" />
             Call Us
           </a>
-          <Button
-            onClick={() => {
-              const el = document.getElementById("creator-packs");
-              if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-            }}
-            className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90 font-medium"
-          >
-            Book a Session
-          </Button>
+          <Link to="/#creator-packs">
+            <Button
+              onClick={() => {
+                if (location.pathname === "/") {
+                  const el = document.getElementById("creator-packs");
+                  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+                }
+              }}
+              className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90 font-medium text-[13px] h-8 px-4"
+            >
+              Book a Session
+            </Button>
+          </Link>
         </div>
 
         <button
-          className="md:hidden text-foreground"
+          className="lg:hidden text-foreground"
           onClick={() => setMobileOpen(!mobileOpen)}
         >
-          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+          {mobileOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
       </div>
 
       {mobileOpen && (
-        <div className="md:hidden bg-background border-t border-border px-4 py-6 space-y-4">
+        <div className="lg:hidden bg-background/95 backdrop-blur-md border-t border-border/50 px-5 py-5 space-y-3">
           {navLinks.map((link) =>
             link.path.startsWith("/#") ? (
               <button
@@ -125,16 +125,11 @@ const Navbar = () => {
             <Phone className="w-4 h-4" />
             Call Us
           </a>
-          <Button
-            onClick={() => {
-              setMobileOpen(false);
-              const el = document.getElementById("creator-packs");
-              if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-            }}
-            className="w-full rounded-full bg-primary text-primary-foreground mt-2"
-          >
-            Book a Session
-          </Button>
+          <Link to="/#creator-packs" onClick={() => setMobileOpen(false)}>
+            <Button className="w-full rounded-full bg-primary text-primary-foreground mt-1 h-9 text-sm">
+              Book a Session
+            </Button>
+          </Link>
         </div>
       )}
     </nav>
