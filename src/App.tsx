@@ -10,6 +10,7 @@ import PacksPage from "./pages/PacksPage";
 import Devis from "./pages/Devis";
 import BuildSession from "./pages/BuildSession";
 import BookingWizard from "./pages/BookingWizard";
+import VipRequest from "./pages/VipRequest";
 import RentYourSpace from "./pages/RentYourSpace";
 import Portfolio from "./pages/Portfolio";
 import NotFound from "./pages/NotFound";
@@ -38,6 +39,7 @@ const App = () => (
             <Route path="/devis" element={<Devis />} />
             <Route path="/build-session" element={<BuildSession />} />
             <Route path="/book" element={<BookingWizard />} />
+            <Route path="/vip" element={<VipRequest />} />
             <Route path="/rent-your-space" element={<RentYourSpace />} />
             <Route path="/portfolio" element={<Portfolio />} />
             <Route path="*" element={<NotFound />} />
