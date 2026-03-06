@@ -114,6 +114,51 @@
   }
 }
 
+/* Glassmorphism CTA Button */
+@layer components {
+  .btn-cta {
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: white;
+    transition: all 250ms ease;
+  }
+
+  .btn-cta:hover {
+    background: hsl(var(--primary));
+    border-color: hsl(var(--primary));
+    color: white;
+    box-shadow: 0 0 24px rgba(255, 106, 26, 0.45);
+    transform: scale(1.02);
+  }
+
+  .btn-cta:active {
+    transform: scale(0.98);
+  }
+
+  /* Light mode adjustments */
+  :root .btn-cta {
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    color: hsl(var(--foreground));
+  }
+
+  .dark .btn-cta {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: white;
+  }
+
+  :root .btn-cta:hover,
+  .dark .btn-cta:hover {
+    background: hsl(var(--primary));
+    border-color: hsl(var(--primary));
+    color: white;
+    box-shadow: 0 0 24px rgba(255, 106, 26, 0.45);
+  }
+}
+
 /* Marquee animation */
 @keyframes marquee {
   0% { transform: translateX(0); }
