@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mic, Video, Scissors, Film, Sparkles, Check, ArrowRight, Minus, Plus } from "lucide-react";
+import { Mic, Video, Scissors, Film, Sparkles, Check, Minus, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import BookingModal from "@/components/BookingModal";
 import MobileStickyBar from "@/components/MobileStickyBar";
@@ -91,39 +91,8 @@ const SessionConfigurator = () => {
 
   return (
     <>
-    <section className="py-12 md:py-20 pb-24 lg:pb-20 px-3 md:px-4 bg-background">
+    <section className="pb-24 lg:pb-20 px-3 md:px-4 bg-background">
       <div className="container mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-8 md:mb-10"
-        >
-          <h1 className="font-display text-2xl md:text-5xl font-bold text-foreground mb-3 md:mb-5 max-w-[800px] mx-auto">
-            Build Your Session
-          </h1>
-          <p className="text-muted-foreground text-sm md:text-lg max-w-[600px] mx-auto">
-            Configure your podcast production session and get an instant quote.
-          </p>
-        </motion.div>
-
-        {/* Pack recommendation note */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.2 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-2 md:gap-3 mb-6 md:mb-12 p-2.5 md:p-3 rounded-lg border border-border/60 bg-card/30 max-w-[640px] mx-auto"
-        >
-          <p className="text-muted-foreground text-xs text-center sm:text-left">
-            Custom sessions are flexible but usually more expensive than our recommended studio packs.
-          </p>
-          <a
-            href="/nos-packs#creator-packs"
-            className="inline-flex items-center gap-1.5 text-primary text-xs font-medium whitespace-nowrap hover:underline"
-          >
-            View Recommended Packs <ArrowRight className="w-4 h-4" />
-          </a>
-        </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-8">
           {/* LEFT: Configuration */}
