@@ -1,6 +1,5 @@
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-
-const BOOKING_URL = "https://booking.kaunstudios.com/booking";
 
 const images = [
   "https://framerusercontent.com/images/L9tFNYW2flStmdZ5kuRH7WO26Ck.jpg?width=7008&height=4672",
@@ -12,25 +11,24 @@ const StudioCarousel = () => {
   const allImages = [...images, ...images, ...images];
 
   return (
-    <section className="py-20 px-4 bg-background">
-      <div className="container mx-auto text-center mb-12">
-        <h2 className="font-display text-3xl md:text-5xl font-bold text-foreground mb-4">
-          Studios podcasts Clé en main
+    <section className="py-16 px-4 bg-background">
+      <div className="container mx-auto text-center mb-10">
+        <h2 className="font-display text-2xl md:text-4xl font-bold text-foreground mb-3">
+          Turnkey Podcast Studios
         </h2>
-        <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-          Découvrez nos <strong className="text-foreground">salles de podcast à exploiter à Tunis</strong>, un espace entièrement équipé pour réaliser vos enregistrements audio de haute qualité.
+        <p className="text-muted-foreground max-w-xl mx-auto text-sm md:text-base">
+          Discover our <strong className="text-foreground">podcast studios in Tunis</strong> — fully equipped spaces for high-quality audio and video recording.
         </p>
       </div>
 
-      {/* Scrolling carousel */}
-      <div className="overflow-hidden mb-12">
-        <div className="animate-marquee flex gap-6 w-max">
+      <div className="overflow-hidden mb-10">
+        <div className="animate-marquee flex gap-4 w-max">
           {allImages.map((src, i) => (
             <img
               key={i}
               src={src}
-              alt="Studio KAUN"
-              className="h-64 md:h-80 w-auto rounded-xl object-cover"
+              alt="KAUN Studio"
+              className="h-52 md:h-72 w-auto rounded-lg object-cover"
               loading="lazy"
             />
           ))}
@@ -38,11 +36,11 @@ const StudioCarousel = () => {
       </div>
 
       <div className="text-center">
-        <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
-          <Button className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-3 text-base font-medium">
-            Réserver ma session
+        <Link to="/#creator-packs">
+          <Button className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90 px-6 text-sm font-medium h-9">
+            Book a Session
           </Button>
-        </a>
+        </Link>
       </div>
     </section>
   );

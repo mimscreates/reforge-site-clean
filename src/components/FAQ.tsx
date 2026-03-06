@@ -9,59 +9,52 @@ const FAQ_IMG = "https://framerusercontent.com/images/WSLp4ELvzyPpsqwM7oQSmwbE.j
 
 const faqs = [
   {
-    question: "Puis-je venir accompagné ?",
-    answer:
-      "Bien entendu. Nos portes vous sont ouvertes, ainsi qu'à vos invités, à condition de le préciser au moment de votre réservation. Cette indication nous permet d'adapter au mieux votre expérience et de nous assurer que tout soit prêt pour vous accueillir dans les meilleures conditions. Une fois votre demande validée, vous recevrez une confirmation ainsi que les détails nécessaires à votre session.",
+    question: "Can I bring guests?",
+    answer: "Of course. Our doors are open to you and your guests — just let us know when booking so we can prepare everything for a great experience.",
   },
   {
-    question: "Êtes-vous ouverts le week-end ?",
-    answer:
-      "Oui, nous sommes ouverts le week-end sur réservation. Pensez à réserver à l'avance pour garantir votre créneau.",
+    question: "Are you open on weekends?",
+    answer: "Yes, we're open on weekends by appointment. Book in advance to secure your time slot.",
   },
   {
-    question: "Puis-je ajouter un micro ou du matériel supplémentaire ?",
-    answer:
-      "Absolument. Vous pouvez ajouter des options supplémentaires lors de votre réservation : micro, caméra, technicien vidéaste, etc.",
+    question: "Can I add extra microphones or equipment?",
+    answer: "Absolutely. You can add extra options during booking — microphones, cameras, videographer, and more.",
   },
   {
-    question: "Vous déplacez-vous pour enregistrer des podcasts en entreprise ?",
-    answer:
-      "Oui, nous proposons des services d'enregistrement en extérieur et en entreprise. Contactez-nous pour un devis personnalisé.",
+    question: "Do you offer on-site recording for companies?",
+    answer: "Yes, we offer on-location recording for businesses and corporate events. Contact us for a custom quote.",
   },
   {
-    question: "Que se passe-t-il si je dépasse l'heure que j'ai réservée ?",
-    answer:
-      "Chaque heure supplémentaire sera facturée selon le tarif de votre pack. Nous vous préviendrons à l'avance si votre session approche de la fin.",
+    question: "What happens if I go over my booked time?",
+    answer: "Each additional hour is billed at the rate of your selected pack. We'll give you a heads-up as your session approaches the end.",
   },
 ];
 
 const FAQ = () => {
   return (
-    <section className="py-20 px-4 bg-background">
+    <section className="py-16 px-4 bg-background">
       <div className="container mx-auto">
-        <h2 className="font-display text-3xl md:text-5xl font-bold text-foreground text-center mb-16">
-          FAQ
+        <h2 className="font-display text-2xl md:text-4xl font-bold text-foreground text-center mb-12">
+          Frequently Asked Questions
         </h2>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-          {/* Image */}
-          <div className="rounded-2xl overflow-hidden">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+          <div className="rounded-xl overflow-hidden">
             <img
               src={FAQ_IMG}
-              alt="Studio KAUN FAQ"
-              className="w-full h-[400px] object-cover rounded-2xl"
+              alt="KAUN Studio FAQ"
+              className="w-full h-[350px] object-cover rounded-xl"
               loading="lazy"
             />
           </div>
 
-          {/* Questions */}
-          <Accordion type="single" collapsible className="space-y-2">
+          <Accordion type="single" collapsible className="space-y-1">
             {faqs.map((faq, i) => (
-              <AccordionItem key={i} value={`faq-${i}`} className="border-border">
-                <AccordionTrigger className="text-foreground text-left font-medium hover:no-underline">
+              <AccordionItem key={i} value={`faq-${i}`} className="border-border/50">
+                <AccordionTrigger className="text-foreground text-left text-sm font-medium hover:no-underline py-3">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground leading-relaxed">
+                <AccordionContent className="text-muted-foreground text-sm leading-relaxed">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>

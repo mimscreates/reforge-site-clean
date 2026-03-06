@@ -1,63 +1,58 @@
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
-const BOOKING_URL = "https://booking.kaunstudios.com/booking";
 const STUDIO_IMG = "https://framerusercontent.com/images/OJMPwpA9ckHsawcEn6bFf5b0cnU.jpg?width=4672&height=7008";
 
 const services = [
   {
     title: "Podcast 🎙",
-    description:
-      "Enregistrez votre podcast dans un studio équipé et optimisé pour un son pro. Besoin d'aide ? Notre équipe vous accompagne de l'idée à la diffusion. Nous sommes basés au cœur de Tunis, à \"L'aouina\". Si vous cherchez le meilleur studio de podcast à louer en Tunisie.",
+    description: "Record your podcast in a fully equipped studio optimized for professional sound. Need help? Our team guides you from concept to distribution.",
   },
   {
-    title: "Services supplémentaires 📷",
-    description:
-      "Un espace modulable avec des options sur mesure : caméras supplémentaires, micros additionnels, pack de photos thumbnails et sous-titrage pour sublimer votre production.",
+    title: "Additional Services 📷",
+    description: "A flexible space with custom options: extra cameras, microphones, photo packs, thumbnails, and subtitling to elevate your production.",
   },
   {
     title: "Production 🎬",
-    description:
-      "Au-delà de la location, KAUN propose des services de production : enregistrement, montage et post-production pour donner vie à vos projets.",
+    description: "Beyond studio rental, KAUN offers full production services — recording, editing, and post-production to bring your projects to life.",
   },
 ];
 
 const CreateMore = () => {
   return (
-    <section className="py-20 px-4 bg-background">
+    <section className="py-16 px-4 bg-background">
       <div className="container mx-auto">
-        <h2 className="font-display text-3xl md:text-5xl font-bold text-foreground text-center mb-6">
-          Create more consume less
+        <h2 className="font-display text-2xl md:text-4xl font-bold text-foreground text-center mb-4">
+          Create More, Consume Less
         </h2>
 
-        <p className="text-muted-foreground text-center max-w-3xl mx-auto mb-16 text-lg leading-relaxed">
-          Chez Kaun Studios, nous accompagnons les créateurs dans la production de podcasts et de projets médias : de l'enregistrement au montage, jusqu'à la diffusion.
+        <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-12 text-sm md:text-base leading-relaxed">
+          At Kaun Studios, we help creators produce podcasts and media projects — from recording and editing to distribution.
         </p>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-          {/* Image */}
-          <div className="rounded-2xl overflow-hidden">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+          <div className="rounded-xl overflow-hidden">
             <img
               src={STUDIO_IMG}
-              alt="Studio KAUN"
-              className="w-full h-[500px] object-cover rounded-2xl"
+              alt="KAUN Studio"
+              className="w-full h-[400px] object-cover rounded-xl"
               loading="lazy"
             />
           </div>
 
-          {/* Services */}
-          <div className="space-y-8">
+          <div className="space-y-6">
             {services.map((service) => (
               <div key={service.title}>
-                <h3 className="font-display text-xl font-bold text-foreground mb-3">{service.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{service.description}</p>
+                <h3 className="font-display text-lg font-bold text-foreground mb-2">{service.title}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">{service.description}</p>
               </div>
             ))}
 
-            <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
-              <Button className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-3 font-medium">
-                Réserver ma session
+            <Link to="/#creator-packs">
+              <Button className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90 px-6 font-medium text-sm h-9">
+                Book a Session
               </Button>
-            </a>
+            </Link>
           </div>
         </div>
       </div>
