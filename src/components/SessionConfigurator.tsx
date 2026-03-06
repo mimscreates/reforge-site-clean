@@ -108,18 +108,18 @@ const SessionConfigurator = () => {
 
   return (
     <>
-    <section className="py-20 pb-32 lg:pb-20 px-4 bg-background">
+    <section className="py-12 md:py-20 pb-24 lg:pb-20 px-3 md:px-4 bg-background">
       <div className="container mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-8"
+          className="text-center mb-6 md:mb-8"
         >
-          <h1 className="font-display text-3xl md:text-5xl font-bold text-foreground mb-4">
+          <h1 className="font-display text-2xl md:text-5xl font-bold text-foreground mb-2 md:mb-4">
             Build Your Session
           </h1>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+          <p className="text-muted-foreground text-sm md:text-lg max-w-2xl mx-auto">
             Configure your podcast production session and get an instant quote.
           </p>
         </motion.div>
@@ -129,7 +129,7 @@ const SessionConfigurator = () => {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.2 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-16 p-4 rounded-xl border border-border bg-card/50 max-w-2xl mx-auto"
+          className="flex flex-col sm:flex-row items-center justify-center gap-2 md:gap-3 mb-8 md:mb-16 p-3 md:p-4 rounded-xl border border-border bg-card/50 max-w-2xl mx-auto"
         >
           <p className="text-muted-foreground text-sm text-center sm:text-left">
             Custom sessions are flexible but usually more expensive than our recommended studio packs.
@@ -142,20 +142,20 @@ const SessionConfigurator = () => {
           </a>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-8">
           {/* LEFT: Configuration */}
-          <div className="lg:col-span-2 space-y-10">
+          <div className="lg:col-span-2 space-y-4 md:space-y-10">
             {/* SECTION 1 — Filming Setup */}
-            <ConfigSection icon={<Video className="w-5 h-5" />} title="Filming Setup" subtitle="Choose the production setup.">
-              <div className="space-y-3">
-                <p className="text-xs uppercase tracking-wider text-muted-foreground font-semibold">Audio Podcast</p>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <ConfigSection icon={<Video className="w-4 h-4 md:w-5 md:h-5" />} title="Filming Setup" subtitle="Choose the production setup.">
+              <div className="space-y-2 md:space-y-3">
+                <p className="text-[11px] md:text-xs uppercase tracking-wider text-muted-foreground/70 font-semibold">Audio Podcast</p>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 md:gap-3">
                   {filmingOptions.filter((o) => o.category === "Audio Podcast").map((o) => (
                     <OptionCard key={o.id} selected={filming === o.id} onClick={() => setFilming(o.id)} label={o.label} price={o.price} />
                   ))}
                 </div>
-                <p className="text-xs uppercase tracking-wider text-muted-foreground font-semibold pt-4">Video Podcast</p>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <p className="text-[11px] md:text-xs uppercase tracking-wider text-muted-foreground/70 font-semibold pt-2 md:pt-4">Video Podcast</p>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 md:gap-3">
                   {filmingOptions.filter((o) => o.category === "Video Podcast").map((o) => (
                     <OptionCard key={o.id} selected={filming === o.id} onClick={() => setFilming(o.id)} label={o.label} price={o.price} />
                   ))}
@@ -164,8 +164,8 @@ const SessionConfigurator = () => {
             </ConfigSection>
 
             {/* SECTION 2 — Session Type */}
-            <ConfigSection icon={<Mic className="w-5 h-5" />} title="Session Type" subtitle="What are you recording?">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <ConfigSection icon={<Mic className="w-4 h-4 md:w-5 md:h-5" />} title="Session Type" subtitle="What are you recording?">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 md:gap-3">
                 {sessionTypes.map((o) => (
                   <OptionCard key={o.id} selected={sessionType === o.id} onClick={() => setSessionType(o.id)} label={o.label} price={o.price} showFree />
                 ))}
@@ -173,8 +173,8 @@ const SessionConfigurator = () => {
             </ConfigSection>
 
             {/* SECTION 3 — Editing */}
-            <ConfigSection icon={<Scissors className="w-5 h-5" />} title="Podcast Editing" subtitle="Choose editing level.">
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <ConfigSection icon={<Scissors className="w-4 h-4 md:w-5 md:h-5" />} title="Podcast Editing" subtitle="Choose editing level.">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 md:gap-3">
                 {editingOptions.map((o) => (
                   <OptionCard key={o.id} selected={editing === o.id} onClick={() => setEditing(o.id)} label={o.label} price={o.price} showFree />
                 ))}
@@ -182,8 +182,8 @@ const SessionConfigurator = () => {
             </ConfigSection>
 
             {/* SECTION 4 — Social Media Clips */}
-            <ConfigSection icon={<Film className="w-5 h-5" />} title="Social Media Clips" subtitle="How many clips do you want from the session?">
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <ConfigSection icon={<Film className="w-4 h-4 md:w-5 md:h-5" />} title="Social Media Clips" subtitle="How many clips do you want from the session?">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 md:gap-3">
                 {clipOptions.map((o) => (
                   <OptionCard key={o.id} selected={clips === o.id} onClick={() => setClips(o.id)} label={o.label} price={o.price} showFree />
                 ))}
@@ -191,8 +191,8 @@ const SessionConfigurator = () => {
             </ConfigSection>
 
             {/* SECTION 5 — Reel Editing Style */}
-            <ConfigSection icon={<Sparkles className="w-5 h-5" />} title="Reel Editing Style" subtitle="Choose a style for your social clips.">
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <ConfigSection icon={<Sparkles className="w-4 h-4 md:w-5 md:h-5" />} title="Reel Editing Style" subtitle="Choose a style for your social clips.">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 md:gap-3">
                 {reelStyles.map((o) => (
                   <OptionCard key={o.id} selected={reelStyle === o.id} onClick={() => setReelStyle(o.id)} label={o.label} price={o.price} showFree />
                 ))}
@@ -200,8 +200,8 @@ const SessionConfigurator = () => {
             </ConfigSection>
 
             {/* SECTION 6 — Extras */}
-            <ConfigSection icon={<Sparkles className="w-5 h-5" />} title="Extra Options" subtitle="Add extras to your session.">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <ConfigSection icon={<Sparkles className="w-4 h-4 md:w-5 md:h-5" />} title="Extra Options" subtitle="Add extras to your session.">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 md:gap-3">
                 {extras.map((o) => (
                   <OptionCard
                     key={o.id}
@@ -289,13 +289,13 @@ function ConfigSection({ icon, title, subtitle, children }: { icon: React.ReactN
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.4 }}
-      className="bg-card border border-border rounded-2xl p-6"
+      className="bg-card border border-border rounded-xl md:rounded-2xl p-4 md:p-6"
     >
-      <div className="flex items-center gap-3 mb-1">
+      <div className="flex items-center gap-2 md:gap-3 mb-0.5 md:mb-1">
         <div className="text-primary">{icon}</div>
-        <h3 className="font-display text-lg font-bold text-foreground">{title}</h3>
+        <h3 className="font-display text-sm md:text-lg font-bold text-foreground">{title}</h3>
       </div>
-      <p className="text-muted-foreground text-sm mb-5">{subtitle}</p>
+      <p className="text-muted-foreground text-xs md:text-sm mb-3 md:mb-5">{subtitle}</p>
       {children}
     </motion.div>
   );
@@ -312,19 +312,17 @@ function OptionCard({ selected, onClick, label, price, showFree, multi }: {
   return (
     <button
       onClick={onClick}
-      className={`relative flex flex-col items-start gap-1 p-4 rounded-xl border text-left transition-all duration-200 ${
+      className={`flex items-center justify-between gap-2 px-3 py-2.5 md:p-4 rounded-[10px] md:rounded-xl border text-left transition-all duration-200 ${
         selected
           ? "border-primary bg-primary/10 shadow-[0_0_20px_-6px_hsl(20_90%_55%_/_0.3)]"
           : "border-border bg-secondary/50 hover:border-muted-foreground/40"
       }`}
     >
-      {selected && (
-        <div className="absolute top-2 right-2">
-          <Check className="w-4 h-4 text-primary" />
-        </div>
-      )}
-      <span className="text-foreground text-sm font-medium pr-5">{label}</span>
-      <span className="text-primary text-xs font-semibold">
+      <div className="flex items-center gap-2 min-w-0">
+        {selected && <Check className="w-3.5 h-3.5 md:w-4 md:h-4 text-primary shrink-0" />}
+        <span className="text-foreground text-xs md:text-sm font-medium truncate">{label}</span>
+      </div>
+      <span className="text-primary text-xs font-semibold whitespace-nowrap shrink-0">
         {price === 0 && showFree ? "Included" : price === 0 ? "—" : `+${price} DT`}
       </span>
     </button>
