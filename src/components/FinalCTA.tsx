@@ -4,14 +4,14 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
 const FinalCTA = () => (
-  <section className="py-24 md:py-32 px-4">
+  <section className="py-14 md:py-32 px-4">
     <div className="container mx-auto max-w-3xl">
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="rounded-2xl border border-border/50 bg-gradient-to-b from-card via-card to-primary/[0.04] p-10 md:p-16 text-center shadow-[0_0_80px_-20px_hsl(20_90%_55%_/_0.1)]"
+        className="rounded-2xl border border-border/50 bg-gradient-to-b from-card via-card to-primary/[0.04] p-7 md:p-16 text-center shadow-[0_0_80px_-20px_hsl(20_90%_55%_/_0.1)]"
       >
         <h2 className="font-display text-3xl md:text-5xl font-bold text-foreground mb-4 leading-tight">
           Ready to Record Your

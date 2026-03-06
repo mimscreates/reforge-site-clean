@@ -17,7 +17,7 @@ const Hero = () => {
   const isDark = theme === "dark";
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-background">
+    <section className="relative min-h-[85vh] md:min-h-screen flex items-center overflow-hidden bg-background">
       {/* Background video */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/2 left-1/2 w-[300%] h-[300%] -translate-x-1/2 -translate-y-1/2 md:w-[180%] md:h-[180%]">
@@ -54,13 +54,13 @@ const Hero = () => {
       />
 
       {/* Content */}
-      <div className="relative z-10 w-full max-w-6xl px-6 md:px-12 mx-auto">
+      <div className="relative z-10 w-full max-w-6xl px-4 md:px-12 mx-auto">
         <div className="max-w-2xl">
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className={`font-display text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight mb-5 ${
+            className={`font-display text-3xl md:text-6xl lg:text-7xl font-bold leading-[1.08] tracking-tight mb-4 ${
               isDark ? "text-primary-foreground" : "text-foreground"
             }`}
           >

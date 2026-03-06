@@ -32,18 +32,18 @@ const faqs = [
 
 const FAQ = () => {
   return (
-    <section className="py-16 px-4 bg-background">
+    <section className="py-10 md:py-16 px-4 bg-background">
       <div className="container mx-auto">
-        <h2 className="font-display text-2xl md:text-4xl font-bold text-foreground text-center mb-12">
+        <h2 className="font-display text-2xl md:text-4xl font-bold text-foreground text-center mb-8 md:mb-12">
           Frequently Asked Questions
         </h2>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-10 items-start">
           <div className="rounded-2xl overflow-hidden">
             <img
               src={FAQ_IMG}
               alt="KAUN Studio FAQ"
-              className="w-full h-[350px] object-cover rounded-2xl"
+              className="w-full h-[220px] md:h-[350px] object-cover rounded-2xl"
               loading="lazy"
             />
           </div>

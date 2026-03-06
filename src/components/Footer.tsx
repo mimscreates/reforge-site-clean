@@ -5,9 +5,9 @@ const LOGO_URL = "https://framerusercontent.com/images/u6I7XJU9MR5jMeeqxKPjCdEdn
 
 const Footer = () => {
   return (
-    <footer className="py-12 px-4 bg-background border-t border-border/50">
+    <footer className="py-8 md:py-12 px-4 bg-background border-t border-border/50">
       <div className="container mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10">
           <div>
             <Link to="/" className="flex items-center gap-3 mb-3">
               <img src={LOGO_URL} alt="KAUN Studios" className="h-10 w-10 rounded-lg object-cover" />
