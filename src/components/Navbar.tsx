@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Phone, ArrowRight } from "lucide-react";
+import { Phone } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import ThemeToggle from "@/components/ThemeToggle";
@@ -17,7 +17,6 @@ const navLinks = [
   { label: "Rent Your Space", path: "/rent-your-space" },
   { label: "Request a Quote", path: "/devis" },
 ];
-
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -48,6 +47,7 @@ const Navbar = () => {
             <img src={LOGO_URL} alt="KAUN Studios" className="h-8 w-8 rounded-md object-cover" />
           </Link>
 
+          {/* Desktop nav */}
           <div className="hidden lg:flex items-center gap-6">
             {navLinks.map((link) =>
               link.path.startsWith("/#") ? (
@@ -58,12 +58,13 @@ const Navbar = () => {
             )}
           </div>
 
+          {/* Desktop right */}
           <div className="hidden lg:flex items-center gap-3">
             <ThemeToggle />
             <a href="tel:+21626934928" className="inline-flex items-center gap-1.5 text-[13px] font-medium text-muted-foreground hover:text-primary transition-colors">
               <Phone className="w-3.5 h-3.5" />Call Us
             </a>
-            <Link to="/creator-packs">
+            <Link to="/build-session">
               <Button
                 variant="cta"
                 className="font-medium text-[13px] h-8 px-4"
@@ -73,8 +74,36 @@ const Navbar = () => {
             </Link>
           </div>
 
+          {/* Mobile right — theme toggle + CTA + hamburger always visible */}
           <div className="flex items-center gap-2 lg:hidden">
-            <button className="text-foreground" onClick={() => setMobileOpen(true)}><Menu size={22} /></button>
+            <ThemeToggle />
+            <Link to="/build-session">
+              <Button variant="cta" className="font-medium text-[11px] h-7 px-3 rounded-md">
+                Book
+              </Button>
+            </Link>
+            {/* Modern hamburger icon */}
+            <button
+              className="w-9 h-9 flex flex-col items-center justify-center gap-[5px] rounded-lg hover:bg-secondary/50 transition-colors"
+              onClick={() => setMobileOpen(!mobileOpen)}
+              aria-label="Menu"
+            >
+              <motion.span
+                animate={mobileOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
+                transition={{ duration: 0.25 }}
+                className="block w-5 h-[1.5px] bg-foreground rounded-full origin-center"
+              />
+              <motion.span
+                animate={mobileOpen ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }}
+                transition={{ duration: 0.2 }}
+                className="block w-5 h-[1.5px] bg-foreground rounded-full"
+              />
+              <motion.span
+                animate={mobileOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
+                transition={{ duration: 0.25 }}
+                className="block w-5 h-[1.5px] bg-foreground rounded-full origin-center"
+              />
+            </button>
           </div>
         </div>
       </nav>
@@ -88,10 +117,21 @@ const Navbar = () => {
                 <Link to="/" onClick={() => setMobileOpen(false)} className="flex-shrink-0">
                   <img src={LOGO_URL} alt="KAUN Studios" className="h-7 w-7 rounded-md object-cover" />
                 </Link>
-                <div className="flex items-center gap-2">
-                  <ThemeToggle />
-                  <button onClick={() => setMobileOpen(false)} className="w-8 h-8 flex items-center justify-center rounded-full text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"><X size={18} /></button>
-                </div>
+                <button
+                  onClick={() => setMobileOpen(false)}
+                  className="w-9 h-9 flex flex-col items-center justify-center gap-[5px] rounded-lg hover:bg-secondary/50 transition-colors"
+                  aria-label="Close menu"
+                >
+                  <motion.span
+                    animate={{ rotate: 45, y: 7 }}
+                    className="block w-5 h-[1.5px] bg-foreground rounded-full origin-center"
+                  />
+                  <motion.span animate={{ opacity: 0 }} className="block w-5 h-[1.5px] bg-foreground rounded-full" />
+                  <motion.span
+                    animate={{ rotate: -45, y: -7 }}
+                    className="block w-5 h-[1.5px] bg-foreground rounded-full origin-center"
+                  />
+                </button>
               </div>
               <div className="flex-1 overflow-y-auto px-5 py-6 space-y-1">
                 {navLinks.map((link, i) => {
