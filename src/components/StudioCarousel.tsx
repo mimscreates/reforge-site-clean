@@ -26,7 +26,7 @@ const StudioCarousel = () => {
         </div>
       </div>
       <div className="text-center">
-        <Link to="/#creator-packs">
+        <Link to="/creator-packs">
           <Button variant="cta" className="px-6 text-sm font-medium h-9">Book a Session</Button>
         </Link>
       </div>

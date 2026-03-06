@@ -33,7 +33,7 @@ const Footer = () => {
               <a href="https://www.instagram.com/kaun_studios/" target="_blank" rel="noopener noreferrer" className="block text-muted-foreground hover:text-primary text-sm transition-colors">Instagram</a>
               <a href="https://www.facebook.com/Kaunstudiosandproduction" target="_blank" rel="noopener noreferrer" className="block text-muted-foreground hover:text-primary text-sm transition-colors">Facebook</a>
             </div>
-            <Link to="/#creator-packs">
+            <Link to="/creator-packs">
               <Button variant="cta" className="font-medium text-sm h-9 px-5">Book a Session</Button>
             </Link>
           </div>

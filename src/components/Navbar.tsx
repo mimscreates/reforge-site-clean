@@ -70,10 +70,9 @@ const Navbar = () => {
             <a href="tel:+21626934928" className="inline-flex items-center gap-1.5 text-[13px] font-medium text-muted-foreground hover:text-primary transition-colors">
               <Phone className="w-3.5 h-3.5" />Call Us
             </a>
-            <Link to="/#creator-packs">
+            <Link to="/creator-packs">
               <Button
                 variant="cta"
-                onClick={() => { if (location.pathname === "/") { const el = document.getElementById("creator-packs"); if (el) el.scrollIntoView({ behavior: "smooth", block: "start" }); } }}
                 className="font-medium text-[13px] h-8 px-4"
               >
                 Book a Session
@@ -130,7 +129,7 @@ const Navbar = () => {
                 <a href="tel:+21626934928" className="flex items-center justify-center gap-2 w-full h-10 rounded-lg border border-border bg-secondary/50 text-foreground text-sm font-medium hover:bg-secondary transition-colors">
                   <Phone className="w-4 h-4" />Call Us
                 </a>
-                <Link to="/#creator-packs" onClick={() => { setMobileOpen(false); if (location.pathname === "/") { setTimeout(() => { const el = document.getElementById("creator-packs"); if (el) el.scrollIntoView({ behavior: "smooth", block: "start" }); }, 100); } }}>
+                <Link to="/creator-packs" onClick={() => setMobileOpen(false)}>
                   <Button variant="cta" className="w-full font-medium text-sm h-10">Book a Session</Button>
                 </Link>
               </motion.div>
