@@ -47,9 +47,9 @@ const Hero = () => {
 
       {/* Bottom fade to background */}
       <div
-        className="absolute inset-x-0 bottom-0 h-32"
+        className="absolute inset-x-0 bottom-0 h-[200px] md:h-[250px]"
         style={{
-          background: "linear-gradient(to top, hsl(var(--background)) 0%, transparent 100%)",
+          background: "linear-gradient(to top, hsl(var(--background)) 0%, hsl(var(--background) / 0.6) 40%, transparent 100%)",
         }}
       />
 
