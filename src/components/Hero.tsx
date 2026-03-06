@@ -5,19 +5,10 @@ import { useTheme } from "@/components/ThemeProvider";
 const Hero = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const { theme } = useTheme();
-
-  const darkOverlay = "rgba(0,0,0,0.55)";
-  const lightOverlay = "rgba(0,0,0,0.25)";
-
-  const darkGradient =
-    "linear-gradient(90deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.55) 40%, rgba(244,106,37,0.12) 100%)";
-  const lightGradient =
-    "linear-gradient(90deg, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.6) 40%, rgba(244,106,37,0.08) 100%)";
-
   const isDark = theme === "dark";
 
   return (
-    <section className="relative min-h-[85vh] md:min-h-screen flex items-center overflow-hidden bg-background">
+    <section className="relative min-h-[85vh] md:min-h-screen flex items-end md:items-center overflow-hidden bg-background">
       {/* Background video */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/2 left-1/2 w-[300%] h-[300%] -translate-x-1/2 -translate-y-1/2 md:w-[180%] md:h-[180%]">
@@ -33,51 +24,58 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Layer 1: overlay */}
+      {/* Single dark overlay — clean, no side gradients */}
       <div
         className="absolute inset-0"
-        style={{ background: isDark ? darkOverlay : lightOverlay }}
-      />
-
-      {/* Layer 2: gradient */}
-      <div
-        className="absolute inset-0"
-        style={{ background: isDark ? darkGradient : lightGradient }}
-      />
-
-      {/* Bottom fade to background */}
-      <div
-        className="absolute inset-x-0 bottom-0 h-[200px] md:h-[250px]"
         style={{
-          background: "linear-gradient(to top, hsl(var(--background)) 0%, hsl(var(--background) / 0.6) 40%, transparent 100%)",
+          background: isDark
+            ? "rgba(0,0,0,0.6)"
+            : "rgba(0,0,0,0.35)",
         }}
       />
 
-      {/* Content */}
-      <div className="relative z-10 w-full max-w-6xl px-4 md:px-12 mx-auto">
+      {/* Cinematic bottom fade */}
+      <div
+        className="absolute inset-x-0 bottom-0 h-[300px] md:h-[350px]"
+        style={{
+          background:
+            "linear-gradient(to top, hsl(var(--background)) 0%, hsl(var(--background) / 0.7) 35%, hsl(var(--background) / 0.2) 65%, transparent 100%)",
+        }}
+      />
+
+      {/* Content — anchored lower on mobile */}
+      <div className="relative z-10 w-full max-w-6xl px-5 md:px-12 mx-auto pb-24 md:pb-0">
         <div className="max-w-2xl">
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className={`font-display text-3xl md:text-6xl lg:text-7xl font-bold leading-[1.08] tracking-tight mb-4 ${
-              isDark ? "text-primary-foreground" : "text-foreground"
-            }`}
+            className="font-display text-[38px] md:text-6xl lg:text-7xl leading-[1.1] tracking-tight mb-5 text-white"
+            style={{ fontWeight: 700 }}
           >
-            Create Powerful Content.
+            Create Powerful Content
             <br />
-            <span className="bg-gradient-to-r from-[#f46a25] via-[#ff8a3d] to-[#f46a25] bg-[length:200%_auto] bg-clip-text text-transparent animate-[gradient-shift_10s_linear_infinite]">All In One Studio.</span>
+            <span style={{ fontWeight: 700 }}>
+              in{" "}
+            </span>
+            <span
+              className="bg-gradient-to-r from-[#f46a25] via-[#ff8a3d] to-[#f46a25] bg-[length:200%_auto] bg-clip-text text-transparent animate-[gradient-shift_10s_linear_infinite]"
+              style={{ fontWeight: 800 }}
+            >
+              One Studio
+            </span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
-            className={`text-base md:text-lg max-w-lg leading-relaxed ${
-              isDark ? "text-primary-foreground/70" : "text-muted-foreground"
-            }`}
+            className="text-[15px] md:text-lg max-w-lg leading-relaxed text-white/60"
+            style={{ fontWeight: 400 }}
           >
-            Podcasts, reels, interviews and corporate content produced in one place.
+            Podcasts, reels, interviews and branded content
+            <br className="hidden md:block" />
+            {" "}produced in one place.
           </motion.p>
         </div>
       </div>
