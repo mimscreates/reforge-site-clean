@@ -7,6 +7,16 @@ const Hero = () => {
   const { theme } = useTheme();
   const isDark = theme === "dark";
 
+  const wordAnimation = {
+    hidden: { opacity: 0, y: 25, filter: "blur(4px)" },
+    visible: (i: number) => ({
+      opacity: 1,
+      y: 0,
+      filter: "blur(0px)",
+      transition: { duration: 0.6, delay: 0.15 + i * 0.08, ease: "easeOut" as const },
+    }),
+  };
+
   return (
     <section className="relative min-h-[85vh] md:min-h-screen flex items-end md:items-center overflow-hidden bg-background">
       {/* Background video */}
@@ -24,58 +34,108 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Single dark overlay — clean, no side gradients */}
+      {/* Dark overlay */}
       <div
         className="absolute inset-0"
-        style={{
-          background: isDark
-            ? "rgba(0,0,0,0.6)"
-            : "rgba(0,0,0,0.35)",
-        }}
+        style={{ background: isDark ? "rgba(0,0,0,0.65)" : "rgba(0,0,0,0.4)" }}
       />
 
-      {/* Cinematic bottom fade */}
+      {/* Cinematic bottom fade — taller for smoother transition */}
       <div
-        className="absolute inset-x-0 bottom-0 h-[300px] md:h-[350px]"
+        className="absolute inset-x-0 bottom-0 h-[350px] md:h-[400px]"
         style={{
           background:
-            "linear-gradient(to top, hsl(var(--background)) 0%, hsl(var(--background) / 0.7) 35%, hsl(var(--background) / 0.2) 65%, transparent 100%)",
+            "linear-gradient(to top, hsl(var(--background)) 0%, hsl(var(--background) / 0.8) 30%, hsl(var(--background) / 0.2) 65%, transparent 100%)",
         }}
       />
 
-      {/* Content — anchored lower on mobile */}
-      <div className="relative z-10 w-full max-w-6xl px-5 md:px-12 mx-auto pb-24 md:pb-0">
-        <div className="max-w-2xl">
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="font-display text-[38px] md:text-6xl lg:text-7xl leading-[1.1] tracking-tight mb-5 text-white"
-            style={{ fontWeight: 700 }}
-          >
-            Create Powerful Content
-            <br />
-            <span style={{ fontWeight: 700 }}>
-              in{" "}
+      {/* Subtle warm glow behind text area */}
+      <div
+        className="absolute bottom-0 left-0 w-[600px] h-[400px] pointer-events-none opacity-20"
+        style={{
+          background: "radial-gradient(ellipse at 20% 80%, rgba(244,106,37,0.3), transparent 70%)",
+        }}
+      />
+
+      {/* Content */}
+      <div className="relative z-10 w-full max-w-6xl px-5 md:px-12 mx-auto pb-28 md:pb-0">
+        <div className="max-w-3xl">
+          {/* Line 1 — word by word reveal */}
+          <h1 className="font-display text-[36px] md:text-[64px] lg:text-[80px] leading-[1.05] tracking-[-0.03em] mb-6">
+            <span className="block overflow-hidden">
+              {["Your", "Vision."].map((word, i) => (
+                <motion.span
+                  key={word}
+                  custom={i}
+                  initial="hidden"
+                  animate="visible"
+                  variants={wordAnimation}
+                  className="inline-block mr-[0.25em] text-white"
+                  style={{ fontWeight: 300 }}
+                >
+                  {word}
+                </motion.span>
+              ))}
             </span>
-            <span
-              className="bg-gradient-to-r from-[#f46a25] via-[#ff8a3d] to-[#f46a25] bg-[length:200%_auto] bg-clip-text text-transparent animate-[gradient-shift_10s_linear_infinite]"
-              style={{ fontWeight: 800 }}
-            >
-              One Studio
+
+            {/* Line 2 — the hero statement */}
+            <span className="block overflow-hidden">
+              {["Our", "Studio."].map((word, i) => (
+                <motion.span
+                  key={word}
+                  custom={i + 2}
+                  initial="hidden"
+                  animate="visible"
+                  variants={wordAnimation}
+                  className="inline-block mr-[0.25em]"
+                  style={{
+                    fontWeight: word === "Studio." ? 700 : 600,
+                    ...(word === "Studio."
+                      ? {}
+                      : { color: "white" }),
+                  }}
+                >
+                  {word === "Studio." ? (
+                    <span
+                      className="bg-clip-text text-transparent"
+                      style={{
+                        backgroundImage:
+                          "linear-gradient(135deg, #f46a25 0%, #ff8a3d 30%, #ffb473 50%, #ff8a3d 70%, #f46a25 100%)",
+                        backgroundSize: "300% auto",
+                        animation: "gradient-shift 8s linear infinite",
+                      }}
+                    >
+                      {word}
+                    </span>
+                  ) : (
+                    word
+                  )}
+                </motion.span>
+              ))}
             </span>
-          </motion.h1>
+          </h1>
+
+          {/* Subtle divider line */}
+          <motion.div
+            initial={{ scaleX: 0, opacity: 0 }}
+            animate={{ scaleX: 1, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
+            className="w-16 h-[1px] mb-5 origin-left"
+            style={{
+              background: "linear-gradient(to right, rgba(244,106,37,0.6), transparent)",
+            }}
+          />
 
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
-            className="text-[15px] md:text-lg max-w-lg leading-relaxed text-white/60"
-            style={{ fontWeight: 400 }}
+            transition={{ duration: 0.7, delay: 0.65, ease: "easeOut" }}
+            className="text-[14px] md:text-[17px] max-w-md leading-[1.7] tracking-wide text-white/50"
+            style={{ fontWeight: 300, letterSpacing: "0.02em" }}
           >
-            Podcasts, reels, interviews and branded content
-            <br className="hidden md:block" />
-            {" "}produced in one place.
+            Podcasts. Reels. Interviews. Branded content.
+            <br />
+            All produced under one roof.
           </motion.p>
         </div>
       </div>
