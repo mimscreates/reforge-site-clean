@@ -1,85 +1,56 @@
 
-# Plan de recréation du site KaunStudios en React
 
-## Objectif
-Recréer fidèlement le site www.kaunstudios.com actuellement sur Framer, en code React/Tailwind propre et facilement modifiable.
+## Plan: Send Booking & VIP Requests to kaunstudios@gmail.com
 
----
+### What we'll build
 
-## Page d'accueil (Homepage)
+1. **Database table** `booking_requests` to persist all submissions (both booking wizard and VIP requests)
+2. **Edge function** `send-booking-email` that receives booking data, saves it to the database, and sends a notification email to kaunstudios@gmail.com using the Resend API
+3. **Update BookingWizard.tsx and VipRequest.tsx** to call the edge function on form submission
 
-### 1. Navbar
-- Logo KAUN Studios à gauche
-- Liens de navigation : Homepage, Nos packs, Demande de devis
-- Bouton CTA "Réserver ma session" (lien externe vers booking.kaunstudios.com)
+### Email service setup
 
-### 2. Section Hero
-- Image de fond plein écran (studio podcast)
-- Texte accroche : "+100 billion planets but you deserve your own"
-- Titre principal : "All the content you need, all in one place."
-- Sous-titre : "Podcasts, Reels booster, short films, photography and more.."
-- Icônes planètes décoratives
+We'll use **Resend** for transactional email delivery. This requires a Resend API key (free tier supports 100 emails/day). I'll need to:
+- Ask you to provide a Resend API key (you can get one at resend.com/api-keys)
+- Store it securely as a backend secret
 
-### 3. Bandeau défilant de services
-- Marquee/ticker horizontal animé avec les catégories : Podcast, Talks, Production, Interviews (avec icônes)
+### Database migration
 
-### 4. Section "Personnalise your pack"
-- Widget de réservation embarqué (iframe du système de booking existant) affichant les 4 packs :
-  - **Customize** – 100 DT/h
-  - **Nova** – 140 DT/h  
-  - **Cosmic** – 390 DT/h
-  - **Interstellar** – 900 DT/h
-- Chaque pack avec sa liste de services inclus
+```sql
+CREATE TABLE public.booking_requests (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  request_type text NOT NULL, -- 'booking' or 'vip'
+  pack_name text,
+  pack_type text,
+  selected_date date,
+  selected_time text,
+  booker_type text,
+  first_name text NOT NULL,
+  last_name text NOT NULL,
+  email text NOT NULL,
+  phone text,
+  company text,
+  notes text,
+  created_at timestamptz DEFAULT now()
+);
 
-### 5. Section "Studios podcasts clé en main"
-- Titre + description
-- Carrousel d'images des studios (défilement automatique)
-- Bouton "Réserver ma session"
+ALTER TABLE public.booking_requests ENABLE ROW LEVEL SECURITY;
 
-### 6. Section "Our Podcast Offers" – Cartes détaillées des 3 packs
-- **Nova** (140 DT/h) – Carte avec liste des services (Audio, Micro, Éclairage PRO, etc.)
-- **Cosmic** (390 DT/h) – Carte avec liste des services (Vidéo+Audio, 2 caméras, etc.)
-- **Interstellar** (900 DT/h) – Carte avec liste complète (montage, révisions, brief, etc.)
-- Chaque carte avec bouton "Réserver ma session"
+-- Allow anonymous inserts (public booking form)
+CREATE POLICY "Allow public inserts" ON public.booking_requests
+  FOR INSERT TO anon WITH CHECK (true);
+```
 
-### 7. Section Options supplémentaires
-- Liste des options à la carte avec prix (Caméra supplémentaire 100 DT, Micro 50 DT, Shorts 100 DT, etc.)
+### Edge function: `send-booking-email`
 
-### 8. Section "Create more, consume less"
-- Texte de présentation de Kaun Studios
-- Image du studio
-- 3 blocs de services : Podcast 🎙, Services supplémentaires 📷, Production 🎬
+- Receives booking JSON via POST
+- Inserts into `booking_requests` table
+- Sends a formatted email to kaunstudios@gmail.com via Resend with all booking details
+- Returns success/error response
 
-### 9. Section FAQ
-- Accordéon avec les questions fréquentes (accompagnement, week-end, matériel supplémentaire, déplacement, dépassement horaire)
-- Image décorative
+### Frontend changes
 
-### 10. Section Newsletter
-- Titre "Subscribe for Kaun insights"
-- Champ email + bouton d'inscription
+- **BookingWizard.tsx**: `handleSubmit` calls the edge function with all form data
+- **VipRequest.tsx**: `handleSubmit` calls the same edge function with `request_type: 'vip'`
+- Add loading states and error handling with toast notifications
 
-### 11. Footer
-- Logo + description de KAUN Studios
-- Liens de navigation (Homepage, Nos packs, Demande de devis)
-- Liens sociaux (Instagram, Facebook)
-- Bouton "Réserver ma session"
-
----
-
-## Design & Style
-- **Thème sombre** (fond noir/très foncé) avec accents orange
-- **Typographies** : PP Neue Machina (titres) + DM Sans/Inter (corps de texte)
-- **Animations** : marquee défilant, transitions smooth au scroll
-- Responsive (mobile + desktop)
-- Toutes les images actuelles du site seront référencées depuis les URLs Framer existantes
-
----
-
-## Pages supplémentaires
-- Page **Nos Packs** (détails des offres)
-- Page **Demande de devis** (formulaire de contact)
-
-## Notes techniques
-- Pas de backend nécessaire (site vitrine statique)
-- Les liens de réservation pointent vers le système externe existant (booking.kaunstudios.com)
-- Code organisé en composants réutilisables pour faciliter les modifications futures
