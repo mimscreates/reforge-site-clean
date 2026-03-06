@@ -1,10 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
+import { motion } from "framer-motion";
 
 const Hero = () => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
+    <section className="relative min-h-screen flex items-center overflow-hidden bg-background">
       {/* Background video */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/2 left-1/2 w-[300%] h-[300%] -translate-x-1/2 -translate-y-1/2 md:w-[180%] md:h-[180%]">
@@ -20,27 +21,52 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Orange-to-black vignette overlay */}
+      {/* Layer 1: Dark overlay for readability */}
+      <div
+        className="absolute inset-0"
+        style={{ background: "rgba(0,0,0,0.35)" }}
+      />
+
+      {/* Layer 2: Cinematic gradient — dark left, subtle orange right */}
       <div
         className="absolute inset-0"
         style={{
-          background: `radial-gradient(ellipse at center, hsl(var(--accent)) / 0.15 0%, transparent 25%, hsl(20 90% 20% / 0.4) 50%, hsl(0 0% 0% / 0.85) 80%, hsl(0 0% 0% / 1) 100%)`,
+          background:
+            "linear-gradient(90deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.55) 40%, rgba(255,120,0,0.15) 100%)",
         }}
       />
 
-      {/* Content */}
-      <div className="relative z-10 text-center max-w-4xl px-4 mx-auto">
-        {/* Main title */}
-        <h1 className="font-display text-4xl lg:text-7xl leading-tight mb-6 md:text-5xl font-medium text-primary-foreground">
-          All the content you need,
-          <br />
-          all in one place.
-        </h1>
+      {/* Bottom fade to background */}
+      <div
+        className="absolute inset-x-0 bottom-0 h-32"
+        style={{
+          background: "linear-gradient(to top, hsl(var(--background)) 0%, transparent 100%)",
+        }}
+      />
 
-        {/* Subtitle */}
-        <p className="text-lg md:text-xl max-w-2xl mx-auto text-primary-foreground">
-          Podcasts, Reels booster, short films, photography and more..
-        </p>
+      {/* Content — left-aligned in dark zone */}
+      <div className="relative z-10 w-full max-w-6xl px-6 md:px-12 mx-auto">
+        <div className="max-w-2xl">
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="font-display text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight text-primary-foreground mb-5"
+          >
+            Create Powerful Content.
+            <br />
+            <span className="text-primary">All In One Studio.</span>
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
+            className="text-base md:text-lg text-primary-foreground/70 max-w-lg leading-relaxed"
+          >
+            Podcasts, reels, interviews and corporate content produced in one place.
+          </motion.p>
+        </div>
       </div>
     </section>
   );
