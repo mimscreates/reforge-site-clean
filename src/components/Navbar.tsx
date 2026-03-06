@@ -11,11 +11,10 @@ const LOGO_URL =
 
 const navLinks = [
   { label: "Home", path: "/" },
-  { label: "Creator Packs", path: "/creator-packs" },
-  { label: "Corporate Packs", path: "/corporate-packs" },
+  { label: "Our Packs", path: "/packs" },
+  { label: "Portfolio", path: "/portfolio" },
   { label: "Build Your Session", path: "/build-session" },
   { label: "Rent Your Space", path: "/rent-your-space" },
-  { label: "Portfolio", path: "/portfolio" },
   { label: "Request a Quote", path: "/devis" },
 ];
 
