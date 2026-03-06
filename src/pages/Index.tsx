@@ -9,7 +9,7 @@ import StudioCarousel from "@/components/StudioCarousel";
 import CreateMore from "@/components/CreateMore";
 import AgencyPartnership from "@/components/AgencyPartnership";
 import FAQ from "@/components/FAQ";
-import Newsletter from "@/components/Newsletter";
+import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
 
 const Index = () => {
@@ -27,7 +27,7 @@ const Index = () => {
         <CreateMore />
         <AgencyPartnership />
         <FAQ />
-        <Newsletter />
+        <FinalCTA />
       </main>
       <Footer />
     </div>
