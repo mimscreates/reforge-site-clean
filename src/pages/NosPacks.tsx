@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
-import PodcastOffers from "@/components/PodcastOffers";
+import CreatorPacks from "@/components/CreatorPacks";
+import CorporatePacks from "@/components/CorporatePacks";
 import Options from "@/components/Options";
 import Footer from "@/components/Footer";
 
@@ -8,7 +9,8 @@ const NosPacks = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       <main className="pt-16">
-        <PodcastOffers />
+        <CreatorPacks />
+        <CorporatePacks />
         <Options />
       </main>
       <Footer />

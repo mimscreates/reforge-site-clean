@@ -1,10 +1,11 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import AudienceSelector from "@/components/AudienceSelector";
 import ServiceMarquee from "@/components/ServiceMarquee";
-import BookingWidget from "@/components/BookingWidget";
-import StudioCarousel from "@/components/StudioCarousel";
-import PodcastOffers from "@/components/PodcastOffers";
+import CreatorPacks from "@/components/CreatorPacks";
+import CorporatePacks from "@/components/CorporatePacks";
 import Options from "@/components/Options";
+import StudioCarousel from "@/components/StudioCarousel";
 import CreateMore from "@/components/CreateMore";
 import FAQ from "@/components/FAQ";
 import Newsletter from "@/components/Newsletter";
@@ -16,11 +17,12 @@ const Index = () => {
       <Navbar />
       <main>
         <Hero />
+        <AudienceSelector />
         <ServiceMarquee />
-        <BookingWidget />
-        <StudioCarousel />
-        <PodcastOffers />
+        <CreatorPacks />
+        <CorporatePacks />
         <Options />
+        <StudioCarousel />
         <CreateMore />
         <FAQ />
         <Newsletter />
