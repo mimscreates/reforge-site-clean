@@ -1,10 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import ClientLogos from "@/components/ClientLogos";
-import AudienceSelector from "@/components/AudienceSelector";
-
-import CreatorPacks from "@/components/CreatorPacks";
-import CorporatePacks from "@/components/CorporatePacks";
+import WhoWeWorkWith from "@/components/WhoWeWorkWith";
 import Options from "@/components/Options";
 import StudioCarousel from "@/components/StudioCarousel";
 import CreateMore from "@/components/CreateMore";
@@ -19,11 +16,9 @@ const Index = () => {
       <main>
         <Hero />
         <ClientLogos />
-        
-        <CreatorPacks />
-        <CorporatePacks />
-        <Options />
+        <WhoWeWorkWith />
         <StudioCarousel />
+        <Options />
         <CreateMore />
         <FAQ />
         <Newsletter />
