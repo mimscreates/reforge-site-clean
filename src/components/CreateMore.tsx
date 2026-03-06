@@ -99,7 +99,7 @@ const CreateMore = () => {
 
             <Link to="/build-session">
               <Button
-                variant="cta"
+                variant="cta-primary"
                 className="font-medium text-sm h-10 px-6 gap-2 rounded-lg"
               >
                 Book a Session <ArrowRight className="w-4 h-4" />

@@ -20,15 +20,15 @@ const MobileFloatingCTA = () => {
     <AnimatePresence>
       {visible && (
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: 20 }}
           transition={{ duration: 0.25 }}
-          className="fixed bottom-5 right-4 z-50 lg:hidden"
+          className="fixed bottom-20 right-0 z-50 lg:hidden"
         >
           <Link
             to="/build-session"
-            className="inline-flex items-center gap-2 justify-center rounded-full bg-primary text-primary-foreground font-medium text-sm h-12 px-6 shadow-[0_4px_20px_-4px_hsl(20_91%_55%_/_0.5)] hover:shadow-[0_4px_28px_-4px_hsl(20_91%_55%_/_0.6)] transition-shadow"
+            className="inline-flex items-center gap-2 justify-center rounded-l-full bg-primary text-white font-medium text-sm h-12 pl-5 pr-4 shadow-[0_4px_24px_-4px_hsl(20_91%_55%_/_0.5)]"
           >
             <Sparkles className="w-4 h-4" />
             Book a Session
