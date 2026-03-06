@@ -30,6 +30,7 @@ const Index = () => {
         <FinalCTA />
       </main>
       <Footer />
+      <MobileFloatingCTA />
     </div>
   );
 };
