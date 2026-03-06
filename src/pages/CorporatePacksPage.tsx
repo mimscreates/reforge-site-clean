@@ -216,27 +216,27 @@ const CorporatePacksPage = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.15 }}
-              className="bg-card border border-border rounded-2xl p-6"
             >
-              <h3 className="font-display text-lg font-bold text-foreground mb-2 text-center">
-                Schedule a Partnership Call
+              <h3 className="font-display text-lg font-bold text-foreground mb-1 text-center">
+                Choisissez le créneau qui vous convient le mieux
               </h3>
-              <p className="text-muted-foreground text-sm mb-5 text-center">
-                Book a 40-minute discovery call to discuss how we can work together.
+              <p className="text-muted-foreground text-sm mb-6 text-center">
+                Réservez un appel de 40 minutes pour discuter de notre collaboration.
               </p>
 
-              <div className="rounded-xl overflow-hidden border border-border bg-background" style={{ minHeight: 600 }}>
+              <div className="rounded-2xl overflow-hidden border border-border/50 bg-[#0a0a0a]">
                 <iframe
-                  src="https://cal.eu/kaun-studios-csvvzi/40min?embed=true&theme=dark"
+                  src="https://cal.com/kaun-studios-csvvzi/40min?embed=true&layout=month_view&theme=dark"
                   title="Schedule a partnership call"
                   className="w-full border-0"
-                  style={{ height: 600 }}
+                  style={{ height: 700, minHeight: 700 }}
                   loading="lazy"
+                  allow="payment"
                 />
               </div>
 
               <p className="text-muted-foreground/50 text-[11px] text-center mt-3">
-                No commitment required — let's explore how we can collaborate.
+                Aucun engagement requis — explorons comment collaborer ensemble.
               </p>
             </motion.div>
           </div>
