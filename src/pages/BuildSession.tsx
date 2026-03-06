@@ -90,7 +90,7 @@ const BuildSession = () => {
                   exit={{ opacity: 0, y: -16 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <SessionConfigurator />
+                  <SessionConfigurator onSwitchTab={(tab) => setActiveTab(tab)} />
                 </motion.div>
               )}
 
