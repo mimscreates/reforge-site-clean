@@ -8,7 +8,6 @@ const Footer = () => {
     <footer className="py-12 px-4 bg-background border-t border-border/50">
       <div className="container mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-          {/* Brand */}
           <div>
             <Link to="/" className="flex items-center gap-3 mb-3">
               <img src={LOGO_URL} alt="KAUN Studios" className="h-10 w-10 rounded-lg object-cover" />
@@ -17,8 +16,6 @@ const Footer = () => {
               <strong className="text-foreground">KAUN STUDIOS</strong> — Premium podcast studio and audiovisual production based in L'Aouina, Tunis. Turnkey studios for podcasts, recording, photography and more.
             </p>
           </div>
-
-          {/* Navigation */}
           <div>
             <h4 className="font-display text-foreground font-semibold text-sm mb-3">Navigation</h4>
             <div className="space-y-2">
@@ -29,8 +26,6 @@ const Footer = () => {
               <Link to="/devis" className="block text-muted-foreground hover:text-foreground text-sm transition-colors">Request a Quote</Link>
             </div>
           </div>
-
-          {/* Social + CTA */}
           <div>
             <h4 className="font-display text-foreground font-semibold text-sm mb-3">Follow Us</h4>
             <div className="space-y-2 mb-5">
@@ -38,9 +33,7 @@ const Footer = () => {
               <a href="https://www.facebook.com/Kaunstudiosandproduction" target="_blank" rel="noopener noreferrer" className="block text-muted-foreground hover:text-primary text-sm transition-colors">Facebook</a>
             </div>
             <Link to="/#creator-packs">
-              <Button className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90 font-medium text-sm h-9 px-5">
-                Book a Session
-              </Button>
+              <Button variant="cta" className="rounded-full font-medium text-sm h-9 px-5">Book a Session</Button>
             </Link>
           </div>
         </div>

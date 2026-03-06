@@ -196,8 +196,9 @@ const RentalConfigurator = () => {
                   </div>
 
                   <Button
+                    variant="cta"
                     onClick={() => setModalOpen(true)}
-                    className="w-full rounded-full bg-primary text-primary-foreground hover:bg-primary/90 font-medium text-base py-6"
+                    className="w-full rounded-full font-medium text-base py-6"
                   >
                     Reserve This Session
                   </Button>

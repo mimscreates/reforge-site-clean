@@ -75,11 +75,12 @@ const MobileStickyBar = ({ totalPrice, items, onReserve }: MobileStickyBarProps)
             </div>
 
             <Button
+              variant="cta"
               onClick={() => {
                 setOpen(false);
                 onReserve();
               }}
-              className="w-full rounded-full bg-primary text-primary-foreground hover:bg-primary/90 font-medium text-sm py-5"
+              className="w-full rounded-full font-medium text-sm py-5"
             >
               Reserve This Session
             </Button>
