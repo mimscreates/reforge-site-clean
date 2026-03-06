@@ -138,16 +138,11 @@ const Navbar = () => {
       >
         <div className="flex items-center justify-between h-14 px-5 w-full">
           <Link to="/" className="flex-shrink-0">
-            <img src={kaunLogo} alt="KAUN Studios" className="h-5 w-auto object-contain" />
+            <img src={kaunLogo} alt="KAUN Studios" className="h-4 w-auto object-contain" />
           </Link>
 
           <div className="flex items-center gap-2">
             <ThemeToggle />
-            <Link to="/build-session">
-              <Button variant="cta-primary" className="font-medium text-[11px] h-7 px-3 rounded-md">
-                Book
-              </Button>
-            </Link>
             <button
               className="w-9 h-9 flex flex-col items-center justify-center gap-[5px] rounded-lg hover:bg-secondary/50 transition-colors"
               onClick={() => setMobileOpen(!mobileOpen)}
