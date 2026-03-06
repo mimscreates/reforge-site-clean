@@ -138,7 +138,7 @@ const Navbar = () => {
       >
         <div className="flex items-center justify-between h-14 px-5 w-full">
           <Link to="/" className="flex-shrink-0">
-            <img src={kaunLogo} alt="KAUN Studios" className="h-7 w-auto object-contain" />
+            <img src={kaunLogo} alt="KAUN Studios" className="h-5 w-auto object-contain" />
           </Link>
 
           <div className="flex items-center gap-2">
