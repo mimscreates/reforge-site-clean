@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const LOGO_URL =
@@ -68,17 +68,24 @@ const Navbar = () => {
           )}
         </div>
 
-        <button
-          className="hidden md:block"
-          onClick={() => {
-            const el = document.getElementById("creator-packs");
-            if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-          }}
-        >
-          <Button className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90 font-medium">
+        <div className="hidden md:flex items-center gap-3">
+          <a
+            href="tel:+21626934928"
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+          >
+            <Phone className="w-4 h-4" />
+            Call Us
+          </a>
+          <Button
+            onClick={() => {
+              const el = document.getElementById("creator-packs");
+              if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+            }}
+            className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90 font-medium"
+          >
             Book a Session
           </Button>
-        </button>
+        </div>
 
         <button
           className="md:hidden text-foreground"
@@ -110,6 +117,13 @@ const Navbar = () => {
               </Link>
             )
           )}
+          <a
+            href="tel:+21626934928"
+            className="flex items-center gap-2 text-sm font-medium text-foreground hover:text-primary"
+          >
+            <Phone className="w-4 h-4" />
+            Call Us
+          </a>
           <Button
             onClick={() => {
               setMobileOpen(false);
