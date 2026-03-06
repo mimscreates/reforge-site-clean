@@ -191,21 +191,21 @@ const RentalConfigurator = () => {
             transition={{ duration: 0.4, delay: 0.15 }}
             className="flex justify-center mb-8 md:mb-12"
           >
-            <div className="inline-flex bg-card border border-border rounded-xl p-1 gap-1 flex-wrap justify-center">
+            <div className="inline-flex flex-wrap justify-center gap-2 md:gap-3">
               {TABS.map((t) => (
                 <button
                   key={t.id}
                   onClick={() => handleTabSwitch(t.id)}
-                  className={`relative px-4 md:px-6 py-2.5 md:py-3 rounded-lg text-xs md:text-sm font-semibold transition-all duration-200 ${
+                  className={`flex flex-col items-center gap-1 px-5 md:px-7 py-3 md:py-4 rounded-xl border text-xs md:text-sm font-semibold transition-all duration-200 ${
                     activeTab === t.id
-                      ? "bg-primary text-primary-foreground shadow-md"
-                      : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
+                      ? "bg-primary text-primary-foreground border-primary shadow-md"
+                      : "bg-card border-border text-muted-foreground hover:text-foreground hover:border-muted-foreground/40"
                   }`}
                 >
-                  {t.label}
+                  <span>{t.label}</span>
                   {t.badge && (
-                    <span className={`absolute -top-2 -right-1 text-[9px] md:text-[10px] font-bold px-1.5 py-0.5 rounded-full ${
-                      activeTab === t.id ? "bg-background text-foreground" : t.badgeColor
+                    <span className={`text-[9px] md:text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                      activeTab === t.id ? "bg-white/20 text-primary-foreground" : "bg-primary/10 text-primary"
                     }`}>
                       {t.badge}
                     </span>
@@ -215,56 +215,61 @@ const RentalConfigurator = () => {
             </div>
           </motion.div>
 
-          {/* Included features card */}
-          <motion.div
-            key={activeTab}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
-            className="mb-8 md:mb-12 p-4 md:p-6 rounded-2xl border border-border bg-card/50 max-w-3xl mx-auto"
-          >
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-3">
-              <div>
-                <span className="text-foreground font-bold text-lg md:text-2xl">{tab.priceLabel}</span>
-                {activeTab !== "hourly" && (
-                  <span className="text-muted-foreground text-xs md:text-sm ml-2">({tab.duration})</span>
-                )}
-              </div>
-              {tab.savings && (
-                <span className="inline-flex items-center gap-1 text-primary text-xs md:text-sm font-semibold bg-primary/10 px-3 py-1 rounded-full">
-                  <Zap className="w-3 h-3" />
-                  {tab.savings}
-                </span>
-              )}
-            </div>
-            <p className="text-muted-foreground text-xs mb-3">Includes:</p>
-            <div className="flex flex-wrap gap-x-4 gap-y-1.5 text-muted-foreground text-xs md:text-sm">
-              {tab.includes.map((item) => (
-                <span key={item} className="flex items-center gap-1.5">
-                  <Check className="w-3 h-3 text-primary shrink-0" /> {item}
-                </span>
-              ))}
-            </div>
-            {activeTab === "monthly" && (
-              <p className="text-muted-foreground/60 text-[11px] mt-3 italic">
-                Camera and microphone add-ons are discounted for monthly members.
-              </p>
-            )}
-          </motion.div>
-
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-8">
             {/* LEFT: Configurator */}
             <div className="lg:col-span-2 space-y-4 md:space-y-6">
-              {/* Hours (only for hourly) */}
-              {activeTab === "hourly" && (
-                <ConfigSection
-                  icon={<Clock className="w-4 h-4 md:w-5 md:h-5" />}
-                  title="Studio Hours"
-                  subtitle="Select how many hours you need."
-                >
-                  <StepperRow label="Hours" value={hours} min={1} max={12} onChange={setHours} price={basePrice} unitPrice={tab.basePrice} />
-                </ConfigSection>
-              )}
+              {/* Studio Rental — merged card with includes + hours */}
+              <motion.div
+                key={activeTab}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4 }}
+                className="bg-card border border-border rounded-2xl p-4 md:p-6"
+              >
+                <div className="flex items-center gap-2 md:gap-3 mb-0.5 md:mb-1">
+                  <div className="text-primary"><Clock className="w-4 h-4 md:w-5 md:h-5" /></div>
+                  <h3 className="font-display text-sm md:text-lg font-bold text-foreground">
+                    {activeTab === "monthly" ? "Creator Pass" : "Studio Rental"}
+                  </h3>
+                </div>
+
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-3 md:mb-4">
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-foreground font-bold text-base md:text-xl">{tab.priceLabel}</span>
+                    {activeTab !== "hourly" && activeTab !== "monthly" && (
+                      <span className="text-muted-foreground text-xs">({tab.duration})</span>
+                    )}
+                  </div>
+                  {tab.savings && (
+                    <span className="inline-flex items-center gap-1 text-primary text-[10px] md:text-xs font-semibold bg-primary/10 px-2.5 py-0.5 rounded-full">
+                      <Zap className="w-3 h-3" />
+                      {tab.savings}
+                    </span>
+                  )}
+                </div>
+
+                <div className="flex flex-wrap gap-x-4 gap-y-1.5 text-muted-foreground text-xs md:text-sm mb-4 md:mb-5">
+                  {tab.includes.map((item) => (
+                    <span key={item} className="flex items-center gap-1.5">
+                      <Check className="w-3 h-3 text-primary shrink-0" /> {item}
+                    </span>
+                  ))}
+                </div>
+
+                {activeTab === "monthly" && (
+                  <p className="text-muted-foreground/60 text-[11px] mb-4 italic">
+                    Camera and microphone add-ons are discounted for monthly members.
+                  </p>
+                )}
+
+                {activeTab === "hourly" && (
+                  <>
+                    <div className="border-t border-border pt-4">
+                      <StepperRow label="Hours" value={hours} min={1} max={12} onChange={setHours} price={basePrice} unitPrice={tab.basePrice} />
+                    </div>
+                  </>
+                )}
+              </motion.div>
 
               {/* Equipment */}
               <ConfigSection
