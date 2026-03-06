@@ -1,31 +1,85 @@
 
+# Plan de recréation du site KaunStudios en React
 
-## Plan: Pill-Style Floating Navbar (Desktop Only)
+## Objectif
+Recréer fidèlement le site www.kaunstudios.com actuellement sur Framer, en code React/Tailwind propre et facilement modifiable.
 
-Redesign the desktop navbar into a floating pill shape inspired by the reference image, while keeping mobile nav unchanged.
+---
 
-### Design
+## Page d'accueil (Homepage)
 
-```text
-   ┌──────────────────────────────────────────────────────────┐
-   │  (●)  Home  Packs  Portfolio  Session  Rent  │ ☀ 📞 [Book] │
-   └──────────────────────────────────────────────────────────┘
-         ↑ pill with full rounded corners, floating with margin
-```
+### 1. Navbar
+- Logo KAUN Studios à gauche
+- Liens de navigation : Homepage, Nos packs, Demande de devis
+- Bouton CTA "Réserver ma session" (lien externe vers booking.kaunstudios.com)
 
-- **Pill container**: `rounded-full`, centered with `max-w-fit mx-auto`, offset from top (`top-4`), glassmorphism background + border
-- **Logo in circle**: Wrap logo `img` in a circular container (`w-8 h-8 rounded-full bg-foreground/10 p-1.5`)
-- **Nav links**: Keep existing links but add hover text animation using framer-motion — subtle slide-up with color shift on hover (each link wrapped in `motion.div` with `whileHover` scale + y shift)
-- **Right cluster**: ThemeToggle icon, Phone icon (no text label to save space), "Book a Session" pill button
-- **Mobile**: Completely unchanged — the pill styling only applies inside `hidden lg:flex` wrappers
+### 2. Section Hero
+- Image de fond plein écran (studio podcast)
+- Texte accroche : "+100 billion planets but you deserve your own"
+- Titre principal : "All the content you need, all in one place."
+- Sous-titre : "Podcasts, Reels booster, short films, photography and more.."
+- Icônes planètes décoratives
 
-### Changes — Single File
+### 3. Bandeau défilant de services
+- Marquee/ticker horizontal animé avec les catégories : Podcast, Talks, Production, Interviews (avec icônes)
 
-**`src/components/Navbar.tsx`**
-1. Change outer `<nav>` from full-width sticky bar to a floating centered pill: `fixed top-4 left-1/2 -translate-x-1/2 z-50 rounded-full px-2` with glassmorphism inline styles
-2. Remove `borderBottom`, use `border` (all sides) instead for the pill shape
-3. Wrap logo in a circular div with subtle background
-4. Add `motion` wrapper to each nav link with `whileHover={{ y: -2, scale: 1.05 }}` and a subtle underline dot animation
-5. Compact the right-side items — keep ThemeToggle, Phone icon-only, and Book button with `rounded-full`
-6. Mobile section (`lg:hidden`) stays exactly as-is, but moves outside the pill container to avoid inheriting pill styles
+### 4. Section "Personnalise your pack"
+- Widget de réservation embarqué (iframe du système de booking existant) affichant les 4 packs :
+  - **Customize** – 100 DT/h
+  - **Nova** – 140 DT/h  
+  - **Cosmic** – 390 DT/h
+  - **Interstellar** – 900 DT/h
+- Chaque pack avec sa liste de services inclus
 
+### 5. Section "Studios podcasts clé en main"
+- Titre + description
+- Carrousel d'images des studios (défilement automatique)
+- Bouton "Réserver ma session"
+
+### 6. Section "Our Podcast Offers" – Cartes détaillées des 3 packs
+- **Nova** (140 DT/h) – Carte avec liste des services (Audio, Micro, Éclairage PRO, etc.)
+- **Cosmic** (390 DT/h) – Carte avec liste des services (Vidéo+Audio, 2 caméras, etc.)
+- **Interstellar** (900 DT/h) – Carte avec liste complète (montage, révisions, brief, etc.)
+- Chaque carte avec bouton "Réserver ma session"
+
+### 7. Section Options supplémentaires
+- Liste des options à la carte avec prix (Caméra supplémentaire 100 DT, Micro 50 DT, Shorts 100 DT, etc.)
+
+### 8. Section "Create more, consume less"
+- Texte de présentation de Kaun Studios
+- Image du studio
+- 3 blocs de services : Podcast 🎙, Services supplémentaires 📷, Production 🎬
+
+### 9. Section FAQ
+- Accordéon avec les questions fréquentes (accompagnement, week-end, matériel supplémentaire, déplacement, dépassement horaire)
+- Image décorative
+
+### 10. Section Newsletter
+- Titre "Subscribe for Kaun insights"
+- Champ email + bouton d'inscription
+
+### 11. Footer
+- Logo + description de KAUN Studios
+- Liens de navigation (Homepage, Nos packs, Demande de devis)
+- Liens sociaux (Instagram, Facebook)
+- Bouton "Réserver ma session"
+
+---
+
+## Design & Style
+- **Thème sombre** (fond noir/très foncé) avec accents orange
+- **Typographies** : PP Neue Machina (titres) + DM Sans/Inter (corps de texte)
+- **Animations** : marquee défilant, transitions smooth au scroll
+- Responsive (mobile + desktop)
+- Toutes les images actuelles du site seront référencées depuis les URLs Framer existantes
+
+---
+
+## Pages supplémentaires
+- Page **Nos Packs** (détails des offres)
+- Page **Demande de devis** (formulaire de contact)
+
+## Notes techniques
+- Pas de backend nécessaire (site vitrine statique)
+- Les liens de réservation pointent vers le système externe existant (booking.kaunstudios.com)
+- Code organisé en composants réutilisables pour faciliter les modifications futures

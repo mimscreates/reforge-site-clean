@@ -16,6 +16,40 @@ const navLinks = [
   { label: "Request a Quote", path: "/devis" },
 ];
 
+const NavItem = ({ link, isActive }: { link: typeof navLinks[0]; isActive: boolean }) => {
+  return (
+    <motion.div
+      className="relative"
+      whileHover="hover"
+    >
+      <Link
+        to={link.path}
+        className={`relative text-[13px] font-medium transition-colors px-1 py-1 ${
+          isActive ? "text-foreground" : "text-muted-foreground"
+        }`}
+      >
+        <motion.span
+          className="inline-block"
+          variants={{
+            hover: { y: -2, color: "hsl(20, 91%, 55%)" },
+          }}
+          transition={{ type: "spring", stiffness: 400, damping: 20 }}
+        >
+          {link.label}
+        </motion.span>
+        <motion.span
+          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-primary"
+          variants={{
+            hover: { scale: 1, opacity: 1 },
+          }}
+          initial={{ scale: 0, opacity: 0 }}
+          transition={{ type: "spring", stiffness: 500, damping: 25 }}
+        />
+      </Link>
+    </motion.div>
+  );
+};
+
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
@@ -34,53 +68,86 @@ const Navbar = () => {
     }
   };
 
-  const navBg = theme === "dark" ? "rgba(10,10,10,0.55)" : "rgba(255,255,255,0.7)";
-  const navBorder = theme === "dark" ? "1px solid rgba(255,255,255,0.08)" : "1px solid rgba(0,0,0,0.08)";
+  const pillBg = theme === "dark" ? "rgba(10,10,10,0.6)" : "rgba(255,255,255,0.75)";
+  const pillBorder = theme === "dark" ? "1px solid rgba(255,255,255,0.1)" : "1px solid rgba(0,0,0,0.08)";
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-50" style={{ background: navBg, backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)", borderBottom: navBorder }}>
-        <div className="flex items-center justify-between h-14 px-5 md:px-8 w-full">
-          <Link to="/" className="flex-shrink-0">
-            <img src={kaunLogo} alt="KAUN Studios" className="h-7 w-auto object-contain" />
+      {/* Desktop floating pill navbar */}
+      <nav
+        className="fixed top-4 left-1/2 -translate-x-1/2 z-50 hidden lg:block rounded-full px-1.5"
+        style={{
+          background: pillBg,
+          backdropFilter: "blur(16px)",
+          WebkitBackdropFilter: "blur(16px)",
+          border: pillBorder,
+          boxShadow: theme === "dark"
+            ? "0 8px 32px rgba(0,0,0,0.4)"
+            : "0 8px 32px rgba(0,0,0,0.08)",
+        }}
+      >
+        <div className="flex items-center gap-1 h-11 px-2">
+          {/* Logo in circle */}
+          <Link to="/" className="flex-shrink-0 mr-2">
+            <div className="w-8 h-8 rounded-full bg-foreground/[0.07] flex items-center justify-center p-1.5">
+              <img src={kaunLogo} alt="KAUN Studios" className="h-full w-full object-contain" />
+            </div>
           </Link>
 
-          {/* Desktop nav */}
-          <div className="hidden lg:flex items-center gap-6">
-            {navLinks.map((link) =>
-              link.path.startsWith("/#") ? (
-                <button key={link.path} onClick={() => handleNav(link.path)} className="text-[13px] font-medium transition-colors hover:text-primary text-muted-foreground">{link.label}</button>
-              ) : (
-                <Link key={link.path} to={link.path} className={`text-[13px] font-medium transition-colors hover:text-primary ${location.pathname === link.path ? "text-foreground" : "text-muted-foreground"}`}>{link.label}</Link>
-              )
-            )}
+          {/* Nav links */}
+          <div className="flex items-center gap-4">
+            {navLinks.map((link) => (
+              <NavItem key={link.path} link={link} isActive={location.pathname === link.path} />
+            ))}
           </div>
 
-          {/* Desktop right */}
-          <div className="hidden lg:flex items-center gap-3">
+          {/* Separator */}
+          <div className="w-px h-5 bg-border/50 mx-2" />
+
+          {/* Right cluster */}
+          <div className="flex items-center gap-1.5">
             <ThemeToggle />
-            <a href="tel:+21626934928" className="inline-flex items-center gap-1.5 text-[13px] font-medium text-muted-foreground hover:text-primary transition-colors">
-              <Phone className="w-3.5 h-3.5" />Call Us
+            <a
+              href="tel:+21626934928"
+              className="w-8 h-8 flex items-center justify-center rounded-full text-muted-foreground hover:text-primary transition-colors"
+              aria-label="Call Us"
+            >
+              <Phone className="w-3.5 h-3.5" />
             </a>
             <Link to="/build-session">
               <Button
                 variant="cta-primary"
-                className="font-medium text-[13px] h-8 px-4"
+                className="font-medium text-[12px] h-7 px-4 rounded-full"
               >
                 Book a Session
               </Button>
             </Link>
           </div>
+        </div>
+      </nav>
 
-          {/* Mobile right — theme toggle + CTA + hamburger always visible */}
-          <div className="flex items-center gap-2 lg:hidden">
+      {/* Mobile top bar — unchanged */}
+      <nav
+        className="fixed top-0 left-0 right-0 z-50 lg:hidden"
+        style={{
+          background: theme === "dark" ? "rgba(10,10,10,0.55)" : "rgba(255,255,255,0.7)",
+          backdropFilter: "blur(12px)",
+          WebkitBackdropFilter: "blur(12px)",
+          borderBottom: theme === "dark" ? "1px solid rgba(255,255,255,0.08)" : "1px solid rgba(0,0,0,0.08)",
+        }}
+      >
+        <div className="flex items-center justify-between h-14 px-5 w-full">
+          <Link to="/" className="flex-shrink-0">
+            <img src={kaunLogo} alt="KAUN Studios" className="h-7 w-auto object-contain" />
+          </Link>
+
+          <div className="flex items-center gap-2">
             <ThemeToggle />
             <Link to="/build-session">
               <Button variant="cta-primary" className="font-medium text-[11px] h-7 px-3 rounded-md">
                 Book
               </Button>
             </Link>
-            {/* Modern hamburger icon */}
             <button
               className="w-9 h-9 flex flex-col items-center justify-center gap-[5px] rounded-lg hover:bg-secondary/50 transition-colors"
               onClick={() => setMobileOpen(!mobileOpen)}
@@ -106,6 +173,7 @@ const Navbar = () => {
         </div>
       </nav>
 
+      {/* Mobile slide-out menu — unchanged */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }} className="fixed inset-0 z-[60] lg:hidden">
@@ -120,15 +188,9 @@ const Navbar = () => {
                   className="w-9 h-9 flex flex-col items-center justify-center gap-[5px] rounded-lg hover:bg-secondary/50 transition-colors"
                   aria-label="Close menu"
                 >
-                  <motion.span
-                    animate={{ rotate: 45, y: 7 }}
-                    className="block w-5 h-[1.5px] bg-foreground rounded-full origin-center"
-                  />
+                  <motion.span animate={{ rotate: 45, y: 7 }} className="block w-5 h-[1.5px] bg-foreground rounded-full origin-center" />
                   <motion.span animate={{ opacity: 0 }} className="block w-5 h-[1.5px] bg-foreground rounded-full" />
-                  <motion.span
-                    animate={{ rotate: -45, y: -7 }}
-                    className="block w-5 h-[1.5px] bg-foreground rounded-full origin-center"
-                  />
+                  <motion.span animate={{ rotate: -45, y: -7 }} className="block w-5 h-[1.5px] bg-foreground rounded-full origin-center" />
                 </button>
               </div>
               <div className="flex-1 overflow-y-auto px-5 py-6 space-y-1">
