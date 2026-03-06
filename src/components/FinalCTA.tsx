@@ -16,7 +16,7 @@ const FinalCTA = () => (
         <h2 className="font-display text-3xl md:text-5xl font-bold text-foreground mb-4 leading-tight">
           Ready to Record Your
           <br />
-          <span className="bg-gradient-to-r from-orange-400 via-amber-300 to-orange-400 bg-[length:200%_auto] bg-clip-text text-transparent animate-[gradient-shift_10s_linear_infinite]">
+          <span className="bg-gradient-to-r from-[#f46a25] via-[#ff8a3d] to-[#f46a25] bg-[length:200%_auto] bg-clip-text text-transparent animate-[gradient-shift_10s_linear_infinite]">
             Next Podcast?
           </span>
         </h2>
