@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'PP Neue Machina';
+  src: url('https://fonts.cdnfonts.com/css/pp-neue-machina') format('woff2');
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --background: 240 4% 96%;
+    --foreground: 0 0% 7%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 7%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 7%;
+
+    --primary: 20 90% 55%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 240 3% 94%;
+    --secondary-foreground: 0 0% 7%;
+
+    --muted: 240 3% 94%;
+    --muted-foreground: 0 0% 33%;
+
+    --accent: 20 90% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 240 4% 90%;
+    --input: 240 4% 90%;
+    --ring: 20 90% 55%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 0 0% 7%;
+    --sidebar-primary: 20 90% 55%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3% 94%;
+    --sidebar-accent-foreground: 0 0% 7%;
+    --sidebar-border: 240 4% 90%;
+    --sidebar-ring: 20 90% 55%;
+  }
+
+  .dark {
+    --background: 0 0% 7%;
+    --foreground: 0 0% 95%;
+
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 20 90% 55%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 95%;
+
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 65%;
+
+    --accent: 20 90% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 20 90% 55%;
+
+    --sidebar-background: 0 0% 8%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 20 90% 55%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 15%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 0 0% 20%;
+    --sidebar-ring: 20 90% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'PP Neue Machina', 'DM Sans', sans-serif;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: 'PP Neue Machina', 'DM Sans', sans-serif;
+  }
+}
+
+/* Glassmorphism CTA Button */
+@layer components {
+  .btn-cta {
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: white;
+    transition: all 250ms ease;
+  }
+
+  .btn-cta:hover {
+    background: hsl(var(--primary));
+    border-color: hsl(var(--primary));
+    color: white;
+    box-shadow: 0 0 24px rgba(255, 106, 26, 0.45);
+    transform: scale(1.02);
+  }
+
+  .btn-cta:active {
+    transform: scale(0.98);
+  }
+
+  /* Light mode adjustments */
+  :root .btn-cta {
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    color: hsl(var(--foreground));
+  }
+
+  .dark .btn-cta {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: white;
+  }
+
+  :root .btn-cta:hover,
+  .dark .btn-cta:hover {
+    background: hsl(var(--primary));
+    border-color: hsl(var(--primary));
+    color: white;
+    box-shadow: 0 0 24px rgba(255, 106, 26, 0.45);
+  }
+}
+
+/* Marquee animation */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 20s linear infinite;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
