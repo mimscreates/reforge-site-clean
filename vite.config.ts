@@ -12,7 +12,10 @@ export default defineConfig(({ mode }) => ({
       overlay: false,
     },
   },
-  plugins: [react({ devTarget: 'es2022' }), mode === "development" && componentTagger()].filter(Boolean),
+  plugins: [
+    react({ fastRefresh: false }),
+    mode === "development" && componentTagger(),
+  ].filter(Boolean),
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
