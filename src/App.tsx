@@ -23,8 +23,9 @@ const App = () => (
         <HashRouter>
           <Routes>
             <Route path="/" element={<Index />} />
-            <Route path="/creator-packs" element={<CreatorPacksPage />} />
-            <Route path="/corporate-packs" element={<CorporatePacksPage />} />
+            <Route path="/creator-packs" element={<PacksPage />} />
+            <Route path="/corporate-packs" element={<PacksPage />} />
+            <Route path="/packs" element={<PacksPage />} />
             <Route path="/devis" element={<Devis />} />
             <Route path="/build-session" element={<BuildSession />} />
             <Route path="/rent-your-space" element={<RentYourSpace />} />
