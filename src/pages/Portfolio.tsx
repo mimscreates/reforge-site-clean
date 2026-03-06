@@ -37,6 +37,8 @@ const projects: VideoProject[] = [
 ];
 
 const categories: Category[] = ["All", "Podcast", "Reels", "Music Video"];
+
+const Portfolio = () => {
   const [active, setActive] = useState<Category>("All");
   const [modalVideo, setModalVideo] = useState<VideoProject | null>(null);
   const filtered = active === "All" ? projects : projects.filter((p) => p.category === active);
