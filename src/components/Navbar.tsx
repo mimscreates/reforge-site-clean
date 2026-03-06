@@ -10,6 +10,7 @@ const navLinks = [
   { label: "Home", path: "/" },
   { label: "Creator Packs", path: "/#creator-packs" },
   { label: "Corporate Packs", path: "/#corporate-packs" },
+  { label: "Build Your Session", path: "/build-session" },
   { label: "Demande de devis", path: "/devis" },
 ];
 
