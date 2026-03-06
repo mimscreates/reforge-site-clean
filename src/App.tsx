@@ -9,6 +9,7 @@ import NosPacks from "./pages/NosPacks";
 import Devis from "./pages/Devis";
 import BuildSession from "./pages/BuildSession";
 import RentYourSpace from "./pages/RentYourSpace";
+import Portfolio from "./pages/Portfolio";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ const App = () => (
             <Route path="/devis" element={<Devis />} />
             <Route path="/build-session" element={<BuildSession />} />
             <Route path="/rent-your-space" element={<RentYourSpace />} />
+            <Route path="/portfolio" element={<Portfolio />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </HashRouter>
