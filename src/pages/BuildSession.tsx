@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sliders, Mic, Building2, Check } from "lucide-react";
 import Navbar from "@/components/Navbar";
@@ -8,7 +8,6 @@ import SessionConfigurator from "@/components/SessionConfigurator";
 import { creatorPacks } from "@/components/CreatorPacks";
 import { corporatePacks } from "@/components/CorporatePacks";
 import { Button } from "@/components/ui/button";
-import BookingModal from "@/components/BookingModal";
 
 const CHECK_ICON =
   "https://framerusercontent.com/images/wQY5BFOK9fwE3QUIMrG43ZlTKM.png?width=201&height=201";
@@ -23,20 +22,22 @@ type TabId = (typeof tabs)[number]["id"];
 
 const BuildSession = () => {
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
   const tabParam = searchParams.get("tab") as TabId | null;
-  const [activeTab, setActiveTab] = useState<TabId>(tabParam && ["custom", "creator", "business"].includes(tabParam) ? tabParam : "creator");
+  const [activeTab, setActiveTab] = useState<TabId>(
+    tabParam && ["custom", "creator", "business"].includes(tabParam)
+      ? tabParam
+      : "creator"
+  );
 
   useEffect(() => {
     if (tabParam && ["custom", "creator", "business"].includes(tabParam)) {
       setActiveTab(tabParam);
     }
   }, [tabParam]);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [selectedPack, setSelectedPack] = useState("");
 
   const openBooking = (name: string, type: string) => {
-    setSelectedPack(`${name} (${type})`);
-    setModalOpen(true);
+    navigate(`/book?pack=${encodeURIComponent(name)}&type=${encodeURIComponent(type)}`);
   };
 
   return (
@@ -82,7 +83,9 @@ const BuildSession = () => {
                     >
                       <tab.icon className="w-4 h-4" />
                       <span className="hidden sm:inline">{tab.label}</span>
-                      <span className="sm:hidden">{tab.label.split(" ")[0]}</span>
+                      <span className="sm:hidden">
+                        {tab.label.split(" ")[0]}
+                      </span>
                     </button>
                   );
                 })}
@@ -99,7 +102,9 @@ const BuildSession = () => {
                   exit={{ opacity: 0, y: -16 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <SessionConfigurator onSwitchTab={(tab) => setActiveTab(tab)} />
+                  <SessionConfigurator
+                    onSwitchTab={(tab) => setActiveTab(tab)}
+                  />
                 </motion.div>
               )}
 
@@ -160,12 +165,6 @@ const BuildSession = () => {
             )}
           </div>
         </section>
-
-        <BookingModal
-          open={modalOpen}
-          onOpenChange={setModalOpen}
-          selectedPack={selectedPack}
-        />
       </main>
       <Footer />
     </div>
@@ -218,7 +217,9 @@ function PacksGrid({
           <p className="font-display text-2xl text-primary font-bold">
             {pack.price}
           </p>
-          <span className="text-muted-foreground text-xs mb-6">{pack.unit}</span>
+          <span className="text-muted-foreground text-xs mb-6">
+            {pack.unit}
+          </span>
           <div className="space-y-2 w-full mb-6">
             {pack.features.map((feature) => (
               <div key={feature} className="flex items-center gap-2">
