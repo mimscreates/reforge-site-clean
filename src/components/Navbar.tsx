@@ -5,9 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import ThemeToggle from "@/components/ThemeToggle";
 import { useTheme } from "@/components/ThemeProvider";
-
-const LOGO_URL =
-  "https://framerusercontent.com/images/u6I7XJU9MR5jMeeqxKPjCdEdn64.jpg?width=891&height=891";
+import kaunLogo from "@/assets/kaun-logo.png";
 
 const navLinks = [
   { label: "Home", path: "/" },
@@ -44,7 +42,7 @@ const Navbar = () => {
       <nav className="fixed top-0 left-0 right-0 z-50" style={{ background: navBg, backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)", borderBottom: navBorder }}>
         <div className="flex items-center justify-between h-14 px-5 md:px-8 w-full">
           <Link to="/" className="flex-shrink-0">
-            <img src={LOGO_URL} alt="KAUN Studios" className="h-8 w-8 rounded-md object-cover" />
+            <img src={kaunLogo} alt="KAUN Studios" className="h-7 w-auto object-contain" />
           </Link>
 
           {/* Desktop nav */}
@@ -115,7 +113,7 @@ const Navbar = () => {
             <motion.div initial={{ x: "100%" }} animate={{ x: 0 }} exit={{ x: "100%" }} transition={{ type: "spring", damping: 30, stiffness: 300 }} className="absolute right-0 top-0 bottom-0 w-full max-w-sm bg-background border-l border-border flex flex-col">
               <div className="flex items-center justify-between px-5 h-14 border-b border-border/50">
                 <Link to="/" onClick={() => setMobileOpen(false)} className="flex-shrink-0">
-                  <img src={LOGO_URL} alt="KAUN Studios" className="h-7 w-7 rounded-md object-cover" />
+                  <img src={kaunLogo} alt="KAUN Studios" className="h-6 w-auto object-contain" />
                 </Link>
                 <button
                   onClick={() => setMobileOpen(false)}

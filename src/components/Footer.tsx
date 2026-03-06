@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-
-const LOGO_URL = "https://framerusercontent.com/images/u6I7XJU9MR5jMeeqxKPjCdEdn64.jpg";
+import kaunLogo from "@/assets/kaun-logo.png";
 
 const Footer = () => {
   return (
@@ -10,7 +9,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10">
           <div>
             <Link to="/" className="flex items-center gap-3 mb-3">
-              <img src={LOGO_URL} alt="KAUN Studios" className="h-10 w-10 rounded-lg object-cover" />
+              <img src={kaunLogo} alt="KAUN Studios" className="h-8 w-auto object-contain" />
             </Link>
             <p className="text-muted-foreground text-sm leading-relaxed">
               <strong className="text-foreground">KAUN STUDIOS</strong> — Premium podcast studio and audiovisual production based in L'Aouina, Tunis. Turnkey studios for podcasts, recording, photography and more.
