@@ -11,6 +11,7 @@ const navLinks = [
   { label: "Creator Packs", path: "/#creator-packs" },
   { label: "Corporate Packs", path: "/#corporate-packs" },
   { label: "Build Your Session", path: "/build-session" },
+  { label: "Rent Your Space", path: "/rent-your-space" },
   { label: "Demande de devis", path: "/devis" },
 ];
 

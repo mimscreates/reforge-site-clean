@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import NosPacks from "./pages/NosPacks";
 import Devis from "./pages/Devis";
 import BuildSession from "./pages/BuildSession";
+import RentYourSpace from "./pages/RentYourSpace";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,6 +23,7 @@ const App = () => (
           <Route path="/nos-packs" element={<NosPacks />} />
           <Route path="/devis" element={<Devis />} />
           <Route path="/build-session" element={<BuildSession />} />
+          <Route path="/rent-your-space" element={<RentYourSpace />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
