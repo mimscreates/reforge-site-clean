@@ -24,7 +24,7 @@ const NavItem = ({ link, isActive }: { link: typeof navLinks[0]; isActive: boole
     >
       <Link
         to={link.path}
-        className={`relative text-[15px] font-medium transition-colors px-1 py-1 ${
+        className={`relative text-[13px] xl:text-[15px] font-medium transition-colors px-1 py-1 whitespace-nowrap ${
           isActive ? "text-foreground" : "text-muted-foreground"
         }`}
       >
@@ -86,7 +86,7 @@ const Navbar = () => {
             : "0 8px 32px rgba(0,0,0,0.08)",
         }}
       >
-        <div className="flex items-center gap-1 h-11 px-2">
+        <div className="flex items-center gap-1 h-11 px-2 whitespace-nowrap">
           {/* Logo in circle */}
           <Link to="/" className="flex-shrink-0 mr-2">
             <div className="w-8 h-8 rounded-full bg-foreground/[0.07] flex items-center justify-center p-1.5">
@@ -95,7 +95,7 @@ const Navbar = () => {
           </Link>
 
           {/* Nav links */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 xl:gap-4">
             {navLinks.map((link) => (
               <NavItem key={link.path} link={link} isActive={location.pathname === link.path} />
             ))}
