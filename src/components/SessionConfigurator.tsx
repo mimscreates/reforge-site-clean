@@ -103,11 +103,11 @@ const SessionConfigurator = ({ onSwitchTab }: SessionConfiguratorProps) => {
 
   return (
     <>
-      <section className="pb-24 lg:pb-20 px-3 md:px-4 bg-background">
+      <section className="pb-24 lg:pb-20 px-1 sm:px-3 md:px-4 bg-background">
         <div className="container mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 md:gap-8">
             {/* LEFT: Configuration */}
-            <div className="lg:col-span-2 space-y-4 md:space-y-10">
+            <div className="lg:col-span-2 space-y-3 md:space-y-10">
               <ConfigSection icon={<Video className="w-4 h-4 md:w-5 md:h-5" />} title="Filming Setup" subtitle="Configure cameras and microphones.">
                 <div className="space-y-3">
                   <StepperRow label="Cameras" value={cameraCount} min={0} max={3} onChange={setCameraCount} price={cameraPrice} displayValue={cameraCount === 0 ? "None" : String(cameraCount)} />
@@ -276,7 +276,7 @@ function ConfigSection({ icon, title, subtitle, children }: { icon: React.ReactN
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.4 }}
-      className="bg-card border border-border rounded-2xl p-4 md:p-6"
+      className="bg-card border border-border rounded-2xl p-3 sm:p-4 md:p-6 overflow-hidden"
     >
       <div className="flex items-center gap-2 md:gap-3 mb-0.5 md:mb-1">
         <div className="text-primary">{icon}</div>
@@ -294,7 +294,7 @@ function OptionCard({ selected, onClick, label, price, showFree, multi }: {
   return (
     <button
       onClick={onClick}
-      className={`flex items-center justify-between gap-2 px-3 py-2.5 md:p-4 rounded-[10px] md:rounded-xl border text-left transition-all duration-200 ${
+      className={`flex items-center justify-between gap-2 px-2.5 py-2 sm:px-3 sm:py-2.5 md:p-4 rounded-[10px] md:rounded-xl border text-left transition-all duration-200 ${
         selected
           ? "border-primary bg-primary/10 shadow-[0_0_20px_-6px_hsl(20_90%_55%_/_0.3)]"
           : "border-border bg-secondary/50 hover:border-muted-foreground/40"

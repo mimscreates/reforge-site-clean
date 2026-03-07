@@ -274,24 +274,23 @@ const PacksPage = () => {
         </section>
 
         {/* Tab Toggle */}
-        <section className="px-3 md:px-4 pb-4">
-          <div className="container mx-auto flex justify-center">
-            <div className="inline-flex bg-card border border-border rounded-2xl p-1.5 gap-1">
+        <section className="px-2 md:px-4 pb-4">
+          <div className="container mx-auto flex justify-center max-w-full overflow-x-auto">
+            <div className="inline-flex bg-card border border-border rounded-2xl p-1 sm:p-1.5 gap-0.5 sm:gap-1 max-w-full">
               {tabs.map((tab) => {
                 const isActive = activeTab === tab.id;
                 return (
                   <button
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
-                    className={`relative flex items-center gap-2 px-4 md:px-6 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 whitespace-nowrap ${
+                    className={`relative flex items-center gap-1.5 px-2.5 sm:px-4 md:px-6 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-all duration-200 whitespace-nowrap ${
                       isActive
                         ? "bg-primary text-primary-foreground shadow-md"
                         : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
                     }`}
                   >
-                    <tab.icon className="w-4 h-4" />
-                    <span className="hidden sm:inline">{tab.label}</span>
-                    <span className="sm:hidden">{tab.label.split(" ")[0]}</span>
+                    <tab.icon className="w-4 h-4 hidden sm:block" />
+                    {tab.label}
                   </button>
                 );
               })}
