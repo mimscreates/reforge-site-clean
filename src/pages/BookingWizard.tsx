@@ -110,14 +110,18 @@ const BookingWizard = () => {
 
   const equipmentTotal = equipmentItems.reduce((sum, item) => sum + (equipmentCounts[item.id] || 0) * item.price, 0) + (basicEditing ? 300 : 0);
 
+  // Navigation helpers for custom sessions (skip decor/equipment)
+  const nextAfterDateTime = isCustom ? 5 : 3;
+  const backFromDetails = isCustom ? 2 : 4;
+
   const handleSubmit = async () => {
     setLoading(true);
     try {
       const { data, error } = await supabase.functions.invoke("send-booking-email", {
         body: {
           request_type: "booking",
-          pack_name: selectedPack?.name,
-          pack_type: selectedPack?.type,
+          pack_name: isCustom ? "Custom Session" : selectedPack?.name,
+          pack_type: isCustom ? "Custom" : selectedPack?.type,
           selected_date: date ? format(date, "yyyy-MM-dd") : null,
           selected_time: time,
           booker_type: bookerType,
@@ -127,8 +131,9 @@ const BookingWizard = () => {
           phone,
           company: bookerType === "company" ? company : null,
           notes: [
-            selectedDecor ? `Decor: ${selectedDecor}` : null,
-            equipmentTotal > 0 ? `Equipment: ${equipmentItems.filter(e => equipmentCounts[e.id] > 0).map(e => `${e.label} x${equipmentCounts[e.id]}`).join(", ")}${basicEditing ? ", Basic Editing" : ""}` : null,
+            isCustom && customConfig ? `Custom config: ${customConfig.summary} — ${customConfig.totalPrice} DT` : null,
+            !isCustom && selectedDecor ? `Decor: ${selectedDecor}` : null,
+            !isCustom && equipmentTotal > 0 ? `Equipment: ${equipmentItems.filter(e => equipmentCounts[e.id] > 0).map(e => `${e.label} x${equipmentCounts[e.id]}`).join(", ")}${basicEditing ? ", Basic Editing" : ""}` : null,
             notes || null,
           ].filter(Boolean).join(" | "),
         },
