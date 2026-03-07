@@ -60,11 +60,29 @@ const BookingWizard = () => {
 
   const packName = searchParams.get("pack") || "";
   const packType = searchParams.get("type") || "";
-  const selectedPack = allPacks.find(
-    (p) => p.name === packName && p.type === packType
-  );
+  const isCustom = packType === "Custom";
+  
+  // Parse custom config if present
+  const customConfig = (() => {
+    if (!isCustom) return null;
+    try {
+      const raw = searchParams.get("config");
+      if (!raw) return null;
+      return JSON.parse(decodeURIComponent(raw)) as {
+        summary: string;
+        totalPrice: number;
+        items: { label: string; value: string; price: number }[];
+      };
+    } catch { return null; }
+  })();
 
-  const [step, setStep] = useState(selectedPack ? 1 : 0);
+  const selectedPack = isCustom
+    ? null
+    : allPacks.find((p) => p.name === packName && p.type === packType);
+
+  // Custom sessions skip steps 0 (pack), 3 (decor), 4 (equipment) → flow: 1→2→5
+  // Regular packs: if pre-selected skip step 0 → flow: 1→2→3→4→5
+  const [step, setStep] = useState((selectedPack || isCustom) ? 1 : 0);
   const [date, setDate] = useState<Date>();
   const [time, setTime] = useState("");
   const [selectedDecor, setSelectedDecor] = useState("");
@@ -81,10 +99,10 @@ const BookingWizard = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (!selectedPack && step > 0) {
+    if (!selectedPack && !isCustom && step > 0) {
       navigate("/packs");
     }
-  }, [selectedPack, step, navigate]);
+  }, [selectedPack, isCustom, step, navigate]);
 
   const canProceedStep2 = !!date && !!time;
   const canProceedStep5 =
