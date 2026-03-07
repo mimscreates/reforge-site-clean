@@ -15,7 +15,6 @@ const logos = [
   { src: logo5, alt: "Trésors Naturels" },
   { src: logo6, alt: "Didon Clinic" },
   { src: logo7, alt: "Client 7" },
-  { src: logo1, alt: "Client 8" },
 ];
 
 const ClientLogos = () => {

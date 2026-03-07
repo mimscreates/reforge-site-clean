@@ -26,7 +26,7 @@ const FinalCTA = () => (
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-          <Link to="/devis">
+          <Link to="/packs?tab=custom">
             <Button variant="cta-primary" className="font-medium text-sm h-11 px-8 gap-2 rounded-lg">
               Book a Session <ArrowRight className="w-4 h-4" />
             </Button>
