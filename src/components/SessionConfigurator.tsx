@@ -236,7 +236,7 @@ const SessionConfigurator = ({ onSwitchTab }: SessionConfiguratorProps) => {
           ]}
           onReserve={() => setModalOpen(true)}
         />
-      </section>
+      </div>
     </>
   );
 };
