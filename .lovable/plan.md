@@ -1,18 +1,85 @@
 
+# Plan de recréation du site KaunStudios en React
 
-## Problem
+## Objectif
+Recréer fidèlement le site www.kaunstudios.com actuellement sur Framer, en code React/Tailwind propre et facilement modifiable.
 
-The desktop navbar text wraps at intermediate viewport widths (around 1024-1280px). "Rent Our Studios" breaks into two lines because the pill container doesn't enforce `whitespace-nowrap`, and the breakpoint jumps straight from mobile (`lg:hidden`) to desktop (`lg:block`) with no size adaptation.
+---
 
-## Fix
+## Page d'accueil (Homepage)
 
-**File: `src/components/Navbar.tsx`**
+### 1. Navbar
+- Logo KAUN Studios à gauche
+- Liens de navigation : Homepage, Nos packs, Demande de devis
+- Bouton CTA "Réserver ma session" (lien externe vers booking.kaunstudios.com)
 
-1. Add `whitespace-nowrap` to the nav pill's inner flex container (line 89) so link text never wraps.
-2. Reduce the nav link gap and font size at the `lg` breakpoint, then restore larger values at `xl`:
-   - Links gap: `gap-2 xl:gap-4`
-   - Font size on `NavItem`: `text-[13px] xl:text-[15px]`
-3. Optionally reduce "Book a Session" button padding at `lg` and restore at `xl`.
+### 2. Section Hero
+- Image de fond plein écran (studio podcast)
+- Texte accroche : "+100 billion planets but you deserve your own"
+- Titre principal : "All the content you need, all in one place."
+- Sous-titre : "Podcasts, Reels booster, short films, photography and more.."
+- Icônes planètes décoratives
 
-This ensures at every viewport above mobile the navbar remains a single horizontal line — it just gets slightly more compact between 1024px and 1280px.
+### 3. Bandeau défilant de services
+- Marquee/ticker horizontal animé avec les catégories : Podcast, Talks, Production, Interviews (avec icônes)
 
+### 4. Section "Personnalise your pack"
+- Widget de réservation embarqué (iframe du système de booking existant) affichant les 4 packs :
+  - **Customize** – 100 DT/h
+  - **Nova** – 140 DT/h  
+  - **Cosmic** – 390 DT/h
+  - **Interstellar** – 900 DT/h
+- Chaque pack avec sa liste de services inclus
+
+### 5. Section "Studios podcasts clé en main"
+- Titre + description
+- Carrousel d'images des studios (défilement automatique)
+- Bouton "Réserver ma session"
+
+### 6. Section "Our Podcast Offers" – Cartes détaillées des 3 packs
+- **Nova** (140 DT/h) – Carte avec liste des services (Audio, Micro, Éclairage PRO, etc.)
+- **Cosmic** (390 DT/h) – Carte avec liste des services (Vidéo+Audio, 2 caméras, etc.)
+- **Interstellar** (900 DT/h) – Carte avec liste complète (montage, révisions, brief, etc.)
+- Chaque carte avec bouton "Réserver ma session"
+
+### 7. Section Options supplémentaires
+- Liste des options à la carte avec prix (Caméra supplémentaire 100 DT, Micro 50 DT, Shorts 100 DT, etc.)
+
+### 8. Section "Create more, consume less"
+- Texte de présentation de Kaun Studios
+- Image du studio
+- 3 blocs de services : Podcast 🎙, Services supplémentaires 📷, Production 🎬
+
+### 9. Section FAQ
+- Accordéon avec les questions fréquentes (accompagnement, week-end, matériel supplémentaire, déplacement, dépassement horaire)
+- Image décorative
+
+### 10. Section Newsletter
+- Titre "Subscribe for Kaun insights"
+- Champ email + bouton d'inscription
+
+### 11. Footer
+- Logo + description de KAUN Studios
+- Liens de navigation (Homepage, Nos packs, Demande de devis)
+- Liens sociaux (Instagram, Facebook)
+- Bouton "Réserver ma session"
+
+---
+
+## Design & Style
+- **Thème sombre** (fond noir/très foncé) avec accents orange
+- **Typographies** : PP Neue Machina (titres) + DM Sans/Inter (corps de texte)
+- **Animations** : marquee défilant, transitions smooth au scroll
+- Responsive (mobile + desktop)
+- Toutes les images actuelles du site seront référencées depuis les URLs Framer existantes
+
+---
+
+## Pages supplémentaires
+- Page **Nos Packs** (détails des offres)
+- Page **Demande de devis** (formulaire de contact)
+
+## Notes techniques
+- Pas de backend nécessaire (site vitrine statique)
+- Les liens de réservation pointent vers le système externe existant (booking.kaunstudios.com)
+- Code organisé en composants réutilisables pour faciliter les modifications futures
