@@ -60,11 +60,29 @@ const BookingWizard = () => {
 
   const packName = searchParams.get("pack") || "";
   const packType = searchParams.get("type") || "";
-  const selectedPack = allPacks.find(
-    (p) => p.name === packName && p.type === packType
-  );
+  const isCustom = packType === "Custom";
+  
+  // Parse custom config if present
+  const customConfig = (() => {
+    if (!isCustom) return null;
+    try {
+      const raw = searchParams.get("config");
+      if (!raw) return null;
+      return JSON.parse(decodeURIComponent(raw)) as {
+        summary: string;
+        totalPrice: number;
+        items: { label: string; value: string; price: number }[];
+      };
+    } catch { return null; }
+  })();
 
-  const [step, setStep] = useState(selectedPack ? 1 : 0);
+  const selectedPack = isCustom
+    ? null
+    : allPacks.find((p) => p.name === packName && p.type === packType);
+
+  // Custom sessions skip steps 0 (pack), 3 (decor), 4 (equipment) → flow: 1→2→5
+  // Regular packs: if pre-selected skip step 0 → flow: 1→2→3→4→5
+  const [step, setStep] = useState((selectedPack || isCustom) ? 1 : 0);
   const [date, setDate] = useState<Date>();
   const [time, setTime] = useState("");
   const [selectedDecor, setSelectedDecor] = useState("");
@@ -81,10 +99,10 @@ const BookingWizard = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (!selectedPack && step > 0) {
+    if (!selectedPack && !isCustom && step > 0) {
       navigate("/packs");
     }
-  }, [selectedPack, step, navigate]);
+  }, [selectedPack, isCustom, step, navigate]);
 
   const canProceedStep2 = !!date && !!time;
   const canProceedStep5 =
@@ -92,14 +110,18 @@ const BookingWizard = () => {
 
   const equipmentTotal = equipmentItems.reduce((sum, item) => sum + (equipmentCounts[item.id] || 0) * item.price, 0) + (basicEditing ? 300 : 0);
 
+  // Navigation helpers for custom sessions (skip decor/equipment)
+  const nextAfterDateTime = isCustom ? 5 : 3;
+  const backFromDetails = isCustom ? 2 : 4;
+
   const handleSubmit = async () => {
     setLoading(true);
     try {
       const { data, error } = await supabase.functions.invoke("send-booking-email", {
         body: {
           request_type: "booking",
-          pack_name: selectedPack?.name,
-          pack_type: selectedPack?.type,
+          pack_name: isCustom ? "Custom Session" : selectedPack?.name,
+          pack_type: isCustom ? "Custom" : selectedPack?.type,
           selected_date: date ? format(date, "yyyy-MM-dd") : null,
           selected_time: time,
           booker_type: bookerType,
@@ -109,8 +131,9 @@ const BookingWizard = () => {
           phone,
           company: bookerType === "company" ? company : null,
           notes: [
-            selectedDecor ? `Decor: ${selectedDecor}` : null,
-            equipmentTotal > 0 ? `Equipment: ${equipmentItems.filter(e => equipmentCounts[e.id] > 0).map(e => `${e.label} x${equipmentCounts[e.id]}`).join(", ")}${basicEditing ? ", Basic Editing" : ""}` : null,
+            isCustom && customConfig ? `Custom config: ${customConfig.summary} — ${customConfig.totalPrice} DT` : null,
+            !isCustom && selectedDecor ? `Decor: ${selectedDecor}` : null,
+            !isCustom && equipmentTotal > 0 ? `Equipment: ${equipmentItems.filter(e => equipmentCounts[e.id] > 0).map(e => `${e.label} x${equipmentCounts[e.id]}`).join(", ")}${basicEditing ? ", Basic Editing" : ""}` : null,
             notes || null,
           ].filter(Boolean).join(" | "),
         },
@@ -228,8 +251,8 @@ const BookingWizard = () => {
         {/* Step content */}
         <div className="container mx-auto max-w-2xl px-4 pb-20">
           <AnimatePresence mode="wait">
-            {/* STEP 1 — Pack summary */}
-            {step === 1 && selectedPack && !submitted && (
+            {/* STEP 1 — Pack summary (regular or custom) */}
+            {step === 1 && (selectedPack || isCustom) && !submitted && (
               <motion.div
                 key="step1"
                 variants={slideVariants}
@@ -240,42 +263,77 @@ const BookingWizard = () => {
                 className="space-y-6"
               >
                 <div className="rounded-2xl border border-border/50 bg-card p-6 md:p-8">
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <p className="text-[10px] uppercase tracking-[0.15em] text-muted-foreground/60 font-medium mb-1">
-                        Selected Pack
-                      </p>
-                      <h3 className="font-display text-xl md:text-2xl font-bold text-foreground">
-                        {selectedPack.name}
-                      </h3>
-                      <p className="text-muted-foreground text-sm mt-1">
-                        {selectedPack.type} Pack
-                      </p>
-                    </div>
-                    <div className="text-right">
-                      <p className="font-display text-xl font-bold text-primary">
-                        {selectedPack.price}
-                      </p>
-                      <p className="text-muted-foreground text-xs">
-                        {selectedPack.unit}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="mt-5 pt-5 border-t border-border/50 grid grid-cols-2 gap-2">
-                    {selectedPack.features.slice(0, 4).map((f) => (
-                      <div key={f} className="flex items-center gap-2 text-sm text-foreground">
-                        <Check className="w-3.5 h-3.5 text-primary flex-shrink-0" />
-                        <span className="truncate">{f}</span>
+                  {isCustom && customConfig ? (
+                    <>
+                      <div className="flex items-start justify-between gap-4">
+                        <div>
+                          <p className="text-[10px] uppercase tracking-[0.15em] text-muted-foreground/60 font-medium mb-1">
+                            Custom Session
+                          </p>
+                          <h3 className="font-display text-xl md:text-2xl font-bold text-foreground">
+                            Your Configuration
+                          </h3>
+                        </div>
+                        <div className="text-right">
+                          <p className="font-display text-xl font-bold text-primary">
+                            {customConfig.totalPrice} DT
+                          </p>
+                        </div>
                       </div>
-                    ))}
-                  </div>
+                      <div className="mt-5 pt-5 border-t border-border/50 space-y-2">
+                        {customConfig.items.map((item) => (
+                          <div key={item.label} className="flex items-center justify-between text-sm">
+                            <span className="text-muted-foreground">{item.label}</span>
+                            <div className="flex items-center gap-3">
+                              <span className="text-foreground font-medium">{item.value}</span>
+                              {item.price > 0 && (
+                                <span className="text-primary text-xs font-semibold">{item.price} DT</span>
+                              )}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </>
+                  ) : selectedPack ? (
+                    <>
+                      <div className="flex items-start justify-between gap-4">
+                        <div>
+                          <p className="text-[10px] uppercase tracking-[0.15em] text-muted-foreground/60 font-medium mb-1">
+                            Selected Pack
+                          </p>
+                          <h3 className="font-display text-xl md:text-2xl font-bold text-foreground">
+                            {selectedPack.name}
+                          </h3>
+                          <p className="text-muted-foreground text-sm mt-1">
+                            {selectedPack.type} Pack
+                          </p>
+                        </div>
+                        <div className="text-right">
+                          <p className="font-display text-xl font-bold text-primary">
+                            {selectedPack.price}
+                          </p>
+                          <p className="text-muted-foreground text-xs">
+                            {selectedPack.unit}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="mt-5 pt-5 border-t border-border/50 grid grid-cols-2 gap-2">
+                        {selectedPack.features.slice(0, 4).map((f) => (
+                          <div key={f} className="flex items-center gap-2 text-sm text-foreground">
+                            <Check className="w-3.5 h-3.5 text-primary flex-shrink-0" />
+                            <span className="truncate">{f}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </>
+                  ) : null}
                 </div>
 
                 <Link
-                  to="/packs"
+                  to={isCustom ? "/packs?tab=custom" : "/packs"}
                   className="text-primary text-sm font-medium hover:underline inline-flex items-center gap-1"
                 >
-                  <ArrowLeft className="w-3.5 h-3.5" /> Change pack
+                  <ArrowLeft className="w-3.5 h-3.5" /> {isCustom ? "Edit configuration" : "Change pack"}
                 </Link>
 
                 <div className="flex justify-end">
@@ -365,7 +423,7 @@ const BookingWizard = () => {
                   <Button
                     variant="cta"
                     disabled={!canProceedStep2}
-                    onClick={() => setStep(3)}
+                    onClick={() => setStep(nextAfterDateTime)}
                     className="font-medium text-sm h-11 px-8 gap-2 rounded-lg disabled:opacity-40"
                   >
                     Continue <ArrowRight className="w-4 h-4" />
@@ -625,7 +683,7 @@ const BookingWizard = () => {
                   <div className="grid grid-cols-2 gap-y-2 gap-x-4 text-sm">
                     <span className="text-muted-foreground">Pack</span>
                     <span className="text-foreground font-medium text-right">
-                      {selectedPack?.name} ({selectedPack?.type})
+                      {isCustom ? "Custom Session" : `${selectedPack?.name} (${selectedPack?.type})`}
                     </span>
                     <span className="text-muted-foreground">Date</span>
                     <span className="text-foreground font-medium text-right">
@@ -635,7 +693,7 @@ const BookingWizard = () => {
                     <span className="text-foreground font-medium text-right">
                       {time || "—"}
                     </span>
-                    {selectedDecor && (
+                    {!isCustom && selectedDecor && (
                       <>
                         <span className="text-muted-foreground">Decor</span>
                         <span className="text-foreground font-medium text-right capitalize">
@@ -643,7 +701,7 @@ const BookingWizard = () => {
                         </span>
                       </>
                     )}
-                    {equipmentTotal > 0 && (
+                    {!isCustom && equipmentTotal > 0 && (
                       <>
                         <span className="text-muted-foreground">Equipment</span>
                         <span className="text-primary font-bold text-right">
@@ -653,14 +711,14 @@ const BookingWizard = () => {
                     )}
                     <span className="text-muted-foreground">Price</span>
                     <span className="text-primary font-bold text-right">
-                      {selectedPack?.price}
+                      {isCustom && customConfig ? `${customConfig.totalPrice} DT` : selectedPack?.price}
                     </span>
                   </div>
                 </div>
 
                 <div className="flex items-center justify-between">
                   <button
-                    onClick={() => setStep(4)}
+                    onClick={() => setStep(backFromDetails)}
                     className="text-muted-foreground text-sm font-medium hover:text-foreground transition-colors inline-flex items-center gap-1"
                   >
                     <ArrowLeft className="w-3.5 h-3.5" /> Back
@@ -704,7 +762,7 @@ const BookingWizard = () => {
                 <div className="rounded-2xl border border-border/50 bg-card p-5 max-w-sm mx-auto text-left space-y-2 text-sm">
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Pack</span>
-                    <span className="text-foreground font-medium">{selectedPack?.name}</span>
+                    <span className="text-foreground font-medium">{isCustom ? "Custom Session" : selectedPack?.name}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Date</span>
@@ -714,16 +772,22 @@ const BookingWizard = () => {
                     <span className="text-muted-foreground">Time</span>
                     <span className="text-foreground font-medium">{time}</span>
                   </div>
-                  {selectedDecor && (
+                  {!isCustom && selectedDecor && (
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Decor</span>
                       <span className="text-foreground font-medium capitalize">{decorOptions.find(d => d.id === selectedDecor)?.label}</span>
                     </div>
                   )}
-                  {equipmentTotal > 0 && (
+                  {!isCustom && equipmentTotal > 0 && (
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Equipment</span>
                       <span className="text-primary font-medium">+{equipmentTotal} DT</span>
+                    </div>
+                  )}
+                  {isCustom && customConfig && (
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Price</span>
+                      <span className="text-primary font-bold">{customConfig.totalPrice} DT</span>
                     </div>
                   )}
                   <div className="flex justify-between">
