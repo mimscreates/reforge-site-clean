@@ -1,8 +1,8 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Mic, Video, Scissors, Film, Sparkles, Check, Minus, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import BookingModal from "@/components/BookingModal";
 import MobileStickyBar from "@/components/MobileStickyBar";
 import PackRecommendation from "@/components/PackRecommendation";
 
@@ -54,7 +54,7 @@ const SessionConfigurator = ({ onSwitchTab }: SessionConfiguratorProps) => {
   const [editing, setEditing] = useState(editingOptions[0].id);
   const [reelStyle, setReelStyle] = useState(reelStyles[0].id);
   const [selectedExtras, setSelectedExtras] = useState<string[]>([]);
-  const [modalOpen, setModalOpen] = useState(false);
+  const navigate = useNavigate();
 
   const toggleExtra = (id: string) => {
     setSelectedExtras((prev) =>
@@ -87,6 +87,23 @@ const SessionConfigurator = ({ onSwitchTab }: SessionConfiguratorProps) => {
     reelLabel !== "Basic Cut" ? reelLabel : null,
     ...extrasLabels,
   ].filter(Boolean).join(", ");
+
+  const handleReserve = () => {
+    const config = JSON.stringify({
+      summary: configSummary,
+      totalPrice,
+      items: [
+        { label: "Base Session", value: "Studio, lighting, setup & technician", price: BASE_SESSION_PRICE },
+        { label: "Filming Setup", value: filmingLabel, price: filmingPrice },
+        { label: "Session Type", value: sessionTypeLabel, price: 0 },
+        { label: "Editing", value: editingLabel, price: editingPrice },
+        { label: "Social Clips", value: clipsLabel, price: clipsPrice },
+        { label: "Reel Style", value: reelLabel, price: reelPrice },
+        ...(extrasLabels.length > 0 ? [{ label: "Extras", value: extrasLabels.join(", "), price: extrasPrice }] : []),
+      ],
+    });
+    navigate(`/book?pack=Custom+Session&type=Custom&config=${encodeURIComponent(config)}`);
+  };
 
   const handleViewPack = (tab: "creator" | "business") => {
     onSwitchTab?.(tab);
@@ -197,7 +214,7 @@ const SessionConfigurator = ({ onSwitchTab }: SessionConfiguratorProps) => {
                       <span className="font-display text-2xl font-bold text-primary">{totalPrice} DT</span>
                     </div>
                   </div>
-                  <Button variant="cta" onClick={() => setModalOpen(true)} className="w-full font-medium text-base py-6">
+                  <Button variant="cta" onClick={handleReserve} className="w-full font-medium text-base py-6">
                     Reserve This Session
                   </Button>
                 </motion.div>
@@ -217,12 +234,6 @@ const SessionConfigurator = ({ onSwitchTab }: SessionConfiguratorProps) => {
           </div>
         </div>
 
-        <BookingModal
-          open={modalOpen}
-          onOpenChange={setModalOpen}
-          selectedPack={`Custom Session: ${configSummary} — ${totalPrice} DT`}
-        />
-
         <MobileStickyBar
           totalPrice={totalPrice}
           items={[
@@ -234,7 +245,7 @@ const SessionConfigurator = ({ onSwitchTab }: SessionConfiguratorProps) => {
             { label: "Reel Style", value: reelLabel, price: reelPrice },
             ...(extrasLabels.length > 0 ? [{ label: "Extras", value: extrasLabels.join(", "), price: extrasPrice }] : []),
           ]}
-          onReserve={() => setModalOpen(true)}
+          onReserve={handleReserve}
         />
       </div>
     </>
