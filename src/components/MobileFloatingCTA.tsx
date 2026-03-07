@@ -27,7 +27,7 @@ const MobileFloatingCTA = () => {
           className="fixed bottom-20 right-0 z-50 lg:hidden"
         >
           <Link
-            to="/build-session"
+            to="/packs?tab=custom"
             className="inline-flex items-center gap-2 justify-center rounded-l-full bg-primary text-white font-medium text-sm h-12 pl-5 pr-4 shadow-[0_4px_24px_-4px_hsl(20_91%_55%_/_0.5)]"
           >
             <Sparkles className="w-4 h-4" />

@@ -8,24 +8,27 @@ const segments = [
     icon: Mic,
     title: "Creators",
     description: "Start a podcast or build your personal brand with professional studio sessions.",
-    link: "/creator-packs",
+    link: "/packs",
     cta: "Explore Creator Packs",
+    external: false,
   },
   {
     id: "companies",
     icon: Building2,
     title: "Companies",
     description: "Create content that builds authority and attracts clients with recurring production.",
-    link: "/corporate-packs",
+    link: "/packs?tab=business",
     cta: "Explore Corporate Packs",
+    external: false,
   },
   {
     id: "agencies",
     icon: Handshake,
     title: "Agencies",
     description: "Produce high-quality podcast and video content for your clients at scale.",
-    link: "/corporate-packs#partnership",
+    link: "https://cal.com/kaun-studios-csvvzi/40min",
     cta: "Become a Partner",
+    external: true,
   },
 ];
 
@@ -57,23 +60,37 @@ const WhoWeWorkWith = () => {
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.4 }}
             >
-              <Link
-                to={seg.link}
-                className="group bg-card border border-border/50 rounded-2xl p-5 md:p-7 flex flex-col items-center text-center gap-3 md:gap-4 cursor-pointer transition-all duration-300 hover:border-primary/40 hover:shadow-[0_0_30px_-8px_hsl(20_90%_55%_/_0.2)] block h-full"
-              >
-                <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/15 transition-colors">
-                  <seg.icon className="w-7 h-7 text-primary" />
-                </div>
-                <h3 className="font-display text-xl font-bold text-foreground">
-                  {seg.title}
-                </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  {seg.description}
-                </p>
-                <span className="inline-flex items-center gap-1.5 text-primary text-sm font-medium mt-auto group-hover:gap-2.5 transition-all">
-                  {seg.cta} <ArrowRight className="w-4 h-4" />
-                </span>
-              </Link>
+              {seg.external ? (
+                <a
+                  href={seg.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group bg-card border border-border/50 rounded-2xl p-5 md:p-7 flex flex-col items-center text-center gap-3 md:gap-4 cursor-pointer transition-all duration-300 hover:border-primary/40 hover:shadow-[0_0_30px_-8px_hsl(20_90%_55%_/_0.2)] block h-full"
+                >
+                  <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/15 transition-colors">
+                    <seg.icon className="w-7 h-7 text-primary" />
+                  </div>
+                  <h3 className="font-display text-xl font-bold text-foreground">{seg.title}</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">{seg.description}</p>
+                  <span className="inline-flex items-center gap-1.5 text-primary text-sm font-medium mt-auto group-hover:gap-2.5 transition-all">
+                    {seg.cta} <ArrowRight className="w-4 h-4" />
+                  </span>
+                </a>
+              ) : (
+                <Link
+                  to={seg.link}
+                  className="group bg-card border border-border/50 rounded-2xl p-5 md:p-7 flex flex-col items-center text-center gap-3 md:gap-4 cursor-pointer transition-all duration-300 hover:border-primary/40 hover:shadow-[0_0_30px_-8px_hsl(20_90%_55%_/_0.2)] block h-full"
+                >
+                  <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/15 transition-colors">
+                    <seg.icon className="w-7 h-7 text-primary" />
+                  </div>
+                  <h3 className="font-display text-xl font-bold text-foreground">{seg.title}</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">{seg.description}</p>
+                  <span className="inline-flex items-center gap-1.5 text-primary text-sm font-medium mt-auto group-hover:gap-2.5 transition-all">
+                    {seg.cta} <ArrowRight className="w-4 h-4" />
+                  </span>
+                </Link>
+              )}
             </motion.div>
           ))}
         </div>

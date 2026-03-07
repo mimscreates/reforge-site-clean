@@ -5,13 +5,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import ThemeToggle from "@/components/ThemeToggle";
 import { useTheme } from "@/components/ThemeProvider";
-import kaunLogo from "@/assets/kaun-logo.png";
+import kaunLogoWhite from "@/assets/kaun-logo.png";
+import kaunLogoDark from "@/assets/kaun-logo-dark.png";
 
 const navLinks = [
   { label: "Home", path: "/" },
   { label: "Packs", path: "/packs" },
   { label: "Work", path: "/portfolio" },
-  { label: "Customize", path: "/build-session" },
   { label: "Rent Our Studios", path: "/rent-your-space" },
   { label: "Contact Us", path: "/devis" },
 ];
@@ -54,6 +54,8 @@ const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
   const { theme } = useTheme();
+
+  const kaunLogo = theme === "dark" ? kaunLogoWhite : kaunLogoDark;
 
   const handleNav = (path: string) => {
     setMobileOpen(false);
@@ -114,7 +116,7 @@ const Navbar = () => {
             >
               <Phone className="w-3.5 h-3.5" />
             </a>
-            <Link to="/build-session">
+            <Link to="/packs?tab=custom">
               <Button
                 variant="cta-primary"
                 className="font-medium text-[12px] h-7 px-4 rounded-full"
@@ -126,7 +128,7 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Mobile top bar — unchanged */}
+      {/* Mobile top bar */}
       <nav
         className="fixed top-0 left-0 right-0 z-50 lg:hidden"
         style={{
@@ -168,7 +170,7 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Mobile slide-out menu — unchanged */}
+      {/* Mobile slide-out menu */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }} className="fixed inset-0 z-[60] lg:hidden">
@@ -208,7 +210,7 @@ const Navbar = () => {
                 })}
               </div>
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35, duration: 0.3 }} className="px-6 pb-7 pt-5 border-t border-border/50 space-y-4">
-                <Link to="/build-session" onClick={() => setMobileOpen(false)}>
+                <Link to="/packs?tab=custom" onClick={() => setMobileOpen(false)}>
                   <Button variant="cta-primary" className="w-full font-medium text-sm h-12 rounded-lg gap-2">
                     Book a Session
                   </Button>

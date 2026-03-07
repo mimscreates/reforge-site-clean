@@ -108,14 +108,14 @@ const Portfolio = () => {
                     transition={{ duration: 0.4, delay: i * 0.05 }}
                   >
                     {project.externalUrl ? (
-                      /* Reel card — opens Instagram in new tab */
+                      /* Reel card — same format as YouTube cards */
                       <a
                         href={project.externalUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="group block overflow-hidden rounded-[24px] border border-border/40 bg-card/80 backdrop-blur-sm transition-all duration-300 hover:border-primary/25 hover:shadow-2xl hover:shadow-primary/5 hover:scale-[1.03]"
                       >
-                        <div className="relative aspect-[9/16] max-h-[480px] overflow-hidden">
+                        <div className="relative aspect-video overflow-hidden">
                           <img
                             src={project.thumbnail}
                             alt=""
@@ -180,7 +180,7 @@ const Portfolio = () => {
             <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-4">
               Ready to create something like this?
             </h2>
-            <Link to="/build-session">
+            <Link to="/packs?tab=custom">
               <Button variant="cta-primary" className="font-medium text-sm h-11 px-7 gap-2">
                 Book a Session <ArrowRight className="w-4 h-4" />
               </Button>

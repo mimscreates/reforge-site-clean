@@ -1,33 +1,25 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useLocation, useNavigate, Link } from "react-router-dom";
-import { ArrowRight, Crown, Star, Handshake } from "lucide-react";
+import { useSearchParams, useNavigate, Link } from "react-router-dom";
+import { ArrowRight, Crown, Star, Handshake, Sliders, Mic, Building2, Sparkles } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import SessionConfigurator from "@/components/SessionConfigurator";
+import { creatorPacks } from "@/components/CreatorPacks";
+import { corporatePacks } from "@/components/CorporatePacks";
 
 const CHECK_ICON =
   "https://framerusercontent.com/images/wQY5BFOK9fwE3QUIMrG43ZlTKM.png?width=201&height=201";
 
-type Tab = "creator" | "business" | "vip";
+type Tab = "custom" | "creator" | "business" | "vip";
 
-const tabs: { id: Tab; label: string }[] = [
-  { id: "creator", label: "Creator" },
-  { id: "business", label: "Business" },
-  { id: "vip", label: "VIP Membership" },
-];
-
-const creatorPacks = [
-  { name: "Nova", price: "800 DT", unit: "/ session", popular: false, features: ["1 Camera", "1 Microphone", "Professional audio recording", "Studio lighting", "RAW footage delivery", "No editing"] },
-  { name: "Cosmic", price: "1,300 DT", unit: "/ session", popular: true, features: ["2 Cameras", "2 Microphones", "Podcast editing", "2 Social Media Reels", "Professional lighting", "Ready-to-publish delivery"] },
-  { name: "Interstellar", price: "1,800 DT", unit: "/ session", popular: false, features: ["2 Cameras", "2 Microphones", "Professional editing", "4 Social Media Reels", "Social media optimized export", "Ready-to-publish delivery"] },
-];
-
-const businessPacks = [
-  { name: "Essential", price: "3,200 DT", unit: "/ month", popular: false, features: ["2 recording sessions per month", "2 cameras", "2 microphones", "Podcast editing", "4 social media reels per month", "Ready-to-publish delivery"] },
-  { name: "Growth", price: "4,200 DT", unit: "/ month", popular: true, features: ["2 sessions per month", "2 cameras + 2 microphones", "Professional editing", "8 social media reels", "YouTube thumbnails", "Optimized for LinkedIn & Instagram"] },
-  { name: "Authority", price: "6,000 DT", unit: "/ month", popular: false, features: ["2 sessions per month", "3 camera production", "Premium editing", "12 social media reels", "Content strategy support", "Multi-platform delivery"] },
+const tabs: { id: Tab; label: string; icon: React.ElementType }[] = [
+  { id: "custom", label: "Customize", icon: Sliders },
+  { id: "creator", label: "Creators", icon: Mic },
+  { id: "business", label: "Business", icon: Building2 },
+  { id: "vip", label: "VIP", icon: Sparkles },
 ];
 
 const vipPlans = [
@@ -170,7 +162,7 @@ const BusinessContent = ({ openBooking }: { openBooking: (n: string) => void }) 
       </p>
     </div>
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-      {businessPacks.map((p, i) => (
+      {corporatePacks.map((p, i) => (
         <PackCard key={p.name} pack={p} index={i} cta="Book this pack" onCta={() => openBooking(`${p.name} (Business)`)} />
       ))}
     </div>
@@ -191,11 +183,7 @@ const BusinessContent = ({ openBooking }: { openBooking: (n: string) => void }) 
       <p className="text-muted-foreground text-sm max-w-md mx-auto mb-6 leading-relaxed">
         We partner with agencies and marketing teams to produce professional podcast and video content for their clients. Flexible scheduling, white-label options, and volume pricing.
       </p>
-      <a
-        href="https://cal.com/kaun-studios-csvvzi/40min"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+      <a href="https://cal.com/kaun-studios-csvvzi/40min" target="_blank" rel="noopener noreferrer">
         <Button variant="cta" className="font-medium text-sm h-10 px-7 gap-2 rounded-lg">
           Schedule a partnership call <ArrowRight className="w-4 h-4" />
         </Button>
@@ -231,16 +219,26 @@ const VIPContent = ({ openBooking }: { openBooking: (n: string) => void }) => (
 
 /* ── Main page ── */
 const PacksPage = () => {
-  const [activeTab, setActiveTab] = useState<Tab>("creator");
-  const location = useLocation();
+  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
+  const tabParam = searchParams.get("tab");
+  const resolveDefaultTab = (): Tab => {
+    if (tabParam === "custom") return "custom";
+    if (tabParam === "business") return "business";
+    if (tabParam === "vip") return "vip";
+    return "creator"; // default
+  };
+
+  const [activeTab, setActiveTab] = useState<Tab>(resolveDefaultTab);
+
   useEffect(() => {
-    const hash = location.hash.replace("#", "");
-    if (hash === "business" || hash === "creator" || hash === "vip") {
-      setActiveTab(hash as Tab);
-    }
-  }, [location.hash]);
+    const t = searchParams.get("tab");
+    if (t === "custom") setActiveTab("custom");
+    else if (t === "business") setActiveTab("business");
+    else if (t === "vip") setActiveTab("vip");
+    else if (t === "creator") setActiveTab("creator");
+  }, [searchParams]);
 
   const openBooking = (name: string) => {
     if (name.includes("(VIP)")) {
@@ -257,79 +255,92 @@ const PacksPage = () => {
       <Navbar />
       <main className="pt-16">
         {/* Hero */}
-        <section className="py-20 md:py-24 px-4">
+        <section className="py-12 md:py-20 px-3 md:px-4">
           <div className="container mx-auto max-w-3xl text-center">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
               <Badge variant="outline" className="mb-4 text-xs font-medium border-primary/30 text-primary">
                 Our Packs
               </Badge>
-              <h1 className="font-display text-3xl md:text-5xl font-bold text-foreground mb-4 leading-tight">
+              <h1 className="font-display text-2xl md:text-5xl font-bold text-foreground mb-3 md:mb-4 leading-tight">
                 Find the Perfect Plan
                 <br />
                 <span className="text-primary">for Your Content</span>
               </h1>
-              <p className="text-muted-foreground text-base md:text-lg max-w-xl mx-auto">
-                Whether you're an independent creator, a growing brand, or looking for a long-term partnership — we have a pack for you.
+              <p className="text-muted-foreground text-sm md:text-lg max-w-xl mx-auto">
+                Choose a ready-made pack or configure a fully custom session.
               </p>
             </motion.div>
           </div>
         </section>
 
         {/* Tab Toggle */}
-        <section className="px-4 pb-4">
+        <section className="px-3 md:px-4 pb-4">
           <div className="container mx-auto flex justify-center">
-            <div className="inline-flex rounded-full border border-border/60 bg-secondary/40 backdrop-blur-sm p-1 gap-0.5">
-              {tabs.map((tab) => (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`relative px-5 md:px-7 py-2.5 rounded-full text-xs md:text-sm font-semibold transition-all duration-300 ${
-                    activeTab === tab.id
-                      ? "bg-primary text-primary-foreground shadow-lg shadow-primary/25"
-                      : "text-muted-foreground hover:text-foreground"
-                  }`}
-                >
-                  {tab.label}
-                </button>
-              ))}
+            <div className="inline-flex bg-card border border-border rounded-2xl p-1.5 gap-1">
+              {tabs.map((tab) => {
+                const isActive = activeTab === tab.id;
+                return (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveTab(tab.id)}
+                    className={`relative flex items-center gap-2 px-4 md:px-6 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 whitespace-nowrap ${
+                      isActive
+                        ? "bg-primary text-primary-foreground shadow-md"
+                        : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
+                    }`}
+                  >
+                    <tab.icon className="w-4 h-4" />
+                    <span className="hidden sm:inline">{tab.label}</span>
+                    <span className="sm:hidden">{tab.label.split(" ")[0]}</span>
+                  </button>
+                );
+              })}
             </div>
           </div>
         </section>
 
         {/* Tab Content */}
-        <section className="py-12 md:py-16 px-4">
+        <section className="py-8 md:py-12 px-3 md:px-4">
           <div className="container mx-auto max-w-5xl">
             <AnimatePresence mode="wait">
+              {activeTab === "custom" && (
+                <motion.div
+                  key="custom"
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -16 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <SessionConfigurator onSwitchTab={(tab) => setActiveTab(tab)} />
+                </motion.div>
+              )}
               {activeTab === "creator" && <CreatorContent openBooking={openBooking} />}
               {activeTab === "business" && <BusinessContent openBooking={openBooking} />}
               {activeTab === "vip" && <VIPContent openBooking={openBooking} />}
             </AnimatePresence>
+
+            {/* Nudge to custom when on packs */}
+            {activeTab !== "custom" && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.3 }}
+                className="text-center mt-10"
+              >
+                <p className="text-muted-foreground text-sm mb-3">
+                  Need something more specific?
+                </p>
+                <button
+                  onClick={() => setActiveTab("custom")}
+                  className="text-primary text-sm font-medium hover:underline inline-flex items-center gap-1.5"
+                >
+                  <Sliders className="w-4 h-4" />
+                  Build a Custom Session
+                </button>
+              </motion.div>
+            )}
           </div>
         </section>
-
-        {/* Bottom CTA */}
-        <section className="py-16 px-4 border-t border-border/40">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="container mx-auto max-w-lg text-center"
-          >
-            <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-3">
-              Need something more custom?
-            </h2>
-            <p className="text-muted-foreground text-sm mb-6">
-              Build your own session from scratch — choose your equipment, editing level, and extras.
-            </p>
-            <Link to="/build-session">
-              <Button variant="cta" className="font-medium text-sm h-10 px-7 gap-2 rounded-lg">
-                Build a Custom Session <ArrowRight className="w-4 h-4" />
-              </Button>
-            </Link>
-          </motion.div>
-        </section>
-
       </main>
       <Footer />
     </div>

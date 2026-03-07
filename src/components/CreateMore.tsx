@@ -97,7 +97,7 @@ const CreateMore = () => {
               ))}
             </div>
 
-            <Link to="/build-session">
+            <Link to="/packs?tab=custom">
               <Button
                 variant="cta-primary"
                 className="font-medium text-sm h-10 px-6 gap-2 rounded-lg"
